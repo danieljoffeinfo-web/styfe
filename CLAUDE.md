@@ -33,8 +33,9 @@ Source brief: `docs/HANDOVER.md`. Approved design: `design/overview-mockup.dc.ht
 6. **Statement months, not calendar months.** See below.
 7. **390px is a supported width.** Tables become cards, the sidebar becomes a
    sheet, touch targets stay at 44px.
-8. No emoji, no gradient washes. Instrument Serif for titles, IBM Plex Sans for
-   UI, IBM Plex Mono for every money figure.
+8. No emoji, no gradient washes. Inter for titles and UI, JetBrains Mono for
+   every money figure. Titles use the `.display` utility (Inter 600, -0.022em
+   tracking); `.money` is mono with tabular figures.
 
 ## Design tokens
 

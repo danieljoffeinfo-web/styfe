@@ -32,7 +32,7 @@ const SheetContent = React.forwardRef<
     >
       <div className="flex items-start justify-between gap-4 border-b border-line px-5 py-4 sm:px-6">
         <div>
-          <DialogPrimitive.Title className="serif text-2xl leading-tight">{title}</DialogPrimitive.Title>
+          <DialogPrimitive.Title className="display text-2xl leading-tight">{title}</DialogPrimitive.Title>
           {description ? (
             <DialogPrimitive.Description className="mt-1 text-[13px] text-muted">
               {description}

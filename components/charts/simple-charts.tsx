@@ -16,12 +16,12 @@ import {
 } from "recharts";
 import { formatZar, formatZarCompact } from "@/lib/money";
 
-const AXIS = { fill: "#5E5B55", fontSize: 11, fontFamily: "IBM Plex Mono" } as const;
+const AXIS = { fill: "#5E5B55", fontSize: 11, fontFamily: "JetBrains Mono" } as const;
 const TOOLTIP = {
   borderRadius: 10,
   border: "1px solid #E2DED5",
   fontSize: 13,
-  fontFamily: "IBM Plex Sans",
+  fontFamily: "Inter",
 } as const;
 
 export function MoneyBarChart({

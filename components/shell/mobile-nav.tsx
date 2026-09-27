@@ -25,7 +25,7 @@ export function MobileNav() {
         <DialogPrimitive.Portal>
           <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-ink/40" />
           <DialogPrimitive.Content className="fixed inset-y-0 left-0 z-50 flex w-[260px] flex-col gap-8 bg-ink px-5 py-8 text-paper focus:outline-none">
-            <DialogPrimitive.Title className="serif text-3xl leading-none">
+            <DialogPrimitive.Title className="display text-3xl leading-none">
               Styfe HQ
             </DialogPrimitive.Title>
             <DialogPrimitive.Description className="sr-only">
@@ -35,7 +35,7 @@ export function MobileNav() {
           </DialogPrimitive.Content>
         </DialogPrimitive.Portal>
       </DialogPrimitive.Root>
-      <Link href="/" className="serif text-xl leading-none">
+      <Link href="/" className="display text-xl leading-none">
         Styfe HQ
       </Link>
       <span className="ml-auto text-[13px] text-muted">{current}</span>

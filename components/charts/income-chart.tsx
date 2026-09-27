@@ -53,7 +53,7 @@ export function IncomeChart({ data, height = 240 }: { data: IncomePoint[]; heigh
             width={46}
             tickLine={false}
             axisLine={false}
-            tick={{ fill: "#5E5B55", fontSize: 11, fontFamily: "IBM Plex Mono" }}
+            tick={{ fill: "#5E5B55", fontSize: 11, fontFamily: "JetBrains Mono" }}
             tickFormatter={(v: number) => (v === 0 ? "0" : formatZarCompact(v))}
           />
           <Tooltip
@@ -62,7 +62,7 @@ export function IncomeChart({ data, height = 240 }: { data: IncomePoint[]; heigh
               borderRadius: 10,
               border: "1px solid #E2DED5",
               fontSize: 13,
-              fontFamily: "IBM Plex Sans",
+              fontFamily: "Inter",
             }}
             labelFormatter={(_, payload) =>
               payload?.[0] ? monthLabelLong(String(payload[0].payload.month)) : ""
@@ -80,7 +80,7 @@ export function IncomeChart({ data, height = 240 }: { data: IncomePoint[]; heigh
               offset={8}
               fill="#17171B"
               fontSize={12}
-              fontFamily="IBM Plex Mono"
+              fontFamily="JetBrains Mono"
               formatter={(v) => (Number(v) ? formatZarCompact(Number(v)) : "")}
             />
             {rows.map((row) => (

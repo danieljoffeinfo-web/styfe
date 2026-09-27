@@ -14,7 +14,7 @@ export default async function LoginPage({
       <div className="w-full max-w-[420px]">
         <div className="mb-8">
           <p className="eyebrow">Styfe</p>
-          <h1 className="serif mt-2 text-5xl leading-none">Styfe HQ</h1>
+          <h1 className="display mt-2 text-5xl leading-none">Styfe HQ</h1>
           <p className="mt-3 text-sm text-muted">
             Sign in with a magic link. One address is allowed.
           </p>

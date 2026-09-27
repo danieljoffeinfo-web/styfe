@@ -35,7 +35,7 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
 export function Sidebar({ footer }: { footer?: React.ReactNode }) {
   return (
     <aside className="hidden w-[220px] shrink-0 flex-col gap-8 bg-ink px-5 py-8 text-paper lg:flex">
-      <Link href="/" className="serif text-3xl leading-none text-paper">
+      <Link href="/" className="display text-3xl leading-none text-paper">
         Styfe HQ
       </Link>
       <SidebarNav />

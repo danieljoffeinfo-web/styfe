@@ -28,9 +28,9 @@
   --color-alert: #8A3E12;
   --color-alert-wash: #FBE7DA;
 
-  --font-sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Inter", system-ui, -apple-system, sans-serif;
 
   --radius-card: 14px;
 }
@@ -43,6 +43,7 @@
     background: var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
     -webkit-font-smoothing: antialiased;
   }
   * {
@@ -66,9 +67,11 @@
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
   }
-  .serif {
-    font-family: var(--font-serif);
-    font-weight: 400;
+  .display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    /* Large Inter needs negative tracking or it reads loose and cheap. */
+    letter-spacing: -0.022em;
   }
   .eyebrow {
     font-size: 13px;

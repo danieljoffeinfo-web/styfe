@@ -35,7 +35,7 @@ export default async function PrintInvoicePage({ params }: { params: Promise<{ i
       <article className="rounded-[14px] border border-line bg-white p-8 sm:p-12 print:rounded-none print:border-0 print:p-0">
         <header className="flex flex-wrap items-start justify-between gap-6">
           <div>
-            <h1 className="serif text-4xl leading-none">{settings.businessName}</h1>
+            <h1 className="display text-4xl leading-none">{settings.businessName}</h1>
             {settings.businessDetails ? (
               <p className="mt-2 whitespace-pre-line text-[13px] leading-relaxed text-muted">
                 {settings.businessDetails}
