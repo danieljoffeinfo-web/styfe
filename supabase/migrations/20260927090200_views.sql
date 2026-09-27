@@ -216,3 +216,22 @@ end;
 $$;
 
 grant execute on function public.categorise(text, numeric) to authenticated, service_role;
+
+-- ------------------------------------------------------------- grants -----
+-- Supabase's default privileges grant new relations to `anon` as well, so each
+-- view has to be locked down explicitly. RLS on the underlying tables does the
+-- real work (every view is security_invoker), but anon should not even have the
+-- grant. This has to live here rather than in the RLS migration, which runs
+-- before these views exist.
+do $$
+declare v text;
+begin
+  foreach v in array array[
+    'v_invoice_totals', 'v_invoices', 'v_mrr', 'v_receivables',
+    'v_monthly_income', 'v_monthly_spend', 'v_offering_stats'
+  ]
+  loop
+    execute format('revoke all on public.%I from anon', v);
+    execute format('grant select on public.%I to authenticated, service_role', v);
+  end loop;
+end $$;

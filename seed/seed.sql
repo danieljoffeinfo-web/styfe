@@ -15,6 +15,23 @@ begin
   end if;
 end $$;
 
+-- Reference data from the migrations may have been inserted before Dan's auth
+-- user existed, in which case owner_id is null and RLS hides it from him.
+-- Claim anything orphaned before seeding on top of it.
+do $$
+declare t text;
+begin
+  foreach t in array array[
+    'settings', 'path_segments', 'categories', 'category_rules', 'clients',
+    'offerings', 'offering_tiers', 'subscriptions', 'invoices', 'invoice_lines',
+    'transactions', 'deals', 'goals', 'goal_entries', 'weekly_targets',
+    'weekly_scores', 'daily_tasks', 'alerts'
+  ]
+  loop
+    execute format('update public.%I set owner_id = public.seed_owner() where owner_id is null', t);
+  end loop;
+end $$;
+
 -- CLIENTS -------------------------------------------------------------
 insert into clients (slug, name, contact_name, relationship, status, notes) values
   ('proto-trading',   'Proto Trading',             'George',            'retainer', 'active', 'Pays R8,000/month regardless of workload. Paid on/around month end.'),

@@ -24,9 +24,15 @@ export async function updateSession(request: NextRequest) {
     },
   });
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // A network blip talking to Supabase must not 500 the whole app; treat it as
+  // "not signed in" and let the login page say so.
+  let user: { email?: string | null } | null = null;
+  try {
+    const { data } = await supabase.auth.getUser();
+    user = data.user;
+  } catch {
+    user = null;
+  }
 
   const path = request.nextUrl.pathname;
   const isPublic = PUBLIC_PATHS.some((p) => path === p || path.startsWith(`${p}/`));
@@ -34,7 +40,11 @@ export async function updateSession(request: NextRequest) {
   if (!isPublic && !isAllowedEmail(user?.email)) {
     if (user) {
       // Signed in but not Dan. RLS already returns nothing; sign them out too.
-      await supabase.auth.signOut();
+      try {
+        await supabase.auth.signOut();
+      } catch {
+        // Nothing more to do — the redirect below still keeps them out.
+      }
     }
     const url = request.nextUrl.clone();
     url.pathname = "/login";
