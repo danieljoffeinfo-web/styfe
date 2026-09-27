@@ -105,3 +105,9 @@ export function greeting(now: Date = new Date()): string {
   if (hour < 17) return "Afternoon";
   return "Evening";
 }
+
+/** Days from today until a deadline; negative once it has passed. */
+export function daysToDeadline(deadline: string | null | undefined): number | null {
+  if (!deadline) return null;
+  return daysBetween(todayIso(), deadline);
+}

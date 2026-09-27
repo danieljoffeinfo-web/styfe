@@ -6,7 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "db:link": "supabase link --project-ref $(node -e \"console.log(new URL(process.env.NEXT_PUBLIC_SUPABASE_URL||require('fs').readFileSync('.env.local','utf8').match(/NEXT_PUBLIC_SUPABASE_URL=(.*)/)[1]).hostname.split('.')[0])\")",
+    "db:push": "supabase db push",
+    "db:seed": "tsx scripts/seed.ts",
+    "db:claim": "tsx scripts/claim-seed.ts",
+    "import:transactions": "tsx scripts/import-transactions.ts",
+    "check": "tsx scripts/sanity-checks.ts",
+    "setup": "npm run db:push && npm run db:seed && npm run import:transactions && npm run check"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.3.11",
@@ -30,6 +38,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "recharts": "^3.10.1",
+    "server-only": "^0.0.1",
     "tailwind-merge": "^3.7.0",
     "zod": "^4.6.5"
   },
@@ -37,12 +46,15 @@
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20.19.43",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "csv-parse": "^7.0.3",
     "dotenv": "^18.0.4",
     "eslint": "^9",
     "eslint-config-next": "15.5.26",
+    "pg": "^8.23.0",
+    "supabase": "^2.118.0",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
     "typescript": "^5"
