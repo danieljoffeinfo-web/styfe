@@ -43,11 +43,7 @@ export function CategoryEditor({ categories }: { categories: Category[] }) {
             {categories.map((category) => (
               <tr key={category.slug} className="border-b border-line-soft last:border-b-0">
                 <td className="py-1.5">
-                  <form action={formAction} className="contents">
-                    <input type="hidden" name="is_edit" value="true" />
-                    <input type="hidden" name="slug" value={category.slug} />
-                    <code className="text-xs text-muted">{category.slug}</code>
-                  </form>
+                  <code className="text-xs text-muted">{category.slug}</code>
                 </td>
                 <td colSpan={4} className="py-1.5">
                   <form action={formAction} className="flex flex-wrap items-center gap-2">

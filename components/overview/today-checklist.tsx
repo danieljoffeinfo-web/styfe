@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import { Plus, X } from "lucide-react";
 import { addTask, carryOverTasks, deleteTask, toggleTask } from "@/lib/actions/misc";
 import { useToast } from "@/components/ui/toast";
@@ -10,6 +11,7 @@ import type { DailyTask } from "@/lib/types";
 
 export function TodayChecklist({ tasks, date }: { tasks: DailyTask[]; date: string }) {
   const toast = useToast();
+  const router = useRouter();
   const [items, setItems] = React.useState(tasks);
   const [label, setLabel] = React.useState("");
   const [pending, startTransition] = React.useTransition();
@@ -22,9 +24,12 @@ export function TodayChecklist({ tasks, date }: { tasks: DailyTask[]; date: stri
     if (carried.current) return;
     carried.current = true;
     carryOverTasks().then((result) => {
-      if (result.ok && result.message) toast(result.message);
+      if (!result.ok || !result.message) return;
+      toast(result.message);
+      // The carried tasks are new rows; pull them in.
+      router.refresh();
     });
-  }, [toast]);
+  }, [toast, router]);
 
   function onToggle(task: DailyTask) {
     const next = !task.done;

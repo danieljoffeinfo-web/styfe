@@ -25,7 +25,7 @@ export const Select = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <select
     ref={ref}
-    className={cn(base, "h-11 appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%235E5B55%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>')] bg-[length:18px] bg-[right_10px_center] bg-no-repeat pr-9", className)}
+    className={cn(base, "select-chevron h-11 appearance-none pr-9", className)}
     {...props}
   />
 ));
