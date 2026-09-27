@@ -2,6 +2,7 @@ import "server-only";
 import { createClient } from "@/lib/supabase/server";
 import { toCents } from "@/lib/money";
 import { monthRange, statementMonth, todayIso } from "@/lib/dates";
+import { merchantName } from "./money.client";
 import type {
   Category,
   MonthlyIncome,
@@ -204,6 +205,8 @@ export async function getTransactions(filter: TransactionFilter = {}): Promise<T
 }
 
 /** Merchant-level rollup for the Spend page. */
+export { merchantName };
+
 export function topMerchants(transactions: Transaction[], categories: Category[], limit = 10) {
   const personal = new Set(
     categories.filter((c) => c.group === "personal" || c.group === "business").map((c) => c.slug),
@@ -226,17 +229,6 @@ export function topMerchants(transactions: Transaction[], categories: Category[]
     .map(([merchant, v]) => ({ merchant, spendCents: v.cents, count: v.count }))
     .sort((a, b) => b.spendCents - a.spendCents)
     .slice(0, limit);
-}
-
-/** "POS Purchase Dl Uber" -> "Uber". Good enough to group a statement. */
-export function merchantName(description: string): string {
-  const cleaned = description
-    .replace(/^(POS Purchase|Card Purchase|Internet Pmt To|Magtape (Credit|Debit)|FNB App (Geo )?(Payment|Transfer) (To|From)|Send Money App Dr Send|Payshap (Account|Credit) (On|Off)-Us|Rtc Credit|Airtime Topup)\s*/i, "")
-    .replace(/\b(Dl|New|S2S|Yoco|Tabbs|Ap|Ik)\s*\*?\s*/i, "")
-    .replace(/[*]/g, " ")
-    .replace(/\s{2,}/g, " ")
-    .trim();
-  return cleaned || "Bank fees";
 }
 
 export function statementMonths(count: number, endMonth?: string): string[] {
