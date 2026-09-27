@@ -1,0 +1,1470 @@
+date,description,amount_zar,category,is_internal,source
+2026-03-04,POS Purchase New Uber Eats,-114.70,food_delivery,false,fnb_statement_import
+2026-03-05,POS Purchase Market Kokoro Lin26,-56.99,eating_out,false,fnb_statement_import
+2026-03-05,POS Purchase S2S*Tajminimarketan,-128.00,groceries,false,fnb_statement_import
+2026-03-05,POS Purchase Woolworths,-327.40,groceries,false,fnb_statement_import
+2026-03-06,,-188.00,bank_fees,false,fnb_statement_import
+2026-03-10,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-10,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-12,FNB App Transfer From H,500.00,internal_transfer,true,fnb_statement_import
+2026-03-12,FNB App Transfer From H,300.00,internal_transfer,true,fnb_statement_import
+2026-03-12,Payshap Account On-Us N,-420.00,internal_transfer,true,fnb_statement_import
+2026-03-12,Payment To Investment H,-116.00,internal_transfer,true,fnb_statement_import
+2026-03-12,FNB App Transfer From J,3.00,internal_transfer,true,fnb_statement_import
+2026-03-12,FNB App Transfer From J,160.00,internal_transfer,true,fnb_statement_import
+2026-03-12,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-12,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-13,FNB App Transfer From I,80.00,internal_transfer,true,fnb_statement_import
+2026-03-13,FNB App Transfer From H,50.00,internal_transfer,true,fnb_statement_import
+2026-03-13,FNB App Transfer From H,60.00,internal_transfer,true,fnb_statement_import
+2026-03-13,FNB App Transfer From J,60.00,internal_transfer,true,fnb_statement_import
+2026-03-13,FNB App Transfer From B,110.00,internal_transfer,true,fnb_statement_import
+2026-03-13,FNB App Transfer From H,210.00,internal_transfer,true,fnb_statement_import
+2026-03-13,Send Money App Dr Send Tennis Racket,-210.00,p2p_out,false,fnb_statement_import
+2026-03-13,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-13,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-14,FNB App Transfer From H,500.00,internal_transfer,true,fnb_statement_import
+2026-03-14,Payment To Investment Y,-79.00,internal_transfer,true,fnb_statement_import
+2026-03-14,FNB App Transfer From H,10.00,internal_transfer,true,fnb_statement_import
+2026-03-14,FNB App Transfer From J,10.00,internal_transfer,true,fnb_statement_import
+2026-03-14,Airtime Topup Airtime 27645371179,-5.00,phone_data,false,fnb_statement_import
+2026-03-14,FNB App Transfer From G,145.00,internal_transfer,true,fnb_statement_import
+2026-03-14,FNB App Transfer From Y,15.00,internal_transfer,true,fnb_statement_import
+2026-03-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-16,FNB App Transfer From H,60.00,internal_transfer,true,fnb_statement_import
+2026-03-16,FNB App Transfer From H,10.00,internal_transfer,true,fnb_statement_import
+2026-03-16,FNB App Transfer From G,40.00,internal_transfer,true,fnb_statement_import
+2026-03-16,FNB App Transfer From H,50.00,internal_transfer,true,fnb_statement_import
+2026-03-16,FNB App Transfer From H,150.00,internal_transfer,true,fnb_statement_import
+2026-03-16,FNB App Transfer From T,23.00,internal_transfer,true,fnb_statement_import
+2026-03-16,FNB App Transfer From U,79.00,internal_transfer,true,fnb_statement_import
+2026-03-16,Payshap Credit Dj,15.00,income_other,false,fnb_statement_import
+2026-03-16,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-16,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-16,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-16,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-16,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-16,POS Purchase Uber,-37.00,transport_uber,false,fnb_statement_import
+2026-03-16,POS Purchase Uber,-50.00,transport_uber,false,fnb_statement_import
+2026-03-16,POS Purchase Microsoft Iso,-159.00,software_tools,false,fnb_statement_import
+2026-03-17,FNB App Payment From Papa,140.00,family,false,fnb_statement_import
+2026-03-17,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-17,POS Purchase Uber,-10.00,transport_uber,false,fnb_statement_import
+2026-03-17,POS Purchase Uber,-34.00,transport_uber,false,fnb_statement_import
+2026-03-17,POS Purchase Uber,-47.00,transport_uber,false,fnb_statement_import
+2026-03-17,POS Purchase Streetbar,-50.00,other,false,fnb_statement_import
+2026-03-17,POS Purchase Woolworths,-52.99,groceries,false,fnb_statement_import
+2026-03-17,POS Purchase Relish - Rosebank -,-95.00,other,false,fnb_statement_import
+2026-03-17,POS Purchase New Uber Eats,-104.75,food_delivery,false,fnb_statement_import
+2026-03-17,POS Purchase New Uber Eats,-158.99,food_delivery,false,fnb_statement_import
+2026-03-17,POS Purchase Green Dot Cafe CC,-410.00,eating_out,false,fnb_statement_import
+2026-03-18,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-18,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-18,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-18,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-18,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-18,FNB App Transfer From H,18.00,internal_transfer,true,fnb_statement_import
+2026-03-18,FNB App Transfer From H,30.00,internal_transfer,true,fnb_statement_import
+2026-03-18,FNB App Transfer From T,15.00,internal_transfer,true,fnb_statement_import
+2026-03-18,FNB App Transfer From N,60.00,internal_transfer,true,fnb_statement_import
+2026-03-18,Payment To Investment H,-65.00,internal_transfer,true,fnb_statement_import
+2026-03-18,FNB App Transfer From H,101.00,internal_transfer,true,fnb_statement_import
+2026-03-18,Payment To Investment G,-16.00,internal_transfer,true,fnb_statement_import
+2026-03-18,Payment To Investment H,-143.00,internal_transfer,true,fnb_statement_import
+2026-03-18,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-18,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-18,POS Purchase Betway,-10.00,betting,false,fnb_statement_import
+2026-03-18,POS Purchase Uber,-28.00,transport_uber,false,fnb_statement_import
+2026-03-19,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-19,POS Purchase Uber,-3.00,transport_uber,false,fnb_statement_import
+2026-03-19,POS Purchase Uber,-33.00,transport_uber,false,fnb_statement_import
+2026-03-19,FNB App Payment From Nnn,130.00,family,false,fnb_statement_import
+2026-03-19,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-20,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-20,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-20,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-20,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-20,FNB App Transfer From N,10.00,internal_transfer,true,fnb_statement_import
+2026-03-20,FNB App Transfer From J,20.00,internal_transfer,true,fnb_statement_import
+2026-03-20,FNB App Transfer From U,108.00,internal_transfer,true,fnb_statement_import
+2026-03-20,FNB App Payment To T,-100.00,p2p_out,false,fnb_statement_import
+2026-03-20,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-20,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-20,POS Purchase Mugg And Bean Maitl,-37.00,eating_out,false,fnb_statement_import
+2026-03-20,POS Purchase Dl Bolt,-148.00,transport_uber,false,fnb_statement_import
+2026-03-23,Credit Voucher Vouch New Uber Eats,109.20,food_delivery,false,fnb_statement_import
+2026-03-23,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-23,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-23,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-23,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-23,POS Purchase Uber,-37.00,transport_uber,false,fnb_statement_import
+2026-03-23,POS Purchase Uber,-46.00,transport_uber,false,fnb_statement_import
+2026-03-23,POS Purchase Uber,-53.00,transport_uber,false,fnb_statement_import
+2026-03-23,POS Purchase Uber,-72.00,transport_uber,false,fnb_statement_import
+2026-03-23,POS Purchase New Uber Eats,-109.20,food_delivery,false,fnb_statement_import
+2026-03-23,FNB App Payment From Mignon,1500.00,income_other,false,fnb_statement_import
+2026-03-23,Payment To Investment Y,-1400.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From U,100.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From U,40.00,internal_transfer,true,fnb_statement_import
+2026-03-23,Airtime Topup Airtime 27645371179,-5.00,phone_data,false,fnb_statement_import
+2026-03-23,FNB App Transfer From I,270.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From J,120.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From H,30.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From U,466.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From U,88.00,internal_transfer,true,fnb_statement_import
+2026-03-23,Payment To Investment Y,-588.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From U,10.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From B,578.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From H,60.00,internal_transfer,true,fnb_statement_import
+2026-03-23,Electricity Prepaid Electricity 04908388285,-50.00,utilities,false,fnb_statement_import
+2026-03-23,FNB App Transfer From T,32.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From G,11.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From H,110.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From J,16.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From U,50.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Transfer From J,7.00,internal_transfer,true,fnb_statement_import
+2026-03-23,FNB App Payment To T,-36.00,p2p_out,false,fnb_statement_import
+2026-03-23,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-23,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-23,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-23,POS Purchase Mugg And Bean Maitl,-91.00,eating_out,false,fnb_statement_import
+2026-03-24,POS Purchase Uber,-50.00,transport_uber,false,fnb_statement_import
+2026-03-24,POS Purchase S2S*Tajminimarketan,-110.00,groceries,false,fnb_statement_import
+2026-03-24,POS Purchase Aperitif Pty Ltd,-588.00,eating_out,false,fnb_statement_import
+2026-03-25,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-25,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-25,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-25,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-25,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-25,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-25,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-25,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-25,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-25,POS Purchase Mugg And Bean Maitl,-37.00,eating_out,false,fnb_statement_import
+2026-03-25,FNB App Transfer From J,15.00,internal_transfer,true,fnb_statement_import
+2026-03-25,FNB App Transfer From H,26.00,internal_transfer,true,fnb_statement_import
+2026-03-25,Payshapid Off-Us Payshap,-37.00,other,false,fnb_statement_import
+2026-03-25,FNB App Transfer From J,15.00,internal_transfer,true,fnb_statement_import
+2026-03-25,FNB App Transfer From H,58.00,internal_transfer,true,fnb_statement_import
+2026-03-25,FNB App Transfer From Y,33.00,internal_transfer,true,fnb_statement_import
+2026-03-25,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-25,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-25,POS Purchase Green Point Tennis,-30.00,health_fitness,false,fnb_statement_import
+2026-03-25,POS Purchase Green Point Tennis,-150.00,health_fitness,false,fnb_statement_import
+2026-03-25,POS Purchase Green Point Tennis,-275.00,health_fitness,false,fnb_statement_import
+2026-03-26,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-26,POS Purchase Uber,-25.00,transport_uber,false,fnb_statement_import
+2026-03-27,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-27,POS Purchase Checkersfx Riverlan,-12.30,groceries,false,fnb_statement_import
+2026-03-27,POS Purchase Woolworths,-50.98,groceries,false,fnb_statement_import
+2026-03-28,,-47.00,bank_fees,false,fnb_statement_import
+2026-03-28,FNB App Transfer From H,350.00,internal_transfer,true,fnb_statement_import
+2026-03-28,Payshap Account Off-Us Tanya,-150.00,p2p_out,false,fnb_statement_import
+2026-03-28,FNB App Transfer From N,30.00,internal_transfer,true,fnb_statement_import
+2026-03-28,FNB App Transfer From Y,100.00,internal_transfer,true,fnb_statement_import
+2026-03-28,FNB App Transfer From I,40.00,internal_transfer,true,fnb_statement_import
+2026-03-28,FNB App Transfer From J,280.00,internal_transfer,true,fnb_statement_import
+2026-03-28,Magtape Credit Amir,1800.00,income_other,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,POS Purchase Uber,-84.00,transport_uber,false,fnb_statement_import
+2026-03-30,POS Purchase Uber,-95.00,transport_uber,false,fnb_statement_import
+2026-03-30,Payshap Account Off-Us N,-80.00,p2p_out,false,fnb_statement_import
+2026-03-30,Payment To Investment H,-1581.00,internal_transfer,true,fnb_statement_import
+2026-03-30,FNB App Transfer From J,170.00,internal_transfer,true,fnb_statement_import
+2026-03-30,FNB App Transfer From Y,70.00,internal_transfer,true,fnb_statement_import
+2026-03-30,FNB App Transfer From Bt,500.00,internal_transfer,true,fnb_statement_import
+2026-03-30,Payshap Account On-Us Bt,-500.00,internal_transfer,true,fnb_statement_import
+2026-03-30,FNB App Transfer From H,65.00,internal_transfer,true,fnb_statement_import
+2026-03-30,FNB App Transfer From D,58.00,internal_transfer,true,fnb_statement_import
+2026-03-30,FNB App Transfer From I,350.00,internal_transfer,true,fnb_statement_import
+2026-03-30,Send Money App Dr Send Hair Hair,-350.00,p2p_out,false,fnb_statement_import
+2026-03-30,FNB App Transfer From H,100.00,internal_transfer,true,fnb_statement_import
+2026-03-30,Send Money App Dr Send Victor Barber,-150.00,p2p_out,false,fnb_statement_import
+2026-03-30,FNB App Transfer From E,200.00,internal_transfer,true,fnb_statement_import
+2026-03-30,FNB App Transfer From J,50.00,internal_transfer,true,fnb_statement_import
+2026-03-30,FNB App Transfer From U,85.00,internal_transfer,true,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-03-31,,-2.00,bank_fees,false,fnb_statement_import
+2026-03-31,POS Purchase Uber,-16.00,transport_uber,false,fnb_statement_import
+2026-03-31,POS Purchase Uber,-55.00,transport_uber,false,fnb_statement_import
+2026-03-31,POS Purchase Uber,-55.00,transport_uber,false,fnb_statement_import
+2026-03-31,POS Purchase Woolworths,-164.25,groceries,false,fnb_statement_import
+2026-03-31,FNB OB Pmt Patin Trading 84 T/A,6500.00,income_ie_global,false,fnb_statement_import
+2026-03-31,Payment To Investment H,-6000.00,internal_transfer,true,fnb_statement_import
+2026-03-31,Mvno Payment To 27645371179 Ftc Prep,-200.00,phone_data,false,fnb_statement_import
+2026-03-31,FNB App Transfer From Yh,1500.00,internal_transfer,true,fnb_statement_import
+2026-03-31,FNB App Transfer From U,600.00,internal_transfer,true,fnb_statement_import
+2026-03-31,Internet Pmt To Yellow Card 3614511035,-2000.00,crypto,false,fnb_statement_import
+2026-03-31,FNB App Transfer From H,100.00,internal_transfer,true,fnb_statement_import
+2026-03-31,Electricity Prepaid Electricity 04908388285,-50.00,utilities,false,fnb_statement_import
+2026-03-31,POS Purchase Yoco *La Familia,-25.00,eating_out,false,fnb_statement_import
+2026-03-31,POS Purchase Dis-Chem Adelphi Ph,-34.99,other,false,fnb_statement_import
+2026-03-31,POS Purchase Woolworths,-38.99,groceries,false,fnb_statement_import
+2026-03-31,POS Purchase Dl Bolt,-43.00,transport_uber,false,fnb_statement_import
+2026-03-31,POS Purchase Market Kokoro Lin26,-113.98,eating_out,false,fnb_statement_import
+2026-03-31,POS Purchase KFC Sea Point,-164.60,other,false,fnb_statement_import
+2026-03-31,POS Purchase Woolworths,-268.43,groceries,false,fnb_statement_import
+2026-04-01,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-01,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-01,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-01,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-01,POS Purchase PNP Crp Sea Point,-18.00,other,false,fnb_statement_import
+2026-04-01,POS Purchase PNP Crp Sea Point,-18.00,other,false,fnb_statement_import
+2026-04-01,POS Purchase Uber,-67.00,transport_uber,false,fnb_statement_import
+2026-04-01,POS Purchase Uber,-82.00,transport_uber,false,fnb_statement_import
+2026-04-01,POS Purchase S2S*Tajminimarketan,-110.00,groceries,false,fnb_statement_import
+2026-04-01,POS Purchase Apple.Com/Bill,-104.99,software_tools,false,fnb_statement_import
+2026-04-01,FNB App Transfer From I,50.00,internal_transfer,true,fnb_statement_import
+2026-04-01,FNB App Transfer From U,30.00,internal_transfer,true,fnb_statement_import
+2026-04-01,FNB App Transfer From U,10.00,internal_transfer,true,fnb_statement_import
+2026-04-01,FNB App Transfer From H,3000.00,internal_transfer,true,fnb_statement_import
+2026-04-01,Payshap Account On-Us Transfer,-3000.00,internal_transfer,true,fnb_statement_import
+2026-04-01,FNB App Transfer From B,40.00,internal_transfer,true,fnb_statement_import
+2026-04-01,FNB App Transfer From H,163.00,internal_transfer,true,fnb_statement_import
+2026-04-01,FNB App Transfer From H,10.00,internal_transfer,true,fnb_statement_import
+2026-04-01,FNB App Transfer From Y,3.00,internal_transfer,true,fnb_statement_import
+2026-04-01,FNB App Transfer From G,5.00,internal_transfer,true,fnb_statement_import
+2026-04-02,FNB App Transfer From J,100.00,internal_transfer,true,fnb_statement_import
+2026-04-02,FNB App Transfer From S,70.00,internal_transfer,true,fnb_statement_import
+2026-04-02,FNB App Transfer From Y,35.00,internal_transfer,true,fnb_statement_import
+2026-04-02,FNB App Transfer From E,16.00,internal_transfer,true,fnb_statement_import
+2026-04-02,FNB App Transfer From I,50.00,internal_transfer,true,fnb_statement_import
+2026-04-02,,-60.00,bank_fees,false,fnb_statement_import
+2026-04-02,,-1.20,bank_fees,false,fnb_statement_import
+2026-04-02,,-20.20,bank_fees,false,fnb_statement_import
+2026-04-02,,-2.62,bank_fees,false,fnb_statement_import
+2026-04-02,POS Purchase Ben Vorster Motors,-17.90,transport_uber,false,fnb_statement_import
+2026-04-02,POS Purchase Uber,-37.00,transport_uber,false,fnb_statement_import
+2026-04-02,POS Purchase Uber,-44.00,transport_uber,false,fnb_statement_import
+2026-04-02,POS Purchase Mugg And Bean Maitl,-52.00,eating_out,false,fnb_statement_import
+2026-04-02,POS Purchase Uber,-53.00,transport_uber,false,fnb_statement_import
+2026-04-02,POS Purchase Uber,-180.00,transport_uber,false,fnb_statement_import
+2026-04-04,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-04,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-04,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-04,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-04,POS Purchase Uber,-10.00,transport_uber,false,fnb_statement_import
+2026-04-04,POS Purchase PNP Crp Sea Point,-18.00,other,false,fnb_statement_import
+2026-04-04,POS Purchase Uber,-28.00,transport_uber,false,fnb_statement_import
+2026-04-04,POS Purchase Uber,-35.00,transport_uber,false,fnb_statement_import
+2026-04-04,POS Purchase Uber,-48.00,transport_uber,false,fnb_statement_import
+2026-04-04,POS Purchase Market Kokoro Lin26,-56.99,eating_out,false,fnb_statement_import
+2026-04-04,POS Purchase Yoco *Maggy Lous,-60.00,eating_out,false,fnb_statement_import
+2026-04-04,POS Purchase Yoco *La Familia,-70.00,eating_out,false,fnb_statement_import
+2026-04-04,POS Purchase Uber,-79.00,transport_uber,false,fnb_statement_import
+2026-04-04,POS Purchase Yoco *Maggy Lous,-100.00,eating_out,false,fnb_statement_import
+2026-04-04,POS Purchase Yoco *Maggy Lous,-155.00,eating_out,false,fnb_statement_import
+2026-04-04,POS Purchase S2S*Tajminimarketan,-220.00,groceries,false,fnb_statement_import
+2026-04-04,POS Purchase Apple.Com/Bill,-14.99,software_tools,false,fnb_statement_import
+2026-04-04,POS Purchase Apple.Com/Bill,-34.99,software_tools,false,fnb_statement_import
+2026-04-04,Payshap Credit Luno Bx23Mnaag Jygnc,147.13,crypto,false,fnb_statement_import
+2026-04-04,Payment To Investment U,-190.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From J,87.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From J,150.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From G,2.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From E,99.00,internal_transfer,true,fnb_statement_import
+2026-04-04,Payshap Credit Luno Bx23Mnaag Jyhrl,900.91,crypto,false,fnb_statement_import
+2026-04-04,Payment To Investment B,-901.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From H,90.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From U,200.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From G,100.00,internal_transfer,true,fnb_statement_import
+2026-04-04,Airtime Topup Airtime 27645371179,-5.00,phone_data,false,fnb_statement_import
+2026-04-04,FNB App Transfer From The,60.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From D,100.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From U,10.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From G,143.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From I,50.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From D,30.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From Y,40.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From D,110.00,internal_transfer,true,fnb_statement_import
+2026-04-04,Payshap Credit Luno Bx23Mnaag Jym7V,739.14,crypto,false,fnb_statement_import
+2026-04-04,Payment To Investment H,-650.00,internal_transfer,true,fnb_statement_import
+2026-04-04,FNB App Transfer From H,100.00,internal_transfer,true,fnb_statement_import
+2026-04-07,,-0.37,bank_fees,false,fnb_statement_import
+2026-04-07,,-0.87,bank_fees,false,fnb_statement_import
+2026-04-07,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-07,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-07,POS Purchase PNP Crp Sea Point,-18.00,other,false,fnb_statement_import
+2026-04-07,POS Purchase Market Kokoro Lin26,-20.00,eating_out,false,fnb_statement_import
+2026-04-07,POS Purchase Woolworths,-35.99,groceries,false,fnb_statement_import
+2026-04-07,POS Purchase Uber,-43.00,transport_uber,false,fnb_statement_import
+2026-04-07,POS Purchase Uber,-47.00,transport_uber,false,fnb_statement_import
+2026-04-07,POS Purchase Uber,-50.00,transport_uber,false,fnb_statement_import
+2026-04-07,POS Purchase Uber,-65.00,transport_uber,false,fnb_statement_import
+2026-04-07,POS Purchase Uber,-68.00,transport_uber,false,fnb_statement_import
+2026-04-07,POS Purchase Uber,-70.00,transport_uber,false,fnb_statement_import
+2026-04-07,POS Purchase Market Kokoro Lin26,-93.98,eating_out,false,fnb_statement_import
+2026-04-07,POS Purchase Mugg And Bean Maitl,-101.00,eating_out,false,fnb_statement_import
+2026-04-07,POS Purchase Ae Green Point,-133.68,shopping,false,fnb_statement_import
+2026-04-07,POS Purchase Planet Fitness De W,-150.00,health_fitness,false,fnb_statement_import
+2026-04-07,POS Purchase New Uber Eats,-205.92,food_delivery,false,fnb_statement_import
+2026-04-07,POS Purchase Uber,-210.00,transport_uber,false,fnb_statement_import
+2026-04-07,POS Purchase Apple.Com/Bill,-34.99,software_tools,false,fnb_statement_import
+2026-04-07,FNB App Transfer From H,60.00,internal_transfer,true,fnb_statement_import
+2026-04-07,Electricity Prepaid Electricity 04908388285,-50.00,utilities,false,fnb_statement_import
+2026-04-07,FNB App Transfer From D,50.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From J,150.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From I,30.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From U,200.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From D,205.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From H,43.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From C,2.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From F,1.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From H,45.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From J,5.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From I,6.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From H,5.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From S,10.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From H,30.00,internal_transfer,true,fnb_statement_import
+2026-04-07,FNB App Transfer From J,10.00,internal_transfer,true,fnb_statement_import
+2026-04-08,,-0.87,bank_fees,false,fnb_statement_import
+2026-04-08,POS Purchase Betway,-10.00,betting,false,fnb_statement_import
+2026-04-08,POS Purchase Ben Vorster Motors,-17.90,transport_uber,false,fnb_statement_import
+2026-04-08,POS Purchase Uber,-33.00,transport_uber,false,fnb_statement_import
+2026-04-08,POS Purchase Uber,-48.00,transport_uber,false,fnb_statement_import
+2026-04-08,POS Purchase Uber,-55.00,transport_uber,false,fnb_statement_import
+2026-04-08,POS Purchase The Cock N Bull Wat,-105.00,other,false,fnb_statement_import
+2026-04-08,FNB App Transfer From F,60.00,internal_transfer,true,fnb_statement_import
+2026-04-08,FNB App Transfer From F,140.00,internal_transfer,true,fnb_statement_import
+2026-04-08,FNB App Transfer From I,60.00,internal_transfer,true,fnb_statement_import
+2026-04-08,FNB App Transfer From I,100.00,internal_transfer,true,fnb_statement_import
+2026-04-08,FNB App Transfer From J,26.00,internal_transfer,true,fnb_statement_import
+2026-04-09,POS Purchase Yoco *La Familia,-55.00,eating_out,false,fnb_statement_import
+2026-04-09,POS Purchase S2S*Tajminimarketan,-128.00,groceries,false,fnb_statement_import
+2026-04-09,POS Purchase Dl New Uber Eats,-159.20,food_delivery,false,fnb_statement_import
+2026-04-09,FNB App Transfer From H,40.00,internal_transfer,true,fnb_statement_import
+2026-04-09,FNB App Transfer From B,4.00,internal_transfer,true,fnb_statement_import
+2026-04-09,FNB App Transfer From H,104.00,internal_transfer,true,fnb_statement_import
+2026-04-09,FNB App Transfer From J,90.00,internal_transfer,true,fnb_statement_import
+2026-04-10,POS Purchase Dl Uber,-41.00,transport_uber,false,fnb_statement_import
+2026-04-10,POS Purchase KFC Sea Point,-81.40,other,false,fnb_statement_import
+2026-04-10,FNB App Transfer From H,108.00,internal_transfer,true,fnb_statement_import
+2026-04-11,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-11,POS Purchase Dl Uber,-104.00,transport_uber,false,fnb_statement_import
+2026-04-11,POS Purchase Ok Minimarket Maitl,-110.99,groceries,false,fnb_statement_import
+2026-04-11,FNB App Transfer From Y,40.00,internal_transfer,true,fnb_statement_import
+2026-04-11,FNB App Transfer From U,45.00,internal_transfer,true,fnb_statement_import
+2026-04-11,FNB App Transfer From J,144.00,internal_transfer,true,fnb_statement_import
+2026-04-11,Magtape Credit Amir,1000.00,income_other,false,fnb_statement_import
+2026-04-13,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-13,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-13,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-13,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-13,POS Purchase PNP Crp Sea Point,-18.00,other,false,fnb_statement_import
+2026-04-13,POS Purchase Dl Uber,-36.00,transport_uber,false,fnb_statement_import
+2026-04-13,POS Purchase Dl Uber,-54.00,transport_uber,false,fnb_statement_import
+2026-04-13,POS Purchase Dl Uber,-57.00,transport_uber,false,fnb_statement_import
+2026-04-13,Payment To Investment I,-1000.00,internal_transfer,true,fnb_statement_import
+2026-04-13,FNB App Transfer From J,379.00,internal_transfer,true,fnb_statement_import
+2026-04-13,Mvno Payment To 27645371179 Ftc Prep,-386.00,phone_data,false,fnb_statement_import
+2026-04-13,FNB App Transfer From U,60.00,internal_transfer,true,fnb_statement_import
+2026-04-13,FNB App Transfer From W,2.00,internal_transfer,true,fnb_statement_import
+2026-04-13,FNB App Transfer From S,8.00,internal_transfer,true,fnb_statement_import
+2026-04-13,FNB App Transfer From I,60.00,internal_transfer,true,fnb_statement_import
+2026-04-13,FNB App Transfer From H,77.00,internal_transfer,true,fnb_statement_import
+2026-04-13,FNB App Transfer From N,8.00,internal_transfer,true,fnb_statement_import
+2026-04-13,FNB App Transfer From U,88.00,internal_transfer,true,fnb_statement_import
+2026-04-13,FNB App Transfer From N,18.00,internal_transfer,true,fnb_statement_import
+2026-04-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-14,POS Purchase Ben Vorster Motors,-16.80,transport_uber,false,fnb_statement_import
+2026-04-14,POS Purchase Dl Uber,-41.00,transport_uber,false,fnb_statement_import
+2026-04-14,POS Purchase Dl Uber,-42.00,transport_uber,false,fnb_statement_import
+2026-04-14,POS Purchase Nandos Sea Point U,-62.00,eating_out,false,fnb_statement_import
+2026-04-14,POS Purchase Upfollow,-221.42,software_tools,false,fnb_statement_import
+2026-04-14,FNB App Transfer From I,100.00,internal_transfer,true,fnb_statement_import
+2026-04-14,FNB App Transfer From J,11.00,internal_transfer,true,fnb_statement_import
+2026-04-14,FNB App Transfer From H,1.00,internal_transfer,true,fnb_statement_import
+2026-04-14,FNB App Transfer From I,100.00,internal_transfer,true,fnb_statement_import
+2026-04-14,FNB App Transfer From H,3.00,internal_transfer,true,fnb_statement_import
+2026-04-14,FNB App Transfer From H,15.00,internal_transfer,true,fnb_statement_import
+2026-04-14,FNB App Transfer From H,40.00,internal_transfer,true,fnb_statement_import
+2026-04-14,FNB App Transfer From B,170.00,internal_transfer,true,fnb_statement_import
+2026-04-15,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-15,POS Purchase Dl Uber,-38.00,transport_uber,false,fnb_statement_import
+2026-04-15,POS Purchase Dl Uber,-106.00,transport_uber,false,fnb_statement_import
+2026-04-15,POS Purchase Ok Minimarket Maitl,-110.99,groceries,false,fnb_statement_import
+2026-04-15,POS Purchase Dl Uber,-117.00,transport_uber,false,fnb_statement_import
+2026-04-15,FNB App Transfer From G,111.00,internal_transfer,true,fnb_statement_import
+2026-04-15,FNB App Transfer From S,100.00,internal_transfer,true,fnb_statement_import
+2026-04-15,FNB App Transfer From U,50.00,internal_transfer,true,fnb_statement_import
+2026-04-15,FNB App Transfer From I,79.00,internal_transfer,true,fnb_statement_import
+2026-04-15,FNB App Transfer From D,6.00,internal_transfer,true,fnb_statement_import
+2026-04-15,FNB App Transfer From K,39.00,internal_transfer,true,fnb_statement_import
+2026-04-15,Payshap Account Off-Us H,-99.00,p2p_out,false,fnb_statement_import
+2026-04-15,FNB App Transfer From G,35.00,internal_transfer,true,fnb_statement_import
+2026-04-15,Payshap Account Off-Us D,-35.00,p2p_out,false,fnb_statement_import
+2026-04-16,POS Purchase Nandos Sea Point U,-86.00,eating_out,false,fnb_statement_import
+2026-04-16,POS Purchase Dl Uber,-96.00,transport_uber,false,fnb_statement_import
+2026-04-16,FNB App Payment From Papa,50.00,family,false,fnb_statement_import
+2026-04-17,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-17,POS Purchase Dl Uber,-25.00,transport_uber,false,fnb_statement_import
+2026-04-18,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-18,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-18,POS Purchase Dl Uber,-82.00,transport_uber,false,fnb_statement_import
+2026-04-18,Electricity Prepaid Electricity 04908388285,-48.00,utilities,false,fnb_statement_import
+2026-04-18,FNB App Transfer From B,144.00,internal_transfer,true,fnb_statement_import
+2026-04-20,POS Purchase Dl Bolt,-38.00,transport_uber,false,fnb_statement_import
+2026-04-20,POS Purchase Dl Bolt,-109.00,transport_uber,false,fnb_statement_import
+2026-04-21,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-21,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-21,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-21,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-22,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-22,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-22,FNB App Transfer From H,98.00,internal_transfer,true,fnb_statement_import
+2026-04-22,FNB App Transfer To 5,-8.00,internal_transfer,true,fnb_statement_import
+2026-04-23,POS Purchase Ben Vorster Motors,-17.90,transport_uber,false,fnb_statement_import
+2026-04-23,POS Purchase Dl Uber,-48.00,transport_uber,false,fnb_statement_import
+2026-04-23,FNB OB Pmt Ie Global,6500.00,income_ie_global,false,fnb_statement_import
+2026-04-23,FNB App Transfer To H,-4800.00,internal_transfer,true,fnb_statement_import
+2026-04-23,FNB App Transfer From I,100.00,internal_transfer,true,fnb_statement_import
+2026-04-23,Payshap Account On-Us T,-650.00,internal_transfer,true,fnb_statement_import
+2026-04-24,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-24,POS Purchase S2S*Tajminimarketan,-110.00,groceries,false,fnb_statement_import
+2026-04-24,POS Purchase Dl Uber,-150.00,transport_uber,false,fnb_statement_import
+2026-04-24,POS Purchase Woolworths,-350.79,groceries,false,fnb_statement_import
+2026-04-24,POS Purchase Vercel Domains,-254.02,software_tools,false,fnb_statement_import
+2026-04-25,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-25,POS Purchase Dl New Uber Eats,-14.80,food_delivery,false,fnb_statement_import
+2026-04-25,POS Purchase Dl Uber,-35.00,transport_uber,false,fnb_statement_import
+2026-04-25,POS Purchase Dl Uber,-35.00,transport_uber,false,fnb_statement_import
+2026-04-25,POS Purchase Dl Uber,-38.00,transport_uber,false,fnb_statement_import
+2026-04-25,POS Purchase Dl Uber,-66.00,transport_uber,false,fnb_statement_import
+2026-04-25,POS Purchase Sans Grocer,-85.00,other,false,fnb_statement_import
+2026-04-25,FNB App Transfer From J,48.00,internal_transfer,true,fnb_statement_import
+2026-04-28,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-28,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-28,POS Purchase Dl Uber,-37.00,transport_uber,false,fnb_statement_import
+2026-04-28,POS Purchase Dl Uber,-48.00,transport_uber,false,fnb_statement_import
+2026-04-28,POS Purchase Dl Uber,-61.00,transport_uber,false,fnb_statement_import
+2026-04-28,POS Purchase Dl Uber,-69.00,transport_uber,false,fnb_statement_import
+2026-04-28,POS Purchase Dl New Uber Eats,-169.95,food_delivery,false,fnb_statement_import
+2026-04-28,FNB App Transfer From R,18.00,internal_transfer,true,fnb_statement_import
+2026-04-28,FNB App Transfer From Y,114.00,internal_transfer,true,fnb_statement_import
+2026-04-28,FNB App Transfer From B,14.00,internal_transfer,true,fnb_statement_import
+2026-04-28,FNB App Transfer From I,40.00,internal_transfer,true,fnb_statement_import
+2026-04-28,Electricity Prepaid Electricity 04908388285,-43.00,utilities,false,fnb_statement_import
+2026-04-28,FNB App Transfer To S,-10.00,internal_transfer,true,fnb_statement_import
+2026-04-28,FNB App Transfer From R,142.00,internal_transfer,true,fnb_statement_import
+2026-04-28,FNB App Transfer To H,-64.00,internal_transfer,true,fnb_statement_import
+2026-04-28,FNB App Transfer From H,54.00,internal_transfer,true,fnb_statement_import
+2026-04-28,FNB App Transfer From H,100.00,internal_transfer,true,fnb_statement_import
+2026-04-28,FNB App Transfer From U,195.00,internal_transfer,true,fnb_statement_import
+2026-04-28,FNB App Transfer From U,54.00,internal_transfer,true,fnb_statement_import
+2026-04-29,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-29,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-29,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-29,POS Purchase Dl Uber,-37.00,transport_uber,false,fnb_statement_import
+2026-04-29,POS Purchase Ok Minimarket Maitl,-110.99,groceries,false,fnb_statement_import
+2026-04-29,FNB OB Pmt Ie Global,3600.00,income_ie_global,false,fnb_statement_import
+2026-04-29,Payment To Investment J,-3500.00,internal_transfer,true,fnb_statement_import
+2026-04-29,FNB App Transfer From B,200.00,internal_transfer,true,fnb_statement_import
+2026-04-29,FNB App Transfer From Y,300.00,internal_transfer,true,fnb_statement_import
+2026-04-29,FNB App Transfer From J,50.00,internal_transfer,true,fnb_statement_import
+2026-04-30,Magtape Unpaid Not Provided For,199.00,debit_order_reversal,false,fnb_statement_import
+2026-04-30,,-115.00,bank_fees,false,fnb_statement_import
+2026-04-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-04-30,POS Purchase Betway,-40.00,betting,false,fnb_statement_import
+2026-04-30,POS Purchase Dl Uber,-60.00,transport_uber,false,fnb_statement_import
+2026-04-30,POS Purchase Dl Uber,-79.00,transport_uber,false,fnb_statement_import
+2026-04-30,POS Purchase Nandos Sea Point U,-110.00,eating_out,false,fnb_statement_import
+2026-04-30,POS Purchase Dl Uber,-196.00,transport_uber,false,fnb_statement_import
+2026-04-30,POS Purchase PNA Sea Point - Ope,-280.16,groceries,false,fnb_statement_import
+2026-04-30,FNB App Transfer From S,100.00,internal_transfer,true,fnb_statement_import
+2026-04-30,FNB OB Pmt Ie Global,1705.27,income_ie_global,false,fnb_statement_import
+2026-04-30,Payshap Account Off-Us B,-200.00,p2p_out,false,fnb_statement_import
+2026-04-30,FNB App Geo Payment To *Hazelmila Holdings( Daniel D Mayele Joff,-650.00,p2p_out,false,fnb_statement_import
+2026-04-30,Send Money App Dr Send Victor Barber,-210.00,p2p_out,false,fnb_statement_import
+2026-04-30,FNB App Transfer From J,86.00,internal_transfer,true,fnb_statement_import
+2026-04-30,FNB App Transfer From H,199.00,internal_transfer,true,fnb_statement_import
+2026-04-30,Hybrid Subscription Fee Connect Topup Paymnt,-69.00,bank_fees,false,fnb_statement_import
+2026-04-30,Magtape Debit Pf Gymfee 318285 N,-199.00,health_fitness,false,fnb_statement_import
+2026-05-02,Electricity Prepaid Electricity 04908388285,-43.00,utilities,false,fnb_statement_import
+2026-05-02,Payment To Investment S,-630.00,internal_transfer,true,fnb_statement_import
+2026-05-02,FNB App Transfer From U,85.00,internal_transfer,true,fnb_statement_import
+2026-05-02,FNB App Transfer From J,100.00,internal_transfer,true,fnb_statement_import
+2026-05-02,FNB App Transfer From L,250.00,internal_transfer,true,fnb_statement_import
+2026-05-02,FNB App Transfer From H,160.00,internal_transfer,true,fnb_statement_import
+2026-05-02,Payshap Account On-Us H,-160.00,internal_transfer,true,fnb_statement_import
+2026-05-02,FNB App Transfer From H,150.00,internal_transfer,true,fnb_statement_import
+2026-05-02,FNB App Transfer From H,10.00,internal_transfer,true,fnb_statement_import
+2026-05-02,FNB App Transfer From Y,160.00,internal_transfer,true,fnb_statement_import
+2026-05-02,FNB App Transfer From H,80.00,internal_transfer,true,fnb_statement_import
+2026-05-02,FNB App Transfer From A,36.00,internal_transfer,true,fnb_statement_import
+2026-05-02,FNB App Transfer From G,1000.00,internal_transfer,true,fnb_statement_import
+2026-05-02,FNB App Transfer From H,1000.00,internal_transfer,true,fnb_statement_import
+2026-05-02,,-60.00,bank_fees,false,fnb_statement_import
+2026-05-02,,-2.40,bank_fees,false,fnb_statement_import
+2026-05-02,,115.00,bank_fees,false,fnb_statement_import
+2026-05-02,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-02,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-02,POS Purchase Ben Vorster Motors,-17.90,transport_uber,false,fnb_statement_import
+2026-05-02,POS Purchase Dl Uber,-31.00,transport_uber,false,fnb_statement_import
+2026-05-02,POS Purchase Yoco *La Familia,-35.00,eating_out,false,fnb_statement_import
+2026-05-02,POS Purchase Dl Uber,-38.00,transport_uber,false,fnb_statement_import
+2026-05-02,POS Purchase Dl Uber,-43.00,transport_uber,false,fnb_statement_import
+2026-05-02,POS Purchase Dl Uber,-70.00,transport_uber,false,fnb_statement_import
+2026-05-02,POS Purchase Ben Vorster Motors,-75.50,transport_uber,false,fnb_statement_import
+2026-05-02,POS Purchase Mcd Observatory (01,-88.30,eating_out,false,fnb_statement_import
+2026-05-02,POS Purchase PNP Crp Sea Point,-101.39,other,false,fnb_statement_import
+2026-05-02,POS Purchase S2S*Tajminimarketan,-110.00,groceries,false,fnb_statement_import
+2026-05-02,POS Purchase Station On Bree,-115.50,eating_out,false,fnb_statement_import
+2026-05-02,POS Purchase Station On Bree,-121.00,eating_out,false,fnb_statement_import
+2026-05-02,POS Purchase Dl Uber,-123.00,transport_uber,false,fnb_statement_import
+2026-05-02,POS Purchase Yustras Kitchen Sup,-128.00,eating_out,false,fnb_statement_import
+2026-05-02,POS Purchase Yoco *Tipbytap,-300.00,eating_out,false,fnb_statement_import
+2026-05-02,POS Purchase Apple.Com/Bill,-104.99,software_tools,false,fnb_statement_import
+2026-05-04,,-2.62,bank_fees,false,fnb_statement_import
+2026-05-04,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-04,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-04,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-04,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-04,POS Purchase PNP Crp Sea Point,-20.00,other,false,fnb_statement_import
+2026-05-04,POS Purchase Yustras Kitchen Sup,-24.00,eating_out,false,fnb_statement_import
+2026-05-04,POS Purchase Andiccio24 Rondebos,-45.00,eating_out,false,fnb_statement_import
+2026-05-04,POS Purchase Dl Uber,-47.00,transport_uber,false,fnb_statement_import
+2026-05-04,POS Purchase Halo Night Club,-50.00,eating_out,false,fnb_statement_import
+2026-05-04,POS Purchase Dl Uber,-54.00,transport_uber,false,fnb_statement_import
+2026-05-04,POS Purchase Dl Uber,-67.00,transport_uber,false,fnb_statement_import
+2026-05-04,POS Purchase Dl Uber,-89.00,transport_uber,false,fnb_statement_import
+2026-05-04,POS Purchase Dl Uber,-117.00,transport_uber,false,fnb_statement_import
+2026-05-04,POS Purchase S2S*Tajminimarketan,-133.00,groceries,false,fnb_statement_import
+2026-05-04,POS Purchase Halo Night Club,-140.00,eating_out,false,fnb_statement_import
+2026-05-04,POS Purchase Yoco *Airdosh,-161.99,eating_out,false,fnb_statement_import
+2026-05-04,POS Purchase Andiccio24 Rondebos,-371.00,eating_out,false,fnb_statement_import
+2026-05-04,POS Purchase Cafe Caprice,-480.00,eating_out,false,fnb_statement_import
+2026-05-04,POS Purchase Apple.Com/Bill,-14.99,software_tools,false,fnb_statement_import
+2026-05-04,POS Purchase Apple.Com/Bill,-34.99,software_tools,false,fnb_statement_import
+2026-05-04,FNB App Transfer From H,150.00,internal_transfer,true,fnb_statement_import
+2026-05-04,FNB App Transfer From J,125.00,internal_transfer,true,fnb_statement_import
+2026-05-04,FNB App Transfer From H,60.00,internal_transfer,true,fnb_statement_import
+2026-05-04,FNB App Transfer From U,125.00,internal_transfer,true,fnb_statement_import
+2026-05-04,FNB App Transfer From B,39.00,internal_transfer,true,fnb_statement_import
+2026-05-05,,-0.37,bank_fees,false,fnb_statement_import
+2026-05-05,,-0.87,bank_fees,false,fnb_statement_import
+2026-05-05,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-05,POS Purchase Dl Uber,-62.00,transport_uber,false,fnb_statement_import
+2026-05-05,POS Purchase Nandos Sea Point U,-130.00,eating_out,false,fnb_statement_import
+2026-05-05,POS Purchase Dl New Uber Eats,-161.90,food_delivery,false,fnb_statement_import
+2026-05-05,POS Purchase Apple.Com/Bill,-34.99,software_tools,false,fnb_statement_import
+2026-05-06,,-0.87,bank_fees,false,fnb_statement_import
+2026-05-06,POS Purchase Dl Uber,-39.00,transport_uber,false,fnb_statement_import
+2026-05-06,POS Purchase Halo Night Club,-50.00,eating_out,false,fnb_statement_import
+2026-05-07,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-07,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-08,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-08,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-11,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-13,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-16,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-23,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-29,,-30.00,bank_fees,false,fnb_statement_import
+2026-05-29,FNB OB Pmt Patin Trading 84 T/A,8713.00,income_ie_global,false,fnb_statement_import
+2026-05-29,Payshap Account Off-Us Transfer,-5200.00,p2p_out,false,fnb_statement_import
+2026-05-29,FNB App Payment To T,-700.00,p2p_out,false,fnb_statement_import
+2026-05-29,Payment To Investment H,-2000.00,internal_transfer,true,fnb_statement_import
+2026-05-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-05-30,POS Purchase S2S*Tajminimarketan,-110.00,groceries,false,fnb_statement_import
+2026-05-30,POS Purchase Apple.Com/Bill,-249.99,software_tools,false,fnb_statement_import
+2026-05-30,FNB App Transfer From N,400.00,internal_transfer,true,fnb_statement_import
+2026-05-30,FNB App Transfer From I,700.00,internal_transfer,true,fnb_statement_import
+2026-05-30,Send Money App Dr Send Victor Barber,-180.00,p2p_out,false,fnb_statement_import
+2026-06-01,Magtape Unpaid Not Provided For,219.00,debit_order_reversal,false,fnb_statement_import
+2026-06-01,,-115.00,bank_fees,false,fnb_statement_import
+2026-06-01,Magtape Unpaid Not Provided For,199.00,debit_order_reversal,false,fnb_statement_import
+2026-06-01,,-115.00,bank_fees,false,fnb_statement_import
+2026-06-01,,-6.25,bank_fees,false,fnb_statement_import
+2026-06-01,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-01,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-01,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-01,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-01,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-01,POS Purchase Dl Uber,-39.00,transport_uber,false,fnb_statement_import
+2026-06-01,POS Purchase Dl Uber,-53.00,transport_uber,false,fnb_statement_import
+2026-06-01,POS Purchase Dl Uber,-53.00,transport_uber,false,fnb_statement_import
+2026-06-01,POS Purchase Yoco *La Familia,-55.00,eating_out,false,fnb_statement_import
+2026-06-01,POS Purchase Dl Uber,-62.00,transport_uber,false,fnb_statement_import
+2026-06-01,POS Purchase Dl Uber,-64.00,transport_uber,false,fnb_statement_import
+2026-06-01,POS Purchase Dl Uber,-93.00,transport_uber,false,fnb_statement_import
+2026-06-01,POS Purchase Mochachos Sea Point,-143.90,eating_out,false,fnb_statement_import
+2026-06-01,POS Purchase Yoco *Our Local S,-256.30,eating_out,false,fnb_statement_import
+2026-06-01,POS Purchase Ali Cellular 19,-300.00,phone_data,false,fnb_statement_import
+2026-06-01,FNB App Transfer From J,300.00,internal_transfer,true,fnb_statement_import
+2026-06-01,FNB App Transfer From U,10.00,internal_transfer,true,fnb_statement_import
+2026-06-01,FNB App Transfer From H,1.00,internal_transfer,true,fnb_statement_import
+2026-06-01,FNB App Transfer From B,150.00,internal_transfer,true,fnb_statement_import
+2026-06-01,FNB App Transfer From S,100.00,internal_transfer,true,fnb_statement_import
+2026-06-01,FNB App Transfer From J,60.00,internal_transfer,true,fnb_statement_import
+2026-06-01,Payment To Investment H,-119.00,internal_transfer,true,fnb_statement_import
+2026-06-01,FNB App Transfer From H,137.00,internal_transfer,true,fnb_statement_import
+2026-06-01,FNB App Transfer From U,2.00,internal_transfer,true,fnb_statement_import
+2026-06-01,FNB App Transfer From U,26.00,internal_transfer,true,fnb_statement_import
+2026-06-01,FNB App Transfer From Y,42.00,internal_transfer,true,fnb_statement_import
+2026-06-01,FNB App Transfer From H,35.00,internal_transfer,true,fnb_statement_import
+2026-06-01,FNB App Transfer From Yes,48.00,internal_transfer,true,fnb_statement_import
+2026-06-01,FNB App Transfer From J,100.00,internal_transfer,true,fnb_statement_import
+2026-06-01,FNB App Transfer From I,8.00,internal_transfer,true,fnb_statement_import
+2026-06-01,Send Money App Dr Send Hair Hair,-450.00,p2p_out,false,fnb_statement_import
+2026-06-01,Hybrid Subscription Fee Connect Topup Paymnt,-69.00,bank_fees,false,fnb_statement_import
+2026-06-01,Magtape Debit Pf Gymfee 318285 N,-199.00,health_fitness,false,fnb_statement_import
+2026-06-01,Magtape Debit Pf Gymfee 318285 Pp,-219.00,health_fitness,false,fnb_statement_import
+2026-06-02,,115.00,bank_fees,false,fnb_statement_import
+2026-06-02,,115.00,bank_fees,false,fnb_statement_import
+2026-06-02,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-02,POS Purchase Dl Uber,-42.00,transport_uber,false,fnb_statement_import
+2026-06-02,POS Purchase Ben Vorster Motors,-46.00,transport_uber,false,fnb_statement_import
+2026-06-02,POS Purchase Mcd Strand Two (061,-137.80,eating_out,false,fnb_statement_import
+2026-06-02,POS Purchase Yustras Kitchen Sup,-191.00,eating_out,false,fnb_statement_import
+2026-06-02,Schd Trxn No Av Bal Pmt To Ptp 59188913_20260602,-0.00,other,false,fnb_statement_import
+2026-06-02,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-03,,-60.00,bank_fees,false,fnb_statement_import
+2026-06-03,,-15.50,bank_fees,false,fnb_statement_import
+2026-06-03,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-03,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-03,POS Purchase Dl Uber,-38.00,transport_uber,false,fnb_statement_import
+2026-06-03,POS Purchase Dl Uber,-106.00,transport_uber,false,fnb_statement_import
+2026-06-04,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-04,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-04,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-04,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-05,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-05,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-05,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-05,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-05,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-06,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-06,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-06,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-08,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-08,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-08,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-08,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-08,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-09,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-09,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-09,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-10,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-10,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-10,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-12,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-12,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-12,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-15,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-15,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-15,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-15,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-17,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-17,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-17,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-17,Magtape Credit Proto Trading CC,30000.00,income_proto,false,fnb_statement_import
+2026-06-18,FNB App Transfer To Y,-500.00,internal_transfer,true,fnb_statement_import
+2026-06-18,FNB App Transfer To Y,-3.00,internal_transfer,true,fnb_statement_import
+2026-06-18,Payment To Investment Y,-25000.00,internal_transfer,true,fnb_statement_import
+2026-06-18,FNB App Transfer To Pay Arrears Now,-1151.00,internal_transfer,true,fnb_statement_import
+2026-06-18,Mvno Payment To 27645371179 Ftc Prep,-1200.00,phone_data,false,fnb_statement_import
+2026-06-19,POS Purchase Ben Vorster Motors,-46.00,transport_uber,false,fnb_statement_import
+2026-06-19,POS Purchase Dl Uber,-49.96,transport_uber,false,fnb_statement_import
+2026-06-19,POS Purchase Dl Uber Eats,-185.00,food_delivery,false,fnb_statement_import
+2026-06-19,POS Purchase Apple.Com/Bill,-14.99,software_tools,false,fnb_statement_import
+2026-06-19,POS Purchase Apple.Com/Bill,-34.99,software_tools,false,fnb_statement_import
+2026-06-19,POS Purchase Apple.Com/Bill,-34.99,software_tools,false,fnb_statement_import
+2026-06-19,POS Purchase Apple.Com/Bill,-104.99,software_tools,false,fnb_statement_import
+2026-06-20,,-80.00,bank_fees,false,fnb_statement_import
+2026-06-20,,-0.37,bank_fees,false,fnb_statement_import
+2026-06-20,,-0.87,bank_fees,false,fnb_statement_import
+2026-06-20,,-0.87,bank_fees,false,fnb_statement_import
+2026-06-20,,-2.62,bank_fees,false,fnb_statement_import
+2026-06-20,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-20,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-20,POS Purchase Dl Uber,-44.97,transport_uber,false,fnb_statement_import
+2026-06-20,POS Purchase Dl Uber,-49.92,transport_uber,false,fnb_statement_import
+2026-06-20,POS Purchase Dl Uber,-69.95,transport_uber,false,fnb_statement_import
+2026-06-20,POS Purchase S2S*Tajminimarketan,-188.00,groceries,false,fnb_statement_import
+2026-06-20,POS Purchase Yoco *Montreal Se,-198.00,eating_out,false,fnb_statement_import
+2026-06-20,FNB App Transfer From Dan,8000.00,internal_transfer,true,fnb_statement_import
+2026-06-20,Payshap Account Off-Us Transfer,-8400.00,p2p_out,false,fnb_statement_import
+2026-06-20,FNB App Transfer From Y,273.00,internal_transfer,true,fnb_statement_import
+2026-06-20,FNB App Transfer From J,4000.00,internal_transfer,true,fnb_statement_import
+2026-06-20,Payshap Account Off-Us Rory,-2700.00,p2p_out,false,fnb_statement_import
+2026-06-20,Send Money App Dr Send Barber Barber,-200.00,p2p_out,false,fnb_statement_import
+2026-06-20,FNB App Transfer From U,250.00,internal_transfer,true,fnb_statement_import
+2026-06-20,Payshap Account On-Us Transfer,-1500.00,internal_transfer,true,fnb_statement_import
+2026-06-20,FNB App Transfer From J,500.00,internal_transfer,true,fnb_statement_import
+2026-06-20,FNB App Transfer From Y,500.00,internal_transfer,true,fnb_statement_import
+2026-06-22,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-22,POS Purchase Dl Uber,-49.94,transport_uber,false,fnb_statement_import
+2026-06-22,POS Purchase Dl Uber,-49.94,transport_uber,false,fnb_statement_import
+2026-06-22,POS Purchase Dl Uber,-49.94,transport_uber,false,fnb_statement_import
+2026-06-22,POS Purchase Dl Uber,-49.95,transport_uber,false,fnb_statement_import
+2026-06-22,POS Purchase Dl Uber,-49.95,transport_uber,false,fnb_statement_import
+2026-06-22,POS Purchase Dl Uber,-50.00,transport_uber,false,fnb_statement_import
+2026-06-22,POS Purchase Dl Uber,-59.94,transport_uber,false,fnb_statement_import
+2026-06-22,POS Purchase Dl Uber,-89.95,transport_uber,false,fnb_statement_import
+2026-06-22,POS Purchase Mcd Strand Two (061,-238.20,eating_out,false,fnb_statement_import
+2026-06-22,POS Purchase Mcd Strand Two (061,-247.70,eating_out,false,fnb_statement_import
+2026-06-22,POS Purchase Tabbs *Brash Burge,-396.00,eating_out,false,fnb_statement_import
+2026-06-22,FNB App Transfer From H,1000.00,internal_transfer,true,fnb_statement_import
+2026-06-22,FNB App Transfer From H,250.00,internal_transfer,true,fnb_statement_import
+2026-06-23,POS Purchase Dl Uber,-10.00,transport_uber,false,fnb_statement_import
+2026-06-23,POS Purchase Ben Vorster Motors,-33.50,transport_uber,false,fnb_statement_import
+2026-06-23,POS Purchase Dl Uber,-49.95,transport_uber,false,fnb_statement_import
+2026-06-23,POS Purchase Dl Uber,-49.95,transport_uber,false,fnb_statement_import
+2026-06-23,POS Purchase Dl Uber Eats,-55.49,food_delivery,false,fnb_statement_import
+2026-06-23,POS Purchase Dl Uber,-69.95,transport_uber,false,fnb_statement_import
+2026-06-23,POS Purchase Yustras Kitchen Sup,-130.00,eating_out,false,fnb_statement_import
+2026-06-23,POS Purchase Dl Uber Eats,-155.48,food_delivery,false,fnb_statement_import
+2026-06-23,FNB App Transfer From H,1000.00,internal_transfer,true,fnb_statement_import
+2026-06-23,Airtime Topup Airtime 27645371179,-5.50,phone_data,false,fnb_statement_import
+2026-06-23,Airtime Topup Airtime 27645371179,-199.00,phone_data,false,fnb_statement_import
+2026-06-23,FNB App Transfer From Y,2000.00,internal_transfer,true,fnb_statement_import
+2026-06-24,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-24,POS Purchase Ben Vorster Motors,-33.50,transport_uber,false,fnb_statement_import
+2026-06-24,POS Purchase Dl Uber,-49.93,transport_uber,false,fnb_statement_import
+2026-06-24,POS Purchase Dl Uber,-49.94,transport_uber,false,fnb_statement_import
+2026-06-24,POS Purchase Dl Uber,-49.94,transport_uber,false,fnb_statement_import
+2026-06-24,POS Purchase Dl Uber,-89.94,transport_uber,false,fnb_statement_import
+2026-06-24,POS Purchase President Hotel,-120.00,eating_out,false,fnb_statement_import
+2026-06-24,POS Purchase Yoco *Maggy Lous,-198.00,eating_out,false,fnb_statement_import
+2026-06-24,POS Purchase Luno,-1800.00,crypto,false,fnb_statement_import
+2026-06-24,"POS Purchase Openrouter, Inc",-183.62,software_tools,false,fnb_statement_import
+2026-06-24,FNB App Transfer From H,1600.00,internal_transfer,true,fnb_statement_import
+2026-06-25,POS Purchase Ben Vorster Motors,-46.00,transport_uber,false,fnb_statement_import
+2026-06-25,POS Purchase Dl Uber,-49.93,transport_uber,false,fnb_statement_import
+2026-06-25,POS Purchase Dl Uber,-49.94,transport_uber,false,fnb_statement_import
+2026-06-25,POS Purchase Dl Uber,-49.94,transport_uber,false,fnb_statement_import
+2026-06-25,POS Purchase Dl Uber,-49.95,transport_uber,false,fnb_statement_import
+2026-06-25,POS Purchase S2S*Tajminimarketan,-113.00,groceries,false,fnb_statement_import
+2026-06-25,POS Purchase Dl Uber Eats,-141.70,food_delivery,false,fnb_statement_import
+2026-06-25,POS Purchase Yustras Kitchen Sup,-148.00,eating_out,false,fnb_statement_import
+2026-06-25,POS Purchase Ok Minimarket Maitl,-156.97,groceries,false,fnb_statement_import
+2026-06-25,POS Purchase Dl Uber,-179.94,transport_uber,false,fnb_statement_import
+2026-06-25,POS Purchase Dl Uber Eats,-214.50,food_delivery,false,fnb_statement_import
+2026-06-25,POS Purchase Dl Uber,-259.94,transport_uber,false,fnb_statement_import
+2026-06-26,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-26,POS Purchase Ben Vorster Motors,-33.50,transport_uber,false,fnb_statement_import
+2026-06-26,POS Purchase Dl Uber,-49.94,transport_uber,false,fnb_statement_import
+2026-06-26,POS Purchase Dl Uber,-49.95,transport_uber,false,fnb_statement_import
+2026-06-26,POS Purchase Dl Uber,-69.96,transport_uber,false,fnb_statement_import
+2026-06-26,POS Purchase Dl Uber,-69.99,transport_uber,false,fnb_statement_import
+2026-06-26,POS Purchase Dl Uber Eats,-161.70,food_delivery,false,fnb_statement_import
+2026-06-26,FNB App Transfer From J,500.00,internal_transfer,true,fnb_statement_import
+2026-06-27,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-27,POS Purchase Dl Uber,-49.94,transport_uber,false,fnb_statement_import
+2026-06-27,POS Purchase Dl Uber,-49.96,transport_uber,false,fnb_statement_import
+2026-06-27,POS Purchase Dl Uber,-69.94,transport_uber,false,fnb_statement_import
+2026-06-27,POS Purchase Dl Uber,-99.94,transport_uber,false,fnb_statement_import
+2026-06-27,POS Purchase Dl Uber,-129.93,transport_uber,false,fnb_statement_import
+2026-06-27,POS Purchase Dl Uber Eats,-156.50,food_delivery,false,fnb_statement_import
+2026-06-27,POS Purchase Cafe Caprice,-382.00,eating_out,false,fnb_statement_import
+2026-06-27,FNB App Transfer From N,500.00,internal_transfer,true,fnb_statement_import
+2026-06-27,FNB App Transfer From H,300.00,internal_transfer,true,fnb_statement_import
+2026-06-27,FNB App Transfer From H,30.00,internal_transfer,true,fnb_statement_import
+2026-06-27,FNB App Transfer From H,60.00,internal_transfer,true,fnb_statement_import
+2026-06-29,,-10.00,bank_fees,false,fnb_statement_import
+2026-06-29,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-29,POS Purchase Dl Uber,-10.00,transport_uber,false,fnb_statement_import
+2026-06-29,POS Purchase Dl Uber,-49.94,transport_uber,false,fnb_statement_import
+2026-06-29,POS Purchase Dl Uber,-59.95,transport_uber,false,fnb_statement_import
+2026-06-29,POS Purchase President Hotel,-60.00,eating_out,false,fnb_statement_import
+2026-06-29,POS Purchase Dl Uber,-89.93,transport_uber,false,fnb_statement_import
+2026-06-29,POS Purchase Dl Uber,-89.94,transport_uber,false,fnb_statement_import
+2026-06-29,POS Purchase President Hotel,-105.00,eating_out,false,fnb_statement_import
+2026-06-29,POS Purchase Yoco *La Familia,-120.00,eating_out,false,fnb_statement_import
+2026-06-29,POS Purchase Dl Uber Eats,-215.00,food_delivery,false,fnb_statement_import
+2026-06-29,POS Purchase Dl Uber,-300.00,transport_uber,false,fnb_statement_import
+2026-06-29,FNB App Transfer From D,677.00,internal_transfer,true,fnb_statement_import
+2026-06-29,FNB App Transfer From J,500.00,internal_transfer,true,fnb_statement_import
+2026-06-29,Payshap Account Off-Us N,-200.00,p2p_out,false,fnb_statement_import
+2026-06-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-06-30,POS Purchase Nandos Sea Point U,-48.00,eating_out,false,fnb_statement_import
+2026-06-30,POS Purchase Dl Uber,-49.95,transport_uber,false,fnb_statement_import
+2026-06-30,POS Purchase Dl Uber,-49.96,transport_uber,false,fnb_statement_import
+2026-06-30,POS Purchase Dl Uber Eats,-51.50,food_delivery,false,fnb_statement_import
+2026-06-30,POS Purchase Ben Vorster Motors,-62.50,transport_uber,false,fnb_statement_import
+2026-06-30,POS Purchase Dl Uber,-69.95,transport_uber,false,fnb_statement_import
+2026-06-30,POS Purchase Yustras Kitchen Sup,-76.00,eating_out,false,fnb_statement_import
+2026-06-30,POS Purchase Yustras Kitchen Sup,-78.00,eating_out,false,fnb_statement_import
+2026-06-30,POS Purchase President Hotel,-105.00,eating_out,false,fnb_statement_import
+2026-06-30,POS Purchase Mcd Strand Two (061,-155.80,eating_out,false,fnb_statement_import
+2026-06-30,POS Purchase Nandos Sea Point U,-305.00,eating_out,false,fnb_statement_import
+2026-06-30,Hybrid Subscription Fee Connect Topup Paymnt,-69.00,bank_fees,false,fnb_statement_import
+2026-06-30,FNB OB Pmt Patin Trading 84 T/A,13000.00,income_ie_global,false,fnb_statement_import
+2026-06-30,Payment To Investment J,-13000.00,internal_transfer,true,fnb_statement_import
+2026-06-30,FNB App Transfer From G,1000.00,internal_transfer,true,fnb_statement_import
+2026-06-30,FNB App Transfer From U,500.00,internal_transfer,true,fnb_statement_import
+2026-06-30,FNB App Transfer From H,700.00,internal_transfer,true,fnb_statement_import
+2026-07-01,Magtape Unpaid Not Provided For,779.40,debit_order_reversal,false,fnb_statement_import
+2026-07-01,,-112.00,bank_fees,false,fnb_statement_import
+2026-07-01,Magtape Unpaid Not Provided For,438.00,debit_order_reversal,false,fnb_statement_import
+2026-07-01,,-112.00,bank_fees,false,fnb_statement_import
+2026-07-01,,-5.00,bank_fees,false,fnb_statement_import
+2026-07-01,POS Purchase PNA Sea Point - Ope,-111.98,groceries,false,fnb_statement_import
+2026-07-01,POS Purchase Dl Uber,-120.90,transport_uber,false,fnb_statement_import
+2026-07-01,POS Purchase S2S*Tajminimarketan,-148.00,groceries,false,fnb_statement_import
+2026-07-01,POS Purchase Apple.Com/Bill,-104.99,software_tools,false,fnb_statement_import
+2026-07-01,FNB App Transfer From H,9000.00,internal_transfer,true,fnb_statement_import
+2026-07-01,Payshap Account Off-Us Dan,-8000.00,internal_transfer,true,fnb_statement_import
+2026-07-01,FNB App Transfer From I,300.00,internal_transfer,true,fnb_statement_import
+2026-07-01,Magtape Debit Pf Gymfee 318285 Pp,-438.00,health_fitness,false,fnb_statement_import
+2026-07-01,Magtape Debit Pf Gymfee 318285 N,-779.40,health_fitness,false,fnb_statement_import
+2026-07-02,,-2.89,bank_fees,false,fnb_statement_import
+2026-07-02,,-15.00,bank_fees,false,fnb_statement_import
+2026-07-02,POS Purchase Dis-Chem Adelphi Ph,-36.99,other,false,fnb_statement_import
+2026-07-02,POS Purchase Dl Uber,-74.24,transport_uber,false,fnb_statement_import
+2026-07-02,POS Purchase Dl Uber,-79.73,transport_uber,false,fnb_statement_import
+2026-07-02,POS Purchase Dl Uber Eats,-97.91,food_delivery,false,fnb_statement_import
+2026-07-02,POS Purchase President Hotel,-105.00,eating_out,false,fnb_statement_import
+2026-07-02,POS Purchase Dl Uber,-113.71,transport_uber,false,fnb_statement_import
+2026-07-02,POS Purchase Dl Uber,-125.44,transport_uber,false,fnb_statement_import
+2026-07-02,POS Purchase Dl Uber,-129.96,transport_uber,false,fnb_statement_import
+2026-07-02,POS Purchase S2S*Tajminimarketan,-185.00,groceries,false,fnb_statement_import
+2026-07-02,POS Purchase Cafe Caprice,-300.00,eating_out,false,fnb_statement_import
+2026-07-02,POS Purchase Farhaan Cellular,-550.00,phone_data,false,fnb_statement_import
+2026-07-02,POS Purchase Netflix.Com,-229.00,software_tools,false,fnb_statement_import
+2026-07-02,POS Purchase Higgsfield Inc.,-255.54,software_tools,false,fnb_statement_import
+2026-07-02,Rtc Credit Vc 18Bo199479,29101.90,income_client_unlabelled,false,fnb_statement_import
+2026-07-02,FNB App Transfer From U,3582.00,internal_transfer,true,fnb_statement_import
+2026-07-02,Payshap Account Off-Us V,-7500.00,p2p_out,false,fnb_statement_import
+2026-07-02,Payshap Account Off-Us B,-500.00,p2p_out,false,fnb_statement_import
+2026-07-02,FNB App Transfer To H,-10000.00,internal_transfer,true,fnb_statement_import
+2026-07-02,FNB App Transfer From H,500.00,internal_transfer,true,fnb_statement_import
+2026-07-02,FNB App Transfer From J,1300.00,internal_transfer,true,fnb_statement_import
+2026-07-02,Payshap Account Off-Us B,-400.00,p2p_out,false,fnb_statement_import
+2026-07-03,Payment To Investment H,-10000.00,internal_transfer,true,fnb_statement_import
+2026-07-03,,-62.50,bank_fees,false,fnb_statement_import
+2026-07-03,,-6.30,bank_fees,false,fnb_statement_import
+2026-07-03,,-7.03,bank_fees,false,fnb_statement_import
+2026-07-03,POS Purchase Dl Uber,-69.95,transport_uber,false,fnb_statement_import
+2026-07-03,POS Purchase PNA Sea Point - Ope,-79.98,groceries,false,fnb_statement_import
+2026-07-03,POS Purchase Dl Uber,-86.46,transport_uber,false,fnb_statement_import
+2026-07-03,POS Purchase Dl Uber,-90.00,transport_uber,false,fnb_statement_import
+2026-07-03,POS Purchase Dl Uber,-145.66,transport_uber,false,fnb_statement_import
+2026-07-03,POS Purchase Betway,-200.00,betting,false,fnb_statement_import
+2026-07-03,POS Purchase Nandos Sea Point U,-281.00,eating_out,false,fnb_statement_import
+2026-07-03,POS Purchase Virgin Act,-599.00,health_fitness,false,fnb_statement_import
+2026-07-03,POS Purchase Virgin Act,-2470.00,health_fitness,false,fnb_statement_import
+2026-07-04,POS Purchase Dl Uber,-45.57,transport_uber,false,fnb_statement_import
+2026-07-04,POS Purchase Dl Uber,-49.96,transport_uber,false,fnb_statement_import
+2026-07-04,POS Purchase Dl Uber,-52.65,transport_uber,false,fnb_statement_import
+2026-07-04,POS Purchase Dl Uber,-87.31,transport_uber,false,fnb_statement_import
+2026-07-04,POS Purchase Dl Uber Eats,-345.72,food_delivery,false,fnb_statement_import
+2026-07-04,POS Purchase Takealot,-633.00,shopping,false,fnb_statement_import
+2026-07-04,POS Purchase Apple.Com/Bill,-14.99,software_tools,false,fnb_statement_import
+2026-07-04,Electricity Prepaid Electricity 04908388285,-350.00,utilities,false,fnb_statement_import
+2026-07-04,FNB App Transfer From I,2000.00,internal_transfer,true,fnb_statement_import
+2026-07-04,FNB App Transfer From J,4000.00,internal_transfer,true,fnb_statement_import
+2026-07-04,FNB App Transfer From U,900.00,internal_transfer,true,fnb_statement_import
+2026-07-04,FNB App Transfer From G,800.00,internal_transfer,true,fnb_statement_import
+2026-07-04,Send Money App Dr Send Victor Barber,-200.00,p2p_out,false,fnb_statement_import
+2026-07-04,FNB App Transfer From U,300.00,internal_transfer,true,fnb_statement_import
+2026-07-04,FNB App Transfer From N,100.00,internal_transfer,true,fnb_statement_import
+2026-07-06,,-0.41,bank_fees,false,fnb_statement_import
+2026-07-06,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-06,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-06,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-06,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-06,POS Purchase Dl Uber,-10.00,transport_uber,false,fnb_statement_import
+2026-07-06,POS Purchase Dl Uber,-29.09,transport_uber,false,fnb_statement_import
+2026-07-06,POS Purchase Vida E Caffe Bracke,-38.00,eating_out,false,fnb_statement_import
+2026-07-06,POS Purchase Dl Uber,-46.62,transport_uber,false,fnb_statement_import
+2026-07-06,POS Purchase Dl Uber,-48.49,transport_uber,false,fnb_statement_import
+2026-07-06,POS Purchase Dl Uber,-49.95,transport_uber,false,fnb_statement_import
+2026-07-06,POS Purchase Dl Uber,-57.62,transport_uber,false,fnb_statement_import
+2026-07-06,POS Purchase Dl Uber,-66.12,transport_uber,false,fnb_statement_import
+2026-07-06,POS Purchase Dl Uber,-76.57,transport_uber,false,fnb_statement_import
+2026-07-06,POS Purchase Vida E Caffe Bracke,-103.00,eating_out,false,fnb_statement_import
+2026-07-06,POS Purchase President Hotel,-105.00,eating_out,false,fnb_statement_import
+2026-07-06,POS Purchase Yoco *La Farms Gr,-105.00,eating_out,false,fnb_statement_import
+2026-07-06,POS Purchase S2S*Tajminimarketan,-148.00,groceries,false,fnb_statement_import
+2026-07-06,POS Purchase Betway,-200.00,betting,false,fnb_statement_import
+2026-07-06,POS Purchase Dl Uber,-217.45,transport_uber,false,fnb_statement_import
+2026-07-06,POS Purchase Dl Uber,-217.54,transport_uber,false,fnb_statement_import
+2026-07-06,POS Purchase Woolworths,-311.71,groceries,false,fnb_statement_import
+2026-07-06,POS Purchase Yoco *La Farms Gr,-348.00,eating_out,false,fnb_statement_import
+2026-07-06,POS Purchase Smw 0750 Waterfront,-449.90,shopping,false,fnb_statement_import
+2026-07-06,POS Purchase Paul 12,-500.00,eating_out,false,fnb_statement_import
+2026-07-06,POS Purchase Checkers Sixty60,-836.99,food_delivery,false,fnb_statement_import
+2026-07-06,POS Purchase Smw 0750 Waterfront,-2328.70,shopping,false,fnb_statement_import
+2026-07-06,POS Purchase Smw 0750 Waterfront,-3749.71,shopping,false,fnb_statement_import
+2026-07-06,POS Purchase Apple.Com/Bill,-34.99,software_tools,false,fnb_statement_import
+2026-07-06,FNB App Transfer From J,380.00,internal_transfer,true,fnb_statement_import
+2026-07-06,FNB App Transfer From H,80.00,internal_transfer,true,fnb_statement_import
+2026-07-06,FNB App Transfer From J,10.00,internal_transfer,true,fnb_statement_import
+2026-07-06,FNB App Transfer From I,50.00,internal_transfer,true,fnb_statement_import
+2026-07-06,FNB App Transfer From H,2261.00,internal_transfer,true,fnb_statement_import
+2026-07-06,FNB App Transfer From J,20.00,internal_transfer,true,fnb_statement_import
+2026-07-06,FNB App Transfer From H,100.00,internal_transfer,true,fnb_statement_import
+2026-07-06,FNB App Transfer From Y,100.00,internal_transfer,true,fnb_statement_import
+2026-07-06,FNB App Transfer From H,120.00,internal_transfer,true,fnb_statement_import
+2026-07-06,FNB App Transfer From U,200.00,internal_transfer,true,fnb_statement_import
+2026-07-06,FNB App Transfer From J,500.00,internal_transfer,true,fnb_statement_import
+2026-07-06,Airtime Topup Airtime 27645371179,-199.00,phone_data,false,fnb_statement_import
+2026-07-07,,-0.96,bank_fees,false,fnb_statement_import
+2026-07-07,POS Purchase Ben Vorster Motors,-32.70,transport_uber,false,fnb_statement_import
+2026-07-07,POS Purchase Dl Uber,-46.60,transport_uber,false,fnb_statement_import
+2026-07-07,POS Purchase Dl Uber,-47.07,transport_uber,false,fnb_statement_import
+2026-07-07,POS Purchase Dl Uber,-47.63,transport_uber,false,fnb_statement_import
+2026-07-07,POS Purchase Dl Uber,-57.55,transport_uber,false,fnb_statement_import
+2026-07-07,POS Purchase Dl Uber,-67.06,transport_uber,false,fnb_statement_import
+2026-07-07,POS Purchase Nandos Sea Point U,-215.00,eating_out,false,fnb_statement_import
+2026-07-07,POS Purchase Giovanni Esposito,-255.80,eating_out,false,fnb_statement_import
+2026-07-07,Payshap Account Off-Us H,-5.00,p2p_out,false,fnb_statement_import
+2026-07-07,FNB App Transfer To H,-180.00,internal_transfer,true,fnb_statement_import
+2026-07-07,Investment Deposit Financial Payout,400.00,internal_transfer,true,fnb_statement_import
+2026-07-07,Magtape Credit Britos,7417.50,income_britos,false,fnb_statement_import
+2026-07-08,POS Purchase Dl Uber,-46.58,transport_uber,false,fnb_statement_import
+2026-07-08,POS Purchase Dl Uber,-67.60,transport_uber,false,fnb_statement_import
+2026-07-08,POS Purchase S2S*Tajminimarketan,-130.00,groceries,false,fnb_statement_import
+2026-07-08,POS Purchase Cellucity Vodashop,-499.00,phone_data,false,fnb_statement_import
+2026-07-08,POS Purchase Apple.Com/Bill,-34.99,software_tools,false,fnb_statement_import
+2026-07-08,FNB App Transfer To H,-31.00,internal_transfer,true,fnb_statement_import
+2026-07-08,Payment To Investment G,-5000.00,internal_transfer,true,fnb_statement_import
+2026-07-08,Send Money App Dr Send Tag Tags,-500.00,p2p_out,false,fnb_statement_import
+2026-07-08,Send Money App Dr Send Hair Hair,-500.00,p2p_out,false,fnb_statement_import
+2026-07-09,,-0.96,bank_fees,false,fnb_statement_import
+2026-07-09,POS Purchase Dl Uber,-47.57,transport_uber,false,fnb_statement_import
+2026-07-09,POS Purchase Dl Uber,-47.57,transport_uber,false,fnb_statement_import
+2026-07-09,POS Purchase Dl Uber,-47.60,transport_uber,false,fnb_statement_import
+2026-07-09,POS Purchase Ben Vorster Motors,-63.50,transport_uber,false,fnb_statement_import
+2026-07-09,POS Purchase Dl Uber,-87.57,transport_uber,false,fnb_statement_import
+2026-07-09,POS Purchase Dl Uber Eats,-239.00,food_delivery,false,fnb_statement_import
+2026-07-09,POS Purchase Smw 0750 Waterfront,-1099.80,shopping,false,fnb_statement_import
+2026-07-09,FNB App Transfer From J,700.00,internal_transfer,true,fnb_statement_import
+2026-07-09,FNB App Transfer From Y,3200.00,internal_transfer,true,fnb_statement_import
+2026-07-09,FNB App Transfer From N,2500.00,internal_transfer,true,fnb_statement_import
+2026-07-09,Payshap Account On-Us H,-5300.00,internal_transfer,true,fnb_statement_import
+2026-07-09,FNB App Transfer From H,350.00,internal_transfer,true,fnb_statement_import
+2026-07-09,FNB App Transfer From J,300.00,internal_transfer,true,fnb_statement_import
+2026-07-10,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-10,POS Purchase PNP Crp Sea Point,-20.00,other,false,fnb_statement_import
+2026-07-10,POS Purchase Dl Uber,-45.56,transport_uber,false,fnb_statement_import
+2026-07-10,POS Purchase Dl Uber,-47.67,transport_uber,false,fnb_statement_import
+2026-07-10,POS Purchase Dl Uber,-54.24,transport_uber,false,fnb_statement_import
+2026-07-10,POS Purchase Dl Uber,-57.57,transport_uber,false,fnb_statement_import
+2026-07-10,POS Purchase Dl Uber,-67.05,transport_uber,false,fnb_statement_import
+2026-07-10,POS Purchase Yoco *Adderley Fl,-100.00,other,false,fnb_statement_import
+2026-07-10,POS Purchase Nu Health Point,-180.00,health_fitness,false,fnb_statement_import
+2026-07-10,POS Purchase Mila Morgan Boutiqu,-350.00,shopping,false,fnb_statement_import
+2026-07-10,POS Purchase S2S*Tajminimarketan,-428.00,groceries,false,fnb_statement_import
+2026-07-10,POS Purchase Flysafair,-1291.11,travel,false,fnb_statement_import
+2026-07-10,FNB App Transfer From U,100.00,internal_transfer,true,fnb_statement_import
+2026-07-10,FNB App Transfer From Y,1350.00,internal_transfer,true,fnb_statement_import
+2026-07-10,Investment Deposit Financial Payout,2000.00,internal_transfer,true,fnb_statement_import
+2026-07-10,Investment Deposit Financial Payout,1668.27,internal_transfer,true,fnb_statement_import
+2026-07-11,POS Purchase Dl Uber,-10.00,transport_uber,false,fnb_statement_import
+2026-07-11,POS Purchase Dl Uber,-37.23,transport_uber,false,fnb_statement_import
+2026-07-11,POS Purchase Dl Uber,-104.02,transport_uber,false,fnb_statement_import
+2026-07-11,POS Purchase Dl Uber,-118.67,transport_uber,false,fnb_statement_import
+2026-07-11,POS Purchase Yoco *Gramodi Gro,-135.00,groceries,false,fnb_statement_import
+2026-07-11,POS Purchase Netflix,-229.00,software_tools,false,fnb_statement_import
+2026-07-11,POS Purchase Liquorshop Sandton,-2359.37,eating_out,false,fnb_statement_import
+2026-07-13,POS Purchase Dl Uber,-37.11,transport_uber,false,fnb_statement_import
+2026-07-13,POS Purchase Dl Uber,-56.73,transport_uber,false,fnb_statement_import
+2026-07-13,POS Purchase Dl Uber,-64.34,transport_uber,false,fnb_statement_import
+2026-07-13,POS Purchase Dl Uber,-112.21,transport_uber,false,fnb_statement_import
+2026-07-13,POS Purchase Dl Uber,-154.76,transport_uber,false,fnb_statement_import
+2026-07-13,POS Purchase Dl Uber,-258.12,transport_uber,false,fnb_statement_import
+2026-07-13,POS Purchase Kolonaki Parkhurst,-1850.00,eating_out,false,fnb_statement_import
+2026-07-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-14,POS Purchase Dl Uber Eats,-164.88,food_delivery,false,fnb_statement_import
+2026-07-14,POS Purchase Woolworths,-325.82,groceries,false,fnb_statement_import
+2026-07-14,FNB App Transfer From G,25.00,internal_transfer,true,fnb_statement_import
+2026-07-15,POS Purchase Mcd Rivonia Square,-135.80,eating_out,false,fnb_statement_import
+2026-07-16,Airtime Topup Airtime 27717292861,-5.00,phone_data,false,fnb_statement_import
+2026-07-20,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-20,FNB App Transfer From I,220.00,internal_transfer,true,fnb_statement_import
+2026-07-21,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-21,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-21,FNB App Transfer From G,1200.00,internal_transfer,true,fnb_statement_import
+2026-07-21,FNB App Transfer From U,42.00,internal_transfer,true,fnb_statement_import
+2026-07-21,FNB App Transfer From H,90.00,internal_transfer,true,fnb_statement_import
+2026-07-22,POS Purchase Mcd Rivonia Square,-39.90,eating_out,false,fnb_statement_import
+2026-07-22,POS Purchase BP Edenburg,-100.00,other,false,fnb_statement_import
+2026-07-22,POS Purchase Dl Uber,-217.05,transport_uber,false,fnb_statement_import
+2026-07-22,POS Purchase Flysafair,-1199.16,travel,false,fnb_statement_import
+2026-07-24,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-24,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-24,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-25,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-27,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-30,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-31,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-31,,-8.00,bank_fees,false,fnb_statement_import
+2026-07-31,FNB OB Pmt Patin Trading 84 T/A,6500.00,income_ie_global,false,fnb_statement_import
+2026-07-31,Payment To Investment Uh,-6000.00,internal_transfer,true,fnb_statement_import
+2026-07-31,FNB App Transfer From H,300.00,internal_transfer,true,fnb_statement_import
+2026-07-31,FNB App Transfer From U,500.00,internal_transfer,true,fnb_statement_import
+2026-07-31,FNB App Transfer From U,350.00,internal_transfer,true,fnb_statement_import
+2026-07-31,FNB App Transfer From I,800.00,internal_transfer,true,fnb_statement_import
+2026-07-31,Payshap Account On-Us Hi,-222.00,internal_transfer,true,fnb_statement_import
+2026-07-31,FNB App Transfer From H,150.00,internal_transfer,true,fnb_statement_import
+2026-08-01,Magtape Unpaid Not Provided For,2499.00,debit_order_reversal,false,fnb_statement_import
+2026-08-01,,-112.00,bank_fees,false,fnb_statement_import
+2026-08-01,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-01,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-01,POS Purchase Dl Uber,-46.00,transport_uber,false,fnb_statement_import
+2026-08-01,POS Purchase Yoco *La Familia,-130.00,eating_out,false,fnb_statement_import
+2026-08-01,POS Purchase Dl Uber,-172.00,transport_uber,false,fnb_statement_import
+2026-08-01,POS Purchase Dl Uber,-175.00,transport_uber,false,fnb_statement_import
+2026-08-01,POS Purchase S2S*Tajminimarketan,-258.00,groceries,false,fnb_statement_import
+2026-08-01,POS Purchase Yoco *Airdosh,-323.97,eating_out,false,fnb_statement_import
+2026-08-01,POS Purchase S2S*Aperitif,-600.00,eating_out,false,fnb_statement_import
+2026-08-01,Hybrid Subscription Fee Connect Topup Paymnt,-69.00,bank_fees,false,fnb_statement_import
+2026-08-01,Payment To Investment H,-200.00,internal_transfer,true,fnb_statement_import
+2026-08-01,FNB App Transfer From U,100.00,internal_transfer,true,fnb_statement_import
+2026-08-01,FNB App Transfer From G,40.00,internal_transfer,true,fnb_statement_import
+2026-08-01,FNB App Transfer From J,50.00,internal_transfer,true,fnb_statement_import
+2026-08-01,FNB App Transfer From H,40.00,internal_transfer,true,fnb_statement_import
+2026-08-01,FNB App Transfer From H,110.00,internal_transfer,true,fnb_statement_import
+2026-08-01,FNB App Transfer From J,500.00,internal_transfer,true,fnb_statement_import
+2026-08-01,FNB App Transfer From J,800.00,internal_transfer,true,fnb_statement_import
+2026-08-01,FNB App Transfer From H,2300.00,internal_transfer,true,fnb_statement_import
+2026-08-01,260801,-112.00,bank_fees,false,fnb_statement_import
+2026-08-01,Magtape Debit Virgin Act424214923 Netcash,-2499.00,health_fitness,false,fnb_statement_import
+2026-08-03,Magtape Credit Proto Trading CC,30000.00,income_proto,false,fnb_statement_import
+2026-08-03,FNB App Transfer From Y,56.00,internal_transfer,true,fnb_statement_import
+2026-08-03,,-62.50,bank_fees,false,fnb_statement_import
+2026-08-03,,-24.00,bank_fees,false,fnb_statement_import
+2026-08-03,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-03,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-03,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-03,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-03,POS Purchase Yoco *La Familia,-45.00,eating_out,false,fnb_statement_import
+2026-08-03,POS Purchase Dl Uber,-46.00,transport_uber,false,fnb_statement_import
+2026-08-03,POS Purchase Dl Uber,-55.00,transport_uber,false,fnb_statement_import
+2026-08-03,POS Purchase Dl Uber,-58.00,transport_uber,false,fnb_statement_import
+2026-08-03,POS Purchase Dl Uber,-63.00,transport_uber,false,fnb_statement_import
+2026-08-03,POS Purchase Dl Uber,-85.00,transport_uber,false,fnb_statement_import
+2026-08-03,POS Purchase Dl Uber,-103.00,transport_uber,false,fnb_statement_import
+2026-08-03,POS Purchase Mugg And Bean Maitl,-138.00,eating_out,false,fnb_statement_import
+2026-08-03,POS Purchase Dl Uber,-202.00,transport_uber,false,fnb_statement_import
+2026-08-03,POS Purchase Dl Uber,-239.00,transport_uber,false,fnb_statement_import
+2026-08-03,POS Purchase Caprice Cafe,-360.00,eating_out,false,fnb_statement_import
+2026-08-03,POS Purchase Cafe Caprice,-720.00,eating_out,false,fnb_statement_import
+2026-08-03,POS Purchase Cafe Caprice,-2500.00,eating_out,false,fnb_statement_import
+2026-08-04,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-04,POS Purchase Giovanni Esposito,-160.70,eating_out,false,fnb_statement_import
+2026-08-04,POS Purchase Apple.Com/Bill,-14.99,software_tools,false,fnb_statement_import
+2026-08-04,POS Purchase Apple.Com/Bill,-34.99,software_tools,false,fnb_statement_import
+2026-08-04,POS Purchase Netflix.Com,-229.00,software_tools,false,fnb_statement_import
+2026-08-04,FNB App Transfer To H,-150.00,internal_transfer,true,fnb_statement_import
+2026-08-04,Payment To Investment G,-28000.00,internal_transfer,true,fnb_statement_import
+2026-08-05,,112.00,bank_fees,false,fnb_statement_import
+2026-08-05,,112.00,bank_fees,false,fnb_statement_import
+2026-08-05,,-0.41,bank_fees,false,fnb_statement_import
+2026-08-05,,-0.96,bank_fees,false,fnb_statement_import
+2026-08-05,,-6.30,bank_fees,false,fnb_statement_import
+2026-08-05,POS Purchase Dl Uber,-85.00,transport_uber,false,fnb_statement_import
+2026-08-05,POS Purchase Ok Minimarket Maitl,-138.98,groceries,false,fnb_statement_import
+2026-08-05,POS Purchase Apple.Com/Bill,-34.99,software_tools,false,fnb_statement_import
+2026-08-05,,-102.35,bank_fees,false,fnb_statement_import
+2026-08-05,POS Purchase Apple.Com/Bill,-104.99,software_tools,false,fnb_statement_import
+2026-08-05,FNB App Transfer From H,500.00,internal_transfer,true,fnb_statement_import
+2026-08-05,FNB App Transfer From J,300.00,internal_transfer,true,fnb_statement_import
+2026-08-05,Airtime Topup Airtime 27645371179,-199.00,phone_data,false,fnb_statement_import
+2026-08-05,FNB App Transfer From G,300.00,internal_transfer,true,fnb_statement_import
+2026-08-05,FNB App Transfer From B,600.00,internal_transfer,true,fnb_statement_import
+2026-08-05,Send Money App Dr Send Victor Barber,-200.00,p2p_out,false,fnb_statement_import
+2026-08-05,Send Money App Dr Send Hazel Mama,-500.00,p2p_out,false,fnb_statement_import
+2026-08-05,Payshap Account Off-Us H,-500.00,p2p_out,false,fnb_statement_import
+2026-08-06,,-0.96,bank_fees,false,fnb_statement_import
+2026-08-06,,-2.81,bank_fees,false,fnb_statement_import
+2026-08-06,,-2.89,bank_fees,false,fnb_statement_import
+2026-08-06,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-06,POS Purchase Dl Uber,-42.00,transport_uber,false,fnb_statement_import
+2026-08-06,POS Purchase Sterkinekor Vna Nou,-69.90,other,false,fnb_statement_import
+2026-08-06,POS Purchase Dl Uber,-127.00,transport_uber,false,fnb_statement_import
+2026-08-06,POS Purchase Dl Uber Eats,-167.04,food_delivery,false,fnb_statement_import
+2026-08-06,POS Purchase Mugg And Bean Maitl,-170.00,eating_out,false,fnb_statement_import
+2026-08-06,FNB App Transfer From J,2500.00,internal_transfer,true,fnb_statement_import
+2026-08-06,FNB App Transfer From H,1200.00,internal_transfer,true,fnb_statement_import
+2026-08-06,Payshap Account On-Us Alo,-1500.00,internal_transfer,true,fnb_statement_import
+2026-08-06,FNB App Transfer From H,800.00,internal_transfer,true,fnb_statement_import
+2026-08-06,FNB App Transfer From J,300.00,internal_transfer,true,fnb_statement_import
+2026-08-07,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-07,POS Purchase Hudsons On Kloof -,-40.00,eating_out,false,fnb_statement_import
+2026-08-07,POS Purchase Dl Uber,-46.00,transport_uber,false,fnb_statement_import
+2026-08-07,POS Purchase Dl Uber,-46.00,transport_uber,false,fnb_statement_import
+2026-08-07,POS Purchase Dl Uber,-50.00,transport_uber,false,fnb_statement_import
+2026-08-07,POS Purchase Dl Uber,-56.00,transport_uber,false,fnb_statement_import
+2026-08-07,POS Purchase Dl Uber,-73.00,transport_uber,false,fnb_statement_import
+2026-08-07,POS Purchase S2S*Seapointlongmar,-120.00,groceries,false,fnb_statement_import
+2026-08-07,POS Purchase Dl Uber Eats,-147.90,food_delivery,false,fnb_statement_import
+2026-08-07,POS Purchase Dl Uber Eats,-217.10,food_delivery,false,fnb_statement_import
+2026-08-07,POS Purchase S2S*Breestreetminis,-470.00,groceries,false,fnb_statement_import
+2026-08-07,POS Purchase Google*Workspace Vi,-91.30,software_tools,false,fnb_statement_import
+2026-08-07,POS Purchase Google Workspace_Vi,-2142.08,software_tools,false,fnb_statement_import
+2026-08-07,FNB App Transfer From U,1000.00,internal_transfer,true,fnb_statement_import
+2026-08-07,FNB App Transfer From U,6000.00,internal_transfer,true,fnb_statement_import
+2026-08-07,Payment To Investment T,-6000.00,internal_transfer,true,fnb_statement_import
+2026-08-07,FNB App Transfer From H,300.00,internal_transfer,true,fnb_statement_import
+2026-08-07,FNB App Transfer From J,500.00,internal_transfer,true,fnb_statement_import
+2026-08-07,FNB App Transfer From I,600.00,internal_transfer,true,fnb_statement_import
+2026-08-07,FNB App Transfer From J,600.00,internal_transfer,true,fnb_statement_import
+2026-08-07,FNB App Transfer From H,1500.00,internal_transfer,true,fnb_statement_import
+2026-08-08,POS Purchase Dl Uber,-40.00,transport_uber,false,fnb_statement_import
+2026-08-08,POS Purchase Hudsons On Kloof -,-45.00,eating_out,false,fnb_statement_import
+2026-08-08,POS Purchase Dl Uber,-48.00,transport_uber,false,fnb_statement_import
+2026-08-08,POS Purchase Dl Uber,-61.00,transport_uber,false,fnb_statement_import
+2026-08-08,POS Purchase Ap *Charles Hope Lo,-65.00,other,false,fnb_statement_import
+2026-08-08,POS Purchase Dl Uber,-67.00,transport_uber,false,fnb_statement_import
+2026-08-08,POS Purchase Dl Uber,-78.00,transport_uber,false,fnb_statement_import
+2026-08-08,POS Purchase Dl Uber,-88.00,transport_uber,false,fnb_statement_import
+2026-08-08,POS Purchase Broke Klubhouse,-88.00,other,false,fnb_statement_import
+2026-08-08,POS Purchase Hudson S On Kloof,-105.00,eating_out,false,fnb_statement_import
+2026-08-08,POS Purchase Dl Uber Eats,-113.00,food_delivery,false,fnb_statement_import
+2026-08-08,POS Purchase Dl Uber,-113.00,transport_uber,false,fnb_statement_import
+2026-08-08,POS Purchase Woolworths,-136.00,groceries,false,fnb_statement_import
+2026-08-08,POS Purchase Hudsons On Kloof -,-175.00,eating_out,false,fnb_statement_import
+2026-08-08,POS Purchase Nandos Sea Point U,-245.00,eating_out,false,fnb_statement_import
+2026-08-08,POS Purchase Woolworths,-398.00,groceries,false,fnb_statement_import
+2026-08-08,POS Purchase Hudsons On Kloof -,-2400.00,eating_out,false,fnb_statement_import
+2026-08-08,FNB App Transfer From J,500.00,internal_transfer,true,fnb_statement_import
+2026-08-08,FNB App Transfer From I,10000.00,internal_transfer,true,fnb_statement_import
+2026-08-08,Payshap Account On-Us H,-10000.00,internal_transfer,true,fnb_statement_import
+2026-08-08,FNB App Transfer From H,800.00,internal_transfer,true,fnb_statement_import
+2026-08-08,Payshap Account On-Us T,-400.00,internal_transfer,true,fnb_statement_import
+2026-08-11,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-11,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-11,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-11,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber,-10.00,transport_uber,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber,-10.00,transport_uber,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber,-37.00,transport_uber,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber,-40.00,transport_uber,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber,-44.00,transport_uber,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber,-46.00,transport_uber,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber,-48.00,transport_uber,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber,-50.00,transport_uber,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber,-51.00,transport_uber,false,fnb_statement_import
+2026-08-11,POS Purchase Market Kokoro Lin26,-56.99,eating_out,false,fnb_statement_import
+2026-08-11,POS Purchase Market Kokoro Lin26,-57.48,eating_out,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber,-62.00,transport_uber,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber,-63.00,transport_uber,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber,-65.00,transport_uber,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber,-75.00,transport_uber,false,fnb_statement_import
+2026-08-11,POS Purchase S2S*Tajminimarketan,-188.00,groceries,false,fnb_statement_import
+2026-08-11,POS Purchase Yoco *La Farms Bu,-210.00,eating_out,false,fnb_statement_import
+2026-08-11,POS Purchase Woolworths,-255.94,groceries,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber Eats,-275.45,food_delivery,false,fnb_statement_import
+2026-08-11,POS Purchase Mcd Observatory (01,-284.20,eating_out,false,fnb_statement_import
+2026-08-11,POS Purchase Drama Cape Town Pty,-300.00,shopping,false,fnb_statement_import
+2026-08-11,POS Purchase Proto Trading CC,-327.50,other,false,fnb_statement_import
+2026-08-11,POS Purchase Dl Uber Eats,-335.00,food_delivery,false,fnb_statement_import
+2026-08-11,FNB App Transfer From Hey,200.00,internal_transfer,true,fnb_statement_import
+2026-08-11,FNB App Transfer From Y,300.00,internal_transfer,true,fnb_statement_import
+2026-08-11,FNB App Transfer From U,200.00,internal_transfer,true,fnb_statement_import
+2026-08-11,FNB App Transfer From J,300.00,internal_transfer,true,fnb_statement_import
+2026-08-11,FNB App Transfer From H,500.00,internal_transfer,true,fnb_statement_import
+2026-08-11,FNB App Payment To T,-500.00,p2p_out,false,fnb_statement_import
+2026-08-11,FNB App Transfer From J,390.00,internal_transfer,true,fnb_statement_import
+2026-08-11,Payshap Account Off-Us B,-400.00,p2p_out,false,fnb_statement_import
+2026-08-11,FNB App Transfer From B,39.00,internal_transfer,true,fnb_statement_import
+2026-08-11,FNB App Transfer From N,89.00,internal_transfer,true,fnb_statement_import
+2026-08-11,FNB App Transfer From J,800.00,internal_transfer,true,fnb_statement_import
+2026-08-11,FNB App Transfer From H,260.00,internal_transfer,true,fnb_statement_import
+2026-08-11,FNB App Transfer From H,200.00,internal_transfer,true,fnb_statement_import
+2026-08-11,FNB App Transfer From Y,200.00,internal_transfer,true,fnb_statement_import
+2026-08-12,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-12,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-12,POS Purchase Dl Uber,-10.00,transport_uber,false,fnb_statement_import
+2026-08-12,POS Purchase Dl Uber,-50.00,transport_uber,false,fnb_statement_import
+2026-08-12,POS Purchase Dl Uber,-51.00,transport_uber,false,fnb_statement_import
+2026-08-12,POS Purchase Dl Uber,-56.00,transport_uber,false,fnb_statement_import
+2026-08-12,POS Purchase Nandos Sea Point U,-159.00,eating_out,false,fnb_statement_import
+2026-08-12,POS Purchase Netflix Za,-229.00,software_tools,false,fnb_statement_import
+2026-08-12,POS Purchase Giovanni Esposito,-366.00,eating_out,false,fnb_statement_import
+2026-08-12,FNB App Transfer From Y,400.00,internal_transfer,true,fnb_statement_import
+2026-08-12,FNB App Transfer To Payment,-450.00,internal_transfer,true,fnb_statement_import
+2026-08-12,FNB App Transfer From N,250.00,internal_transfer,true,fnb_statement_import
+2026-08-12,FNB App Transfer From J,600.00,internal_transfer,true,fnb_statement_import
+2026-08-12,Hybrid Subscription Fee Ftc Real Time Invoic,-579.00,bank_fees,false,fnb_statement_import
+2026-08-12,Rtc Credit Vtc-Google 18Bo505539,2070.68,income_other,false,fnb_statement_import
+2026-08-12,Payment To Investment J,-2000.00,internal_transfer,true,fnb_statement_import
+2026-08-12,Send Money App Dr Send Victor Barber,-120.00,p2p_out,false,fnb_statement_import
+2026-08-12,FNB App Transfer From J,90.00,internal_transfer,true,fnb_statement_import
+2026-08-12,FNB App Transfer To Credit,-70.00,internal_transfer,true,fnb_statement_import
+2026-08-12,FNB App Transfer From N,50.00,internal_transfer,true,fnb_statement_import
+2026-08-12,FNB App Transfer From K,50.00,internal_transfer,true,fnb_statement_import
+2026-08-12,FNB App Transfer From H,150.00,internal_transfer,true,fnb_statement_import
+2026-08-13,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-13,POS Purchase Dl Uber,-50.00,transport_uber,false,fnb_statement_import
+2026-08-13,POS Purchase Dl Uber,-60.00,transport_uber,false,fnb_statement_import
+2026-08-13,POS Purchase Dl Uber,-63.00,transport_uber,false,fnb_statement_import
+2026-08-13,POS Purchase Dl Uber,-67.00,transport_uber,false,fnb_statement_import
+2026-08-13,POS Purchase Dl Uber,-92.00,transport_uber,false,fnb_statement_import
+2026-08-13,POS Purchase Dl Uber Eats,-267.45,food_delivery,false,fnb_statement_import
+2026-08-13,FNB App Transfer From H,390.00,internal_transfer,true,fnb_statement_import
+2026-08-13,FNB App Transfer From H,300.00,internal_transfer,true,fnb_statement_import
+2026-08-13,FNB App Transfer From J,100.00,internal_transfer,true,fnb_statement_import
+2026-08-13,FNB App Transfer From U,100.00,internal_transfer,true,fnb_statement_import
+2026-08-13,FNB App Transfer From G,20.00,internal_transfer,true,fnb_statement_import
+2026-08-13,FNB App Transfer From U,100.00,internal_transfer,true,fnb_statement_import
+2026-08-13,Payment To Investment J,-200.00,internal_transfer,true,fnb_statement_import
+2026-08-13,FNB App Transfer From N,250.00,internal_transfer,true,fnb_statement_import
+2026-08-13,FNB App Transfer From H,120.00,internal_transfer,true,fnb_statement_import
+2026-08-13,FNB App Transfer From J,200.00,internal_transfer,true,fnb_statement_import
+2026-08-13,FNB App Transfer From H,230.00,internal_transfer,true,fnb_statement_import
+2026-08-13,FNB App Transfer From N,600.00,internal_transfer,true,fnb_statement_import
+2026-08-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-14,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-14,POS Purchase Dl Uber,-15.00,transport_uber,false,fnb_statement_import
+2026-08-14,POS Purchase Dl Uber,-46.00,transport_uber,false,fnb_statement_import
+2026-08-14,POS Purchase Dl Uber,-46.00,transport_uber,false,fnb_statement_import
+2026-08-14,POS Purchase Dl Uber,-47.00,transport_uber,false,fnb_statement_import
+2026-08-14,POS Purchase Dl Uber,-57.00,transport_uber,false,fnb_statement_import
+2026-08-14,POS Purchase Dl Uber,-57.00,transport_uber,false,fnb_statement_import
+2026-08-14,POS Purchase Dl Uber,-60.00,transport_uber,false,fnb_statement_import
+2026-08-14,POS Purchase S2S*Tajminimarketan,-60.00,groceries,false,fnb_statement_import
+2026-08-14,POS Purchase Dl Uber,-70.00,transport_uber,false,fnb_statement_import
+2026-08-14,POS Purchase Dl Uber,-81.00,transport_uber,false,fnb_statement_import
+2026-08-14,POS Purchase Hudson S On Kloof,-135.00,eating_out,false,fnb_statement_import
+2026-08-14,POS Purchase Hudson S On Kloof,-135.00,eating_out,false,fnb_statement_import
+2026-08-14,POS Purchase Dl Uber,-164.00,transport_uber,false,fnb_statement_import
+2026-08-14,POS Purchase Dl Uber Eats,-204.95,food_delivery,false,fnb_statement_import
+2026-08-14,POS Purchase Hudson S On Kloof,-230.00,eating_out,false,fnb_statement_import
+2026-08-14,POS Purchase Hudsons On Kloof -,-300.00,eating_out,false,fnb_statement_import
+2026-08-14,POS Purchase Andiccio24 Rondebos,-400.00,eating_out,false,fnb_statement_import
+2026-08-14,POS Purchase Yoco *Airdosh,-485.96,eating_out,false,fnb_statement_import
+2026-08-14,FNB App Transfer From U,60.00,internal_transfer,true,fnb_statement_import
+2026-08-14,FNB App Transfer From Y,2.00,internal_transfer,true,fnb_statement_import
+2026-08-14,FNB App Transfer From Y,35.00,internal_transfer,true,fnb_statement_import
+2026-08-14,FNB App Transfer From S,30.00,internal_transfer,true,fnb_statement_import
+2026-08-14,FNB App Transfer From Y,123.00,internal_transfer,true,fnb_statement_import
+2026-08-14,FNB App Payment From Mmmm,1250.00,family,false,fnb_statement_import
+2026-08-14,Send Money App Dr Send Tag Tags,-250.00,p2p_out,false,fnb_statement_import
+2026-08-14,Payment To Investment H,-100.00,internal_transfer,true,fnb_statement_import
+2026-08-14,Payment To Investment H,-800.00,internal_transfer,true,fnb_statement_import
+2026-08-14,FNB App Transfer From N,45.00,internal_transfer,true,fnb_statement_import
+2026-08-14,FNB App Transfer From N,20.00,internal_transfer,true,fnb_statement_import
+2026-08-14,FNB App Transfer From I,100.00,internal_transfer,true,fnb_statement_import
+2026-08-14,Electricity Prepaid Electricity 04908388285,-100.00,utilities,false,fnb_statement_import
+2026-08-15,POS Purchase Dl Uber,-22.00,transport_uber,false,fnb_statement_import
+2026-08-15,POS Purchase Dl Uber,-45.00,transport_uber,false,fnb_statement_import
+2026-08-15,POS Purchase Dl Uber,-49.00,transport_uber,false,fnb_statement_import
+2026-08-15,POS Purchase Dl Uber,-57.00,transport_uber,false,fnb_statement_import
+2026-08-15,POS Purchase Dl Uber,-59.00,transport_uber,false,fnb_statement_import
+2026-08-15,POS Purchase Betway,-80.00,betting,false,fnb_statement_import
+2026-08-15,POS Purchase Dl Uber Eats,-188.95,food_delivery,false,fnb_statement_import
+2026-08-15,FNB App Transfer From D,73.00,internal_transfer,true,fnb_statement_import
+2026-08-15,FNB App Transfer From H,50.00,internal_transfer,true,fnb_statement_import
+2026-08-15,FNB App Transfer From H,210.00,internal_transfer,true,fnb_statement_import
+2026-08-15,FNB App Transfer From H,20.00,internal_transfer,true,fnb_statement_import
+2026-08-15,FNB App Transfer From G,40.00,internal_transfer,true,fnb_statement_import
+2026-08-15,Electricity Prepaid Electricity 04908388285,-80.00,utilities,false,fnb_statement_import
+2026-08-17,POS Purchase Dl Uber,-40.00,transport_uber,false,fnb_statement_import
+2026-08-17,POS Purchase Dl Uber,-46.00,transport_uber,false,fnb_statement_import
+2026-08-17,POS Purchase Dl Uber,-56.00,transport_uber,false,fnb_statement_import
+2026-08-17,POS Purchase S2S*Tajminimarketan,-60.00,groceries,false,fnb_statement_import
+2026-08-17,POS Purchase S2S*Tajminimarketan,-60.00,groceries,false,fnb_statement_import
+2026-08-17,POS Purchase Dl Uber,-64.00,transport_uber,false,fnb_statement_import
+2026-08-17,POS Purchase Dl Uber Eats,-257.00,food_delivery,false,fnb_statement_import
+2026-08-17,POS Purchase Frankie Fenner Meat,-275.00,groceries,false,fnb_statement_import
+2026-08-17,FNB App Transfer From H,189.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Transfer From H,150.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Transfer From H,22.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Transfer To H,-88.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Transfer From H,83.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Payment From Nnnnn,400.00,family,false,fnb_statement_import
+2026-08-17,Payment To Investment Y,-500.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Transfer From I,20.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Transfer From H,300.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Transfer From H,15.00,internal_transfer,true,fnb_statement_import
+2026-08-17,Payment To Investment G,-407.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Transfer From H,30.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Transfer From J,50.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Transfer From U,50.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Transfer From Y,75.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Transfer From H,462.00,internal_transfer,true,fnb_statement_import
+2026-08-17,FNB App Payment From Mama,400.00,family,false,fnb_statement_import
+2026-08-17,Payshap Account Off-Us D,-460.00,p2p_out,false,fnb_statement_import
+2026-08-17,Airtime Topup Airtime 27645371179,-5.50,phone_data,false,fnb_statement_import
+2026-08-17,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-18,POS Purchase Dl Uber,-6.00,transport_uber,false,fnb_statement_import
+2026-08-18,POS Purchase Dl Uber,-35.00,transport_uber,false,fnb_statement_import
+2026-08-18,POS Purchase Dl Uber,-37.00,transport_uber,false,fnb_statement_import
+2026-08-18,POS Purchase Dl Uber,-45.00,transport_uber,false,fnb_statement_import
+2026-08-18,POS Purchase Dl Uber,-46.00,transport_uber,false,fnb_statement_import
+2026-08-18,POS Purchase Dl Uber,-56.00,transport_uber,false,fnb_statement_import
+2026-08-18,POS Purchase Caprice Cafe,-58.00,eating_out,false,fnb_statement_import
+2026-08-18,POS Purchase Dl Uber,-73.00,transport_uber,false,fnb_statement_import
+2026-08-18,POS Purchase Dl Uber,-113.00,transport_uber,false,fnb_statement_import
+2026-08-18,POS Purchase Woolworths,-272.38,groceries,false,fnb_statement_import
+2026-08-18,FNB App Transfer From Y,70.00,internal_transfer,true,fnb_statement_import
+2026-08-18,FNB App Transfer From G,1.00,internal_transfer,true,fnb_statement_import
+2026-08-18,FNB App Transfer From U,40.00,internal_transfer,true,fnb_statement_import
+2026-08-18,FNB App Transfer From N,49.00,internal_transfer,true,fnb_statement_import
+2026-08-18,FNB App Payment From Maman,400.00,family,false,fnb_statement_import
+2026-08-18,FNB App Transfer From U,50.00,internal_transfer,true,fnb_statement_import
+2026-08-18,Payshap Account Off-Us Powe,-80.00,p2p_out,false,fnb_statement_import
+2026-08-18,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-19,POS Purchase Dl Uber,-38.00,transport_uber,false,fnb_statement_import
+2026-08-19,POS Purchase Dl Uber,-48.00,transport_uber,false,fnb_statement_import
+2026-08-19,POS Purchase Dl Uber,-54.00,transport_uber,false,fnb_statement_import
+2026-08-19,FNB App Transfer From W,100.00,internal_transfer,true,fnb_statement_import
+2026-08-19,FNB App Transfer From H,50.00,internal_transfer,true,fnb_statement_import
+2026-08-19,FNB App Transfer To G,-60.00,internal_transfer,true,fnb_statement_import
+2026-08-19,Payshap Account Off-Us B,-59.00,p2p_out,false,fnb_statement_import
+2026-08-19,FNB App Transfer From H,20.00,internal_transfer,true,fnb_statement_import
+2026-08-19,Payshap Account Off-Us U,-20.00,p2p_out,false,fnb_statement_import
+2026-08-19,FNB App Transfer From H,85.00,internal_transfer,true,fnb_statement_import
+2026-08-19,FNB App Transfer From Y,45.00,internal_transfer,true,fnb_statement_import
+2026-08-19,Payshap Account Off-Us B,-46.11,p2p_out,false,fnb_statement_import
+2026-08-19,Payment To Investment Y,-300.00,internal_transfer,true,fnb_statement_import
+2026-08-19,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-19,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-20,POS Purchase Dl Uber,-51.00,transport_uber,false,fnb_statement_import
+2026-08-20,POS Purchase Dl Uber,-59.00,transport_uber,false,fnb_statement_import
+2026-08-20,POS Purchase Dl Uber Eats,-84.40,food_delivery,false,fnb_statement_import
+2026-08-20,POS Purchase Dl Uber,-88.00,transport_uber,false,fnb_statement_import
+2026-08-20,FNB App Payment From Heeeeee,400.00,family,false,fnb_statement_import
+2026-08-20,Payment To Investment H,-300.00,internal_transfer,true,fnb_statement_import
+2026-08-20,FNB App Transfer From I,60.00,internal_transfer,true,fnb_statement_import
+2026-08-20,FNB App Transfer From S,52.00,internal_transfer,true,fnb_statement_import
+2026-08-21,POS Purchase Dl Uber,-84.00,transport_uber,false,fnb_statement_import
+2026-08-21,Payment To Investment J,-60.00,internal_transfer,true,fnb_statement_import
+2026-08-21,FNB App Transfer From N,80.00,internal_transfer,true,fnb_statement_import
+2026-08-21,FNB App Transfer From J,30.00,internal_transfer,true,fnb_statement_import
+2026-08-21,FNB App Payment From Mm D,400.00,family,false,fnb_statement_import
+2026-08-21,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-21,Electricity Prepaid Electricity 04908388285,-60.00,utilities,false,fnb_statement_import
+2026-08-21,FNB App Transfer From B,120.00,internal_transfer,true,fnb_statement_import
+2026-08-21,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-22,POS Purchase Dl Uber,-46.00,transport_uber,false,fnb_statement_import
+2026-08-22,POS Purchase Dl Uber,-51.00,transport_uber,false,fnb_statement_import
+2026-08-22,POS Purchase Dl Uber Eats,-159.20,food_delivery,false,fnb_statement_import
+2026-08-22,FNB App Transfer From H,18.00,internal_transfer,true,fnb_statement_import
+2026-08-22,Payshap Credit D Mayele Joffe,200.00,internal_transfer,true,fnb_statement_import
+2026-08-22,Payment To Investment Y,-100.00,internal_transfer,true,fnb_statement_import
+2026-08-22,FNB App Transfer From H,100.00,internal_transfer,true,fnb_statement_import
+2026-08-24,POS Purchase Dl Uber,-14.00,transport_uber,false,fnb_statement_import
+2026-08-24,POS Purchase Ik *Tin Roof,-36.30,other,false,fnb_statement_import
+2026-08-24,POS Purchase Dl Uber,-38.00,transport_uber,false,fnb_statement_import
+2026-08-24,POS Purchase Dl Uber,-39.00,transport_uber,false,fnb_statement_import
+2026-08-24,POS Purchase Dl Uber,-58.00,transport_uber,false,fnb_statement_import
+2026-08-24,POS Purchase Dl Uber,-58.00,transport_uber,false,fnb_statement_import
+2026-08-24,POS Purchase Dl Uber,-111.00,transport_uber,false,fnb_statement_import
+2026-08-24,POS Purchase Dl Uber Eats,-135.85,food_delivery,false,fnb_statement_import
+2026-08-24,POS Purchase Nandos Sea Point U,-159.00,eating_out,false,fnb_statement_import
+2026-08-24,Payshap Credit D Mayele Joffe,150.00,internal_transfer,true,fnb_statement_import
+2026-08-24,Payshap Credit D Mayele Joffe,10.00,internal_transfer,true,fnb_statement_import
+2026-08-24,Payment To Investment H,-120.00,internal_transfer,true,fnb_statement_import
+2026-08-24,FNB App Transfer From H,120.00,internal_transfer,true,fnb_statement_import
+2026-08-24,FNB App Payment From Bank,200.00,family,false,fnb_statement_import
+2026-08-24,Payshap Credit D Mayele Joffe,10.00,internal_transfer,true,fnb_statement_import
+2026-08-25,POS Purchase Ik *Tin Roof,-36.30,other,false,fnb_statement_import
+2026-08-25,POS Purchase Ik *Tin Roof,-37.40,other,false,fnb_statement_import
+2026-08-25,POS Purchase Dl Uber,-63.00,transport_uber,false,fnb_statement_import
+2026-08-25,POS Purchase Dl Uber Eats,-115.65,food_delivery,false,fnb_statement_import
+2026-08-25,Payshap Credit D Mayele Joffe,400.00,internal_transfer,true,fnb_statement_import
+2026-08-25,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-25,Payshap Credit D Mayele Joffe,420.00,internal_transfer,true,fnb_statement_import
+2026-08-25,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-25,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-25,Electricity Prepaid Electricity 04908388285,-60.00,utilities,false,fnb_statement_import
+2026-08-26,POS Purchase Dl*Uber,-10.00,transport_uber,false,fnb_statement_import
+2026-08-26,POS Purchase Dl*Uber,-71.00,transport_uber,false,fnb_statement_import
+2026-08-26,POS Purchase Dl*Uber,-102.00,transport_uber,false,fnb_statement_import
+2026-08-26,POS Purchase Dl*Uber Eats,-167.00,food_delivery,false,fnb_statement_import
+2026-08-26,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-26,Payshap Credit D Mayele Joffe,179.00,internal_transfer,true,fnb_statement_import
+2026-08-26,Payshap Account Off-Us Rr,-7.00,p2p_out,false,fnb_statement_import
+2026-08-26,Payshap Account Off-Us Rr,-85.00,p2p_out,false,fnb_statement_import
+2026-08-27,POS Purchase Dl*Uber,-45.00,transport_uber,false,fnb_statement_import
+2026-08-27,POS Purchase Dl*Uber,-66.00,transport_uber,false,fnb_statement_import
+2026-08-27,POS Purchase Dl*Uber,-96.00,transport_uber,false,fnb_statement_import
+2026-08-27,POS Purchase Dl*Uber,-118.00,transport_uber,false,fnb_statement_import
+2026-08-27,POS Purchase Nandos Riverlands,-208.00,eating_out,false,fnb_statement_import
+2026-08-28,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-28,POS Purchase Mugg And Bean Maitl,-67.00,eating_out,false,fnb_statement_import
+2026-08-28,POS Purchase Dl*Uber Eats,-175.40,food_delivery,false,fnb_statement_import
+2026-08-28,Schd Trxn No Av Bal Pmt To Ptp 59188913_20260828,-0.00,other,false,fnb_statement_import
+2026-08-28,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-28,FNB App Transfer From Y,136.00,internal_transfer,true,fnb_statement_import
+2026-08-28,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-28,FNB App Transfer From G,183.00,internal_transfer,true,fnb_statement_import
+2026-08-28,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-28,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-29,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-29,POS Purchase Dl*Uber,-61.50,transport_uber,false,fnb_statement_import
+2026-08-29,POS Purchase Dl*Uber,-163.00,transport_uber,false,fnb_statement_import
+2026-08-29,FNB App Transfer From U,190.00,internal_transfer,true,fnb_statement_import
+2026-08-29,FNB App Transfer From H,200.00,internal_transfer,true,fnb_statement_import
+2026-08-29,FNB App Transfer From H,18.00,internal_transfer,true,fnb_statement_import
+2026-08-29,FNB App Transfer From H,82.00,internal_transfer,true,fnb_statement_import
+2026-08-29,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-29,Payshap Account Off-Us Rr,-26.00,p2p_out,false,fnb_statement_import
+2026-08-31,,-8.00,bank_fees,false,fnb_statement_import
+2026-08-31,POS Purchase Dl*Uber,-12.96,transport_uber,false,fnb_statement_import
+2026-08-31,POS Purchase Dl*Uber,-57.00,transport_uber,false,fnb_statement_import
+2026-08-31,POS Purchase Dl*Uber,-61.00,transport_uber,false,fnb_statement_import
+2026-08-31,POS Purchase Dl*Uber,-89.00,transport_uber,false,fnb_statement_import
+2026-08-31,POS Purchase Dl*Uber,-103.00,transport_uber,false,fnb_statement_import
+2026-08-31,POS Purchase Frankie Fenner Meat,-220.00,groceries,false,fnb_statement_import
+2026-08-31,FNB App Transfer From H,7.00,internal_transfer,true,fnb_statement_import
+2026-08-31,Electricity Prepaid Electricity 04908388285,-26.00,utilities,false,fnb_statement_import
+2026-08-31,FNB App Transfer From B,218.00,internal_transfer,true,fnb_statement_import
+2026-08-31,FNB App Transfer From U,60.00,internal_transfer,true,fnb_statement_import
+2026-08-31,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-08-31,FNB App Transfer From I,60.00,internal_transfer,true,fnb_statement_import
+2026-08-31,FNB App Transfer From Y,10.00,internal_transfer,true,fnb_statement_import
+2026-08-31,Payshap Credit Goon,80.99,income_other,false,fnb_statement_import
+2026-08-31,FNB App Transfer From B,200.00,internal_transfer,true,fnb_statement_import
+2026-08-31,Rm Ction Attempt Fnbconnect8920588020,579.00,debit_order_reversal,false,fnb_statement_import
+2026-09-01,Magtape Unpaid Not Provided For,2499.00,debit_order_reversal,false,fnb_statement_import
+2026-09-01,,-112.00,bank_fees,false,fnb_statement_import
+2026-09-01,,-8.00,bank_fees,false,fnb_statement_import
+2026-09-01,POS Purchase Yustras Kitchen Sup,-80.00,eating_out,false,fnb_statement_import
+2026-09-01,POS Purchase Dl*Uber,-81.00,transport_uber,false,fnb_statement_import
+2026-09-01,POS Purchase Dl*Uber Eats,-193.95,food_delivery,false,fnb_statement_import
+2026-09-01,POS Purchase Apple.Com/Bill,-104.99,software_tools,false,fnb_statement_import
+2026-09-01,FNB App Transfer From H,72.00,internal_transfer,true,fnb_statement_import
+2026-09-01,260901,-112.00,bank_fees,false,fnb_statement_import
+2026-09-01,Magtape Debit Virgin Act429382106 Netcash,-2499.00,health_fitness,false,fnb_statement_import
+2026-09-01,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-09-02,,-2.89,bank_fees,false,fnb_statement_import
+2026-09-02,POS Purchase Dl*Uber Eats,-236.95,food_delivery,false,fnb_statement_import
+2026-09-02,FNB OB Pmt Ie Global,6500.00,income_ie_global,false,fnb_statement_import
+2026-09-02,Rm Internal D/O Fnbconnect8920588020,-579.00,debit_order_reversal,false,fnb_statement_import
+2026-09-02,Payment To Investment U,-5000.00,internal_transfer,true,fnb_statement_import
+2026-09-02,FNB App Transfer From J,3000.00,internal_transfer,true,fnb_statement_import
+2026-09-02,FNB App Transfer From G,1000.00,internal_transfer,true,fnb_statement_import
+2026-09-02,Payshap Account On-Us Alo,-1000.00,internal_transfer,true,fnb_statement_import
+2026-09-02,FNB App Transfer From H,60.00,internal_transfer,true,fnb_statement_import
+2026-09-02,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-09-03,Hybrid Subscription Fee Connect Topup Paymnt,-69.00,bank_fees,false,fnb_statement_import
+2026-09-03,Airtime Topup Airtime 27645371179,-9.00,phone_data,false,fnb_statement_import
+2026-09-03,FNB App Transfer From H,350.00,internal_transfer,true,fnb_statement_import
+2026-09-03,FNB App Transfer From J,30.00,internal_transfer,true,fnb_statement_import
+2026-09-03,FNB App Transfer From J,58.00,internal_transfer,true,fnb_statement_import
+2026-09-03,FNB App Transfer From J,8.00,internal_transfer,true,fnb_statement_import
+2026-09-03,,-62.50,bank_fees,false,fnb_statement_import
+2026-09-03,,-43.00,bank_fees,false,fnb_statement_import

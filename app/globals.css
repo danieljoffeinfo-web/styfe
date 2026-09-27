@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@theme {
+  /* Styfe HQ palette — see CLAUDE.md §Design */
+  --color-paper: #F3F1EC;
+  --color-card: #FFFFFF;
+  --color-line: #E2DED5;
+  --color-line-soft: #F0EDE6;
+  --color-ink: #17171B;
+  --color-muted: #5E5B55;
+  --color-muted-dark: #A8A396;
+  --color-muted-light: #C9C4B8;
+  --color-track: #ECE8E0;
+  --color-well: #F7F5F0;
+  --color-control: #CFCAC0;
+  --color-sidebar-item: #D9D5CC;
+
+  --color-green: #1D6B4F;
+  --color-green-deep: #134A37;
+  --color-green-soft: #9CC3B0;
+  --color-green-wash: #E1EFE8;
+
+  --color-sand: #C9A77A;
+  --color-sand-soft: #E7DCC8;
+
+  --color-blue: #2F5D8A;
+
+  --color-alert: #8A3E12;
+  --color-alert-wash: #FBE7DA;
+
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-serif: "Instrument Serif", Georgia, serif;
+
+  --radius-card: 14px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  * {
+    border-color: var(--color-line);
+  }
+  ::selection {
+    background: var(--color-green-wash);
+  }
+  /* Touch targets stay >= 44px on coarse pointers */
+  @media (pointer: coarse) {
+    button,
+    a[role="button"],
+    [data-touch] {
+      min-height: 44px;
+    }
+  }
+}
+
+@layer utilities {
+  .money {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+  .serif {
+    font-family: var(--font-serif);
+    font-weight: 400;
+  }
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .card {
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}
+
+@media print {
+  .print-hidden {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+}
