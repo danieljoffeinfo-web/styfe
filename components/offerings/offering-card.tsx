@@ -50,7 +50,7 @@ export function OfferingCard({ entry }: { entry: CatalogueEntry }) {
         <Stat label="MRR" value={<MoneyCents cents={mrrCents} />} />
         <Stat label="Revenue YTD" value={<MoneyCents cents={revenueCents} />} />
         <Stat
-          label={`Open deals${stats?.open_deals ? ` (${stats.open_deals})` : ""}`}
+          label={`Pipeline · 12mo${stats?.open_deals ? ` (${stats.open_deals})` : ""}`}
           value={<MoneyCents cents={pipelineCents} />}
         />
         {stats?.win_rate_pct !== null && stats?.win_rate_pct !== undefined ? (

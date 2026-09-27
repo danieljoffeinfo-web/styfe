@@ -55,6 +55,14 @@ npm run check                # asserts the numbers match Dan's statements
 month (Mar 9.8k · Apr 12.8k · May 8.7k · Jun 72.1k · Jul 43.9k · Aug 8.7k),
 income per client, receivables of R33,200 and MRR of R8,000.
 
+### Checking the SQL without Supabase
+
+`./scripts/verify-sql.sh` spins up a throwaway local Postgres, applies every
+migration, runs `seed/seed.sql` twice to prove it is idempotent, loads the
+bundled statement and asserts the same numbers `npm run check` does. It needs
+`postgresql` installed locally, never touches the real project, and must be run
+as a normal (non-root) user. Use it before pushing a schema change.
+
 ### Auth
 
 Sign-in is a magic link, and one address is allowed:

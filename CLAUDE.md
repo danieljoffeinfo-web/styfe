@@ -119,6 +119,7 @@ npm run db:push              # applies supabase/migrations
 npm run db:seed              # creates Dan's auth user, then runs seed/seed.sql
 npm run import:transactions  # loads seed/transactions_2026-03_to_2026-09.csv
 npm run db:claim             # repair: gives orphaned rows to Dan
-npm run check                # sanity checks — fails loudly
+npm run check                # sanity checks against the live project — fails loudly
+./scripts/verify-sql.sh      # migrations + seed + numbers on a throwaway local Postgres
 npm run setup                # push + seed + import + check
 ```

@@ -64,7 +64,10 @@ create or replace view public.v_receivables
 with (security_invoker = true) as
 select
   v.*,
-  case when v.due_at is not null then (current_date - v.due_at) else null end as days_overdue
+  case
+    when v.due_at is not null and v.due_at < current_date then (current_date - v.due_at)
+    else null
+  end as days_overdue
 from public.v_invoices v
 where v.status not in ('paid', 'void');
 
@@ -118,6 +121,8 @@ deal_stats as (
   select
     d.offering_id,
     count(*) filter (where d.stage not in ('won', 'lost'))::int              as open_deals,
+    -- Twelve months of the recurring value plus the once-off, so a retainer
+    -- and a project can be compared on one number.
     coalesce(sum(
       coalesce(d.monthly_value_zar, 0) * d.units * 12 + coalesce(d.once_off_value_zar, 0)
     ) filter (where d.stage not in ('won', 'lost')), 0)::numeric(12,2)       as pipeline_value_zar,

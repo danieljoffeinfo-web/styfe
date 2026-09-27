@@ -139,7 +139,7 @@ export default async function OfferingDetailPage({ params }: { params: Promise<{
               <Stat label="Revenue YTD" value={<MoneyCents cents={toCents(stat?.revenue_ytd_zar)} />} />
               <Stat label="Invoiced ever" value={<MoneyCents cents={toCents(stat?.invoiced_zar)} />} />
               <Stat label="Open deals" value={String(stat?.open_deals ?? 0)} />
-              <Stat label="Pipeline" value={<MoneyCents cents={toCents(stat?.pipeline_value_zar)} />} />
+              <Stat label="Pipeline · 12mo" value={<MoneyCents cents={toCents(stat?.pipeline_value_zar)} />} />
               <Stat
                 label="Win rate"
                 value={stat?.win_rate_pct === null || stat?.win_rate_pct === undefined ? "—" : `${stat.win_rate_pct}%`}
