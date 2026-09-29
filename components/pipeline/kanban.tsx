@@ -21,6 +21,7 @@ import {
   type DealStage,
   type Offering,
   type OfferingTier,
+  type DealAddon,
 } from "@/lib/types";
 
 export function PipelineBoard({
@@ -28,11 +29,13 @@ export function PipelineBoard({
   clients,
   offerings,
   tiers,
+  addons,
 }: {
   deals: Deal[];
   clients: Client[];
   offerings: Offering[];
   tiers: OfferingTier[];
+  addons: DealAddon[];
 }) {
   const toast = useToast();
   const [deals, setDeals] = React.useState(initial);
@@ -173,6 +176,7 @@ export function PipelineBoard({
                         clients={clients}
                         offerings={offerings}
                         tiers={tiers}
+                        addons={addons}
                         trigger={
                           <button type="button" className="text-left font-medium hover:underline">
                             {deal.title}
@@ -235,6 +239,7 @@ export function PipelineBoard({
                 clients={clients}
                 offerings={offerings}
                 tiers={tiers}
+                addons={addons}
                 defaultStage={stage}
                 trigger={
                   <button
@@ -253,6 +258,8 @@ export function PipelineBoard({
       <WonDialog
         deal={wonDeal}
         offering={wonDeal?.offering_id ? (offeringById.get(wonDeal.offering_id) ?? null) : null}
+        offerings={offerings}
+        addons={addons}
         onClose={() => setWonDeal(null)}
       />
     </>

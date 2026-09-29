@@ -7,6 +7,7 @@ import { OfferingForm } from "./offering-form";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast";
 import { reorderOfferings } from "@/lib/actions/offerings";
+import { groupByServiceLine } from "@/lib/offerings";
 import type { CatalogueEntry } from "@/lib/queries/offerings";
 
 /**
@@ -55,12 +56,8 @@ export function OfferingsGrid({
     persist(next);
   }
 
-  const grouped = new Map<string, CatalogueEntry[]>();
-  for (const entry of order) {
-    const list = grouped.get(entry.offering.category) ?? [];
-    list.push(entry);
-    grouped.set(entry.offering.category, list);
-  }
+  // Grouped by service line, and inside each one standard -> custom -> add-ons.
+  const grouped = groupByServiceLine(order);
 
   if (order.length === 0) {
     return (

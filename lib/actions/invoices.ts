@@ -6,6 +6,7 @@ import { z } from "zod";
 import { todayIso, addDaysIso } from "@/lib/dates";
 import { guard, ok, fail, withUser, ensureSettings, type ActionResult } from "./helpers";
 import { zDate, zInvoiceStatus, zMoney, zText, zodMessage } from "./schemas";
+import type { Offering } from "@/lib/types";
 
 const lineSchema = z.object({
   description: z.string().trim().min(1, "Every line needs a description").max(300),
@@ -189,7 +190,12 @@ export async function deleteInvoice(id: string): Promise<ActionResult> {
   );
 }
 
-/** Draft invoice straight off a won deal — used by the Won flow. */
+/**
+ * A won deal can carry several things at once now: a base offering plus any
+ * number of add-ons. The once-off side becomes one draft invoice with a line
+ * per item, so what Dan sends matches what he sold rather than collapsing into
+ * a single "Website" line.
+ */
 export async function createInvoiceFromDeal(dealId: string): Promise<ActionResult> {
   let createdId: string | null = null;
 
@@ -199,23 +205,74 @@ export async function createInvoiceFromDeal(dealId: string): Promise<ActionResul
       if (!deal) return fail("Deal not found.");
       if (!deal.client_id) return fail("Link the deal to a client first.");
 
+      const { data: addonRows } = await supabase
+        .from("deal_addons")
+        .select("*")
+        .eq("deal_id", dealId)
+        .order("created_at");
+      const addons = addonRows ?? [];
+
+      const offeringIds = [
+        deal.offering_id,
+        ...addons.map((a: { offering_id: string }) => a.offering_id),
+      ].filter((id): id is string => Boolean(id));
+      const { data: offeringRows } = offeringIds.length
+        ? await supabase.from("offerings").select("*").in("id", offeringIds)
+        : { data: [] as Offering[] };
+      const byId = new Map<string, Offering>((offeringRows ?? []).map((o: Offering) => [o.id, o]));
+
+      const lines: {
+        description: string;
+        qty: number;
+        unit_price_zar: number;
+        offering_id: string | null;
+        tier_id: string | null;
+        scope: string | null;
+        sort: number;
+      }[] = [];
+
+      // The base offering, when any of it is once-off.
+      const base = deal.offering_id ? byId.get(deal.offering_id) : undefined;
+      const basePrice = Number(deal.once_off_value_zar ?? 0) || Number(base?.setup_fee_zar ?? 0);
+      if (basePrice > 0) {
+        lines.push({
+          description: base?.name ?? deal.title,
+          qty: deal.units ?? 1,
+          unit_price_zar: basePrice,
+          offering_id: deal.offering_id,
+          tier_id: deal.tier_id,
+          // The brief belongs on the invoice for bespoke work, and only there:
+          // a standard package already describes itself.
+          scope: base?.offering_type === "custom" ? deal.scope : null,
+          sort: 1,
+        });
+      }
+
+      for (const addon of addons) {
+        if (addon.pricing_model === "monthly" || addon.pricing_model === "per_unit_monthly") continue;
+        const offering = byId.get(addon.offering_id);
+        const price =
+          addon.price_zar !== null && addon.price_zar !== undefined
+            ? Number(addon.price_zar)
+            : Number(offering?.setup_fee_zar ?? 0);
+        lines.push({
+          description: offering?.name ?? "Add-on",
+          qty: addon.qty ?? 1,
+          unit_price_zar: price,
+          offering_id: addon.offering_id,
+          tier_id: addon.tier_id,
+          scope: null,
+          sort: lines.length + 1,
+        });
+      }
+
+      if (lines.length === 0) {
+        return fail("Nothing once-off on this deal — create the subscription instead.");
+      }
+
       await ensureSettings(supabase, userId);
       const { data: number, error: numberError } = await supabase.rpc("next_invoice_number");
       if (numberError || !number) return fail(numberError?.message ?? "Could not reserve a number.");
-
-      let description = deal.title;
-      let unitPrice = Number(deal.once_off_value_zar ?? 0);
-      if (deal.offering_id) {
-        const { data: offering } = await supabase
-          .from("offerings")
-          .select("name, setup_fee_zar")
-          .eq("id", deal.offering_id)
-          .maybeSingle();
-        if (offering) {
-          description = offering.name;
-          if (!unitPrice) unitPrice = Number(offering.setup_fee_zar ?? 0);
-        }
-      }
 
       const issued = todayIso();
       const { data: invoice, error } = await supabase
@@ -233,22 +290,15 @@ export async function createInvoiceFromDeal(dealId: string): Promise<ActionResul
         .single();
       if (error || !invoice) return fail(error?.message ?? "Could not create the invoice.");
 
-      const { error: lineError } = await supabase.from("invoice_lines").insert({
-        owner_id: userId,
-        invoice_id: invoice.id,
-        offering_id: deal.offering_id,
-        tier_id: deal.tier_id,
-        description,
-        qty: deal.units ?? 1,
-        unit_price_zar: unitPrice,
-        sort: 1,
-      });
+      const { error: lineError } = await supabase
+        .from("invoice_lines")
+        .insert(lines.map((line) => ({ ...line, owner_id: userId, invoice_id: invoice.id })));
       if (lineError) return fail(lineError.message);
 
       createdId = invoice.id;
       revalidatePath("/invoices");
       revalidatePath("/pipeline");
-      return ok(`${number} drafted.`);
+      return ok(`${number} drafted with ${lines.length} line${lines.length === 1 ? "" : "s"}.`);
     }),
   );
 
@@ -256,42 +306,90 @@ export async function createInvoiceFromDeal(dealId: string): Promise<ActionResul
   return result;
 }
 
-/** Subscription straight off a won deal — used by the Won flow. */
+/**
+ * The monthly side of a won deal: one subscription per recurring item, so a
+ * Launch Website + Care Plan sale produces a subscription for the care plan
+ * without inventing one for the website.
+ */
 export async function createSubscriptionFromDeal(dealId: string): Promise<ActionResult> {
   return guard(async () =>
     withUser(async (supabase, userId) => {
       const { data: deal } = await supabase.from("deals").select("*").eq("id", dealId).maybeSingle();
       if (!deal) return fail("Deal not found.");
       if (!deal.client_id) return fail("Link the deal to a client first.");
-      if (!deal.offering_id) return fail("Link the deal to an offering first.");
 
-      let monthly = Number(deal.monthly_value_zar ?? 0);
-      if (!monthly) {
-        const { data: offering } = await supabase
-          .from("offerings")
-          .select("monthly_fee_zar")
-          .eq("id", deal.offering_id)
-          .maybeSingle();
-        monthly = Number(offering?.monthly_fee_zar ?? 0);
+      const { data: addonRows } = await supabase
+        .from("deal_addons")
+        .select("*")
+        .eq("deal_id", dealId)
+        .order("created_at");
+      const addons = addonRows ?? [];
+
+      const offeringIds = [
+        deal.offering_id,
+        ...addons.map((a: { offering_id: string }) => a.offering_id),
+      ].filter((id): id is string => Boolean(id));
+      const { data: offeringRows } = offeringIds.length
+        ? await supabase.from("offerings").select("*").in("id", offeringIds)
+        : { data: [] as Offering[] };
+      const byId = new Map<string, Offering>((offeringRows ?? []).map((o: Offering) => [o.id, o]));
+
+      const subs: {
+        offering_id: string;
+        tier_id: string | null;
+        units: number;
+        monthly_fee_zar: number;
+      }[] = [];
+
+      const base = deal.offering_id ? byId.get(deal.offering_id) : undefined;
+      if (deal.offering_id) {
+        const baseMonthly =
+          Number(deal.monthly_value_zar ?? 0) || Number(base?.monthly_fee_zar ?? 0);
+        if (baseMonthly > 0) {
+          subs.push({
+            offering_id: deal.offering_id,
+            tier_id: deal.tier_id,
+            units: deal.units ?? 1,
+            monthly_fee_zar: baseMonthly,
+          });
+        }
       }
 
-      const { error } = await supabase.from("subscriptions").insert({
-        owner_id: userId,
-        client_id: deal.client_id,
-        offering_id: deal.offering_id,
-        tier_id: deal.tier_id,
-        units: deal.units ?? 1,
-        monthly_fee_zar: monthly,
-        started_at: todayIso(),
-        status: "active",
-        notes: `From deal: ${deal.title}`,
-      });
+      for (const addon of addons) {
+        if (addon.pricing_model !== "monthly" && addon.pricing_model !== "per_unit_monthly") continue;
+        const offering = byId.get(addon.offering_id);
+        const monthly =
+          addon.price_zar !== null && addon.price_zar !== undefined
+            ? Number(addon.price_zar)
+            : Number(offering?.monthly_fee_zar ?? 0);
+        subs.push({
+          offering_id: addon.offering_id,
+          tier_id: addon.tier_id,
+          units: addon.qty ?? 1,
+          monthly_fee_zar: monthly,
+        });
+      }
+
+      if (subs.length === 0) {
+        return fail("Nothing recurring on this deal — draft the invoice instead.");
+      }
+
+      const { error } = await supabase.from("subscriptions").insert(
+        subs.map((sub) => ({
+          ...sub,
+          owner_id: userId,
+          client_id: deal.client_id,
+          started_at: todayIso(),
+          status: "active",
+          notes: `From deal: ${deal.title}`,
+        })),
+      );
       if (error) return fail(error.message);
 
       revalidatePath("/pipeline");
       revalidatePath("/clients");
       revalidatePath("/");
-      return ok("Subscription created.");
+      return ok(`${subs.length} subscription${subs.length === 1 ? "" : "s"} created.`);
     }),
   );
 }

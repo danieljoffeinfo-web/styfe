@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { todayIso } from "@/lib/dates";
 import { guard, ok, fail, withUser, type ActionResult } from "./helpers";
-import { zDate, zDealStage, zInt, zMoney, zRequiredText, zText, zodMessage } from "./schemas";
+import { zDate, zDealStage, zInt, zMoney, zPricingModel, zRequiredText, zText, zodMessage } from "./schemas";
 
 const dealSchema = z.object({
   title: zRequiredText,
@@ -21,7 +21,38 @@ const dealSchema = z.object({
   next_step: zText,
   next_step_at: zDate,
   notes: zText,
+  scope: zText,
 });
+
+/**
+ * The add-on rows post one field per column in matching order, the same
+ * convention the deliverables and portfolio editors use. A row without an
+ * offering is a half-filled picker and is dropped rather than saved.
+ */
+function readAddons(formData: FormData) {
+  const offeringIds = formData.getAll("addon_offering_id");
+  const qtys = formData.getAll("addon_qty");
+  const prices = formData.getAll("addon_price");
+  const models = formData.getAll("addon_pricing_model");
+
+  const rows: { offering_id: string; qty: number; price_zar: number | null; pricing_model: string }[] = [];
+  for (let i = 0; i < offeringIds.length; i += 1) {
+    const offeringId = String(offeringIds[i] ?? "").trim();
+    if (!offeringId) continue;
+
+    const qty = Number(String(qtys[i] ?? "1"));
+    const price = zMoney.safeParse(prices[i]);
+    const model = zPricingModel.safeParse(String(models[i] ?? "once_off"));
+
+    rows.push({
+      offering_id: offeringId,
+      qty: Number.isInteger(qty) && qty > 0 ? qty : 1,
+      price_zar: price.success ? price.data : null,
+      pricing_model: model.success ? model.data : "once_off",
+    });
+  }
+  return rows.slice(0, 20);
+}
 
 export async function saveDeal(_: ActionResult | null, formData: FormData): Promise<ActionResult> {
   return guard(async () => {
@@ -41,8 +72,10 @@ export async function saveDeal(_: ActionResult | null, formData: FormData): Prom
       next_step: formData.get("next_step"),
       next_step_at: formData.get("next_step_at"),
       notes: formData.get("notes"),
+      scope: formData.get("scope"),
     });
     if (!parsed.success) return fail(zodMessage(parsed.error));
+    const addons = readAddons(formData);
 
     const payload = {
       ...parsed.data,
@@ -50,10 +83,40 @@ export async function saveDeal(_: ActionResult | null, formData: FormData): Prom
     };
 
     return withUser(async (supabase, userId) => {
-      const { error } = id
-        ? await supabase.from("deals").update(payload).eq("id", id)
-        : await supabase.from("deals").insert({ ...payload, owner_id: userId });
-      if (error) return fail(error.message);
+      // A custom build is nothing without its brief, so refuse to save one
+      // empty rather than let it reach an invoice as a bare title.
+      if (payload.offering_id) {
+        const { data: offering } = await supabase
+          .from("offerings")
+          .select("offering_type, name")
+          .eq("id", payload.offering_id)
+          .maybeSingle();
+        if (offering?.offering_type === "custom" && !payload.scope) {
+          return fail(`${offering.name} is a custom build — write the scope first.`);
+        }
+      }
+
+      const { data: saved, error } = id
+        ? await supabase.from("deals").update(payload).eq("id", id).select("id").single()
+        : await supabase
+            .from("deals")
+            .insert({ ...payload, owner_id: userId })
+            .select("id")
+            .single();
+      if (error || !saved) return fail(error?.message ?? "Could not save the deal.");
+
+      // Add-ons are replaced wholesale: the form always posts the full set, so
+      // a removed row has to disappear rather than linger.
+      const { error: clearError } = await supabase.from("deal_addons").delete().eq("deal_id", saved.id);
+      if (clearError) return fail(clearError.message);
+
+      if (addons.length) {
+        const { error: addonError } = await supabase
+          .from("deal_addons")
+          .insert(addons.map((a) => ({ ...a, deal_id: saved.id, owner_id: userId })));
+        if (addonError) return fail(addonError.message);
+      }
+
       revalidatePath("/pipeline");
       revalidatePath("/");
       return ok("Deal saved.");

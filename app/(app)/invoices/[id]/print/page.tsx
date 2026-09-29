@@ -84,7 +84,14 @@ export default async function PrintInvoicePage({ params }: { params: Promise<{ i
           <tbody>
             {lines.map((line) => (
               <tr key={line.id} className="border-b border-line-soft">
-                <td className="py-3">{line.description}</td>
+                <td className="py-3">
+                  {line.description}
+                  {line.scope ? (
+                    <span className="mt-1 block whitespace-pre-line text-[12px] leading-relaxed text-muted">
+                      {line.scope}
+                    </span>
+                  ) : null}
+                </td>
                 <td className="money py-3 text-right">{Number(line.qty)}</td>
                 <td className="money py-3 text-right">
                   <MoneyCents cents={toCents(line.unit_price_zar)} withCents />

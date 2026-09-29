@@ -2,8 +2,16 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { MoneyCents } from "@/components/money";
 import { priceLine } from "@/lib/offerings";
+import { OFFERING_TYPE_LABEL, type OfferingType } from "@/lib/types";
 import { toCents } from "@/lib/money";
 import type { CatalogueEntry } from "@/lib/queries/offerings";
+
+/** Standard is the default and stays quiet; the other two earn a colour. */
+const TYPE_TONE: Record<OfferingType, "outline" | "blue" | "sand"> = {
+  standard: "outline",
+  custom: "blue",
+  addon: "sand",
+};
 
 export function OfferingCard({ entry }: { entry: CatalogueEntry }) {
   const { offering, tiers, stats } = entry;
@@ -28,6 +36,9 @@ export function OfferingCard({ entry }: { entry: CatalogueEntry }) {
       </div>
 
       <div className="flex flex-wrap gap-1.5">
+        <Badge tone={TYPE_TONE[offering.offering_type]}>
+          {OFFERING_TYPE_LABEL[offering.offering_type]}
+        </Badge>
         <Badge tone={offering.kind === "product" ? "blue" : "green"}>{offering.kind}</Badge>
         {offering.status === "archived" ? <Badge tone="neutral">Archived</Badge> : null}
         {tiers.length ? <Badge tone="outline">{tiers.length} tiers</Badge> : null}
@@ -36,6 +47,23 @@ export function OfferingCard({ entry }: { entry: CatalogueEntry }) {
 
       {offering.description ? (
         <p className="line-clamp-2 text-[13px] leading-relaxed text-muted">{offering.description}</p>
+      ) : null}
+
+      {offering.portfolio?.length ? (
+        <ul className="flex flex-wrap gap-x-3 gap-y-1 text-[13px]">
+          {offering.portfolio.map((link) => (
+            <li key={link.url}>
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-blue underline underline-offset-4 hover:text-ink"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       ) : null}
 
       <dl className="mt-auto grid grid-cols-2 gap-x-3 gap-y-2 border-t border-line-soft pt-3 text-[13px]">

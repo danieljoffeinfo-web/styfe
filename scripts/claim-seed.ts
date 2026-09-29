@@ -12,7 +12,7 @@ import { OWNER_EMAIL, bold, dim, green, red } from "./_env";
 const TABLES = [
   "settings", "path_segments", "categories", "category_rules", "clients",
   "offerings", "offering_tiers", "subscriptions", "invoices", "invoice_lines",
-  "transactions", "deals", "goals", "goal_entries", "weekly_targets",
+  "transactions", "deals", "deal_addons", "goals", "goal_entries", "weekly_targets",
   "weekly_scores", "daily_tasks", "alerts",
 ];
 

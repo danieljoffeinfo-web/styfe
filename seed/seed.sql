@@ -24,8 +24,8 @@ begin
   foreach t in array array[
     'settings', 'path_segments', 'categories', 'category_rules', 'clients',
     'offerings', 'offering_tiers', 'subscriptions', 'invoices', 'invoice_lines',
-    'transactions', 'deals', 'goals', 'goal_entries', 'weekly_targets',
-    'weekly_scores', 'daily_tasks', 'alerts'
+    'transactions', 'deals', 'deal_addons', 'goals', 'goal_entries',
+    'weekly_targets', 'weekly_scores', 'daily_tasks', 'alerts'
   ]
   loop
     execute format('update public.%I set owner_id = public.seed_owner() where owner_id is null', t);
@@ -43,47 +43,15 @@ insert into clients (slug, name, contact_name, relationship, status, notes) valu
   ('ie-global',       'IE Global',                 null,                'employer', 'ended',  'Salary R6,500/month (pays as Patin Trading 84 T/A). Ended Sep 2026.')
 on conflict (owner_id, slug) do nothing;
 
--- OFFERINGS (products & services catalogue — fully editable in the UI) --
--- pricing_model: once_off | monthly | per_unit_monthly | quote
--- price fields are ex VAT; null = not set yet (UI shows "Set price")
-insert into offerings (slug, name, kind, category, pricing_model, setup_fee_zar, monthly_fee_zar, unit_label, unit_cost_monthly_zar, delivery_days, description, deliverables, color, status, sort) values
-  ('website-build',     'Standard Website Build',            'service', 'Web',      'once_off',         null,  null,  null,         null, 14,
-     'Marketing website: design, build, deploy, basic SEO.',
-     '["Design", "Build", "Deploy", "Basic SEO"]'::jsonb, '#2F5D8A', 'active', 10),
-  ('whatsapp-ai',       'WhatsApp AI Assistant',             'service', 'AI',       'once_off',         7300,  null,  null,         null, 7,
-     'Meta Business verification (3–5 days), AI model tuning + testing, failsafes + human handover, catalogue/media upload. Client pays Meta + broadcast fees.',
-     '["Meta Business verification (3–5 days)", "AI model tuning + testing", "Failsafes + human handover", "Catalogue / media upload"]'::jsonb, '#1D6B4F', 'active', 20),
-  ('custom-bms',        'Custom Business Management System', 'service', 'Systems',  'quote',            null,  null,  null,         null, 30,
-     'Bespoke back-office: dashboards, workflows, integrations, admin.',
-     '["Discovery + spec", "Dashboards", "Workflows", "Integrations", "Admin + handover"]'::jsonb, '#2F5D8A', 'active', 30),
-  ('growth-retainer',   'Growth Retainer',                   'service', 'Retainer', 'monthly',          null,  7500,  null,         null, null,
-     'Website care, WhatsApp AI, monthly automations, monthly report.',
-     '["Website care", "WhatsApp AI", "Monthly automations", "Monthly report"]'::jsonb, '#1D6B4F', 'active', 40),
-  ('proto-retainer',    'Proto Trading Retainer',            'service', 'Retainer', 'monthly',          null,  8000,  null,         null, null,
-     'Ongoing systems work for Proto Trading.',
-     '["Systems work", "Support"]'::jsonb, '#1D6B4F', 'active', 45),
-  ('moto-desk',         'Moto Desk',                         'product', 'SaaS',     'per_unit_monthly', null,  8000,  'dealership', null, null,
-     'Cloud DMS for South African dealerships.',
-     '["Stock management", "Leads + deals", "Reporting", "Support"]'::jsonb, '#2F5D8A', 'active', 50),
-  ('chom-learn',        'Chom Learn',                        'product', 'SaaS',     'per_unit_monthly', null,  12000, 'school',     6000, null,
-     'AI learning platform for SA high schools. CONFIRM price per school.',
-     '["Learner accounts", "AI tutor", "Teacher dashboard", "Onboarding"]'::jsonb, '#2F5D8A', 'active', 60)
-on conflict (owner_id, slug) do nothing;
-
--- Tiers / packages for offerings that have them
-insert into offering_tiers (offering_id, name, pricing_model, setup_fee_zar, monthly_fee_zar, description, deliverables, sort)
-select o.id, v.name, v.pricing_model, v.setup_fee_zar, null, v.description, v.deliverables, v.sort
-from (values
-  ('AI Assistant',         'once_off', 7300::numeric,  'Assistant setup as above.',
-     '["Meta Business verification", "AI model tuning + testing", "Failsafes + human handover", "Catalogue / media upload"]'::jsonb, 1),
-  ('Full API Integration', 'once_off', 18500::numeric, 'Full ordering on WhatsApp, card payments, order dashboard.',
-     '["Everything in AI Assistant", "Ordering on WhatsApp", "Card payments", "Order dashboard"]'::jsonb, 2)
-) as v(name, pricing_model, setup_fee_zar, description, deliverables, sort)
-cross join (select id from offerings where slug = 'whatsapp-ai' and owner_id = public.seed_owner()) o
-where not exists (
-  select 1 from offering_tiers t
-  where t.offering_id = o.id and t.name = v.name
-);
+-- OFFERINGS -----------------------------------------------------------
+-- The catalogue itself now ships in supabase/migrations/20260929090000_offerings_v2.sql,
+-- the same way the spend categories ship in 20260927090300_reference_data.sql.
+-- Migrations run against every environment and the seed does not, and the v2
+-- migration has to create the new slugs anyway so it can repoint the deals and
+-- invoice lines that used to hang off whatsapp-ai and custom-bms. Restating the
+-- twelve rows here as well would only let the two copies drift.
+--
+-- Everything below still looks offerings up by slug, so it keeps working.
 
 -- Which client is on which recurring offering
 insert into subscriptions (client_id, offering_id, units, monthly_fee_zar, started_at, status)

@@ -52,6 +52,22 @@ export const zBool = z
   .union([z.string(), z.boolean(), z.null(), z.undefined()])
   .transform((v) => v === true || v === "true" || v === "on" || v === "1");
 
+/** The portfolio editor posts label/url in matching order, so they zip back
+ *  into pairs. A row with a blank url is dropped rather than saved half-built. */
+export function parsePortfolio(
+  labels: FormDataEntryValue[],
+  urls: FormDataEntryValue[],
+): { label: string; url: string }[] {
+  const out: { label: string; url: string }[] = [];
+  for (let i = 0; i < urls.length; i += 1) {
+    const url = String(urls[i] ?? "").trim();
+    if (!url) continue;
+    const label = String(labels[i] ?? "").trim();
+    out.push({ label: label || url.replace(/^https?:\/\//, "").replace(/\/$/, ""), url });
+  }
+  return out.slice(0, 20);
+}
+
 /** A deliverables editor posts one `deliverables` field per line. */
 export function parseList(values: FormDataEntryValue[]): string[] {
   return values
@@ -63,6 +79,7 @@ export function parseList(values: FormDataEntryValue[]): string[] {
 export const PRICING_MODELS = ["once_off", "monthly", "per_unit_monthly", "quote"] as const;
 export const zPricingModel = z.enum(PRICING_MODELS);
 export const zOfferingKind = z.enum(["service", "product"]);
+export const zOfferingType = z.enum(["standard", "custom", "addon"]);
 export const zOfferingStatus = z.enum(["active", "archived"]);
 export const zDealStage = z.enum(["lead", "meeting", "proposal", "pilot", "won", "lost"]);
 export const zInvoiceStatus = z.enum(["draft", "sent", "overdue", "paid", "void"]);

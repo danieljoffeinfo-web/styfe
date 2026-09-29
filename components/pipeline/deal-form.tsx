@@ -7,15 +7,37 @@ import { Button } from "@/components/ui/button";
 import { SubmitButton } from "@/components/ui/submit-button";
 import { Field, Input, Select, Textarea } from "@/components/ui/input";
 import { useToast } from "@/components/ui/toast";
+import { Badge } from "@/components/ui/badge";
 import { saveDeal } from "@/lib/actions/deals";
-import { DEAL_STAGES, DEAL_STAGE_LABEL, type Client, type Deal, type Offering, type OfferingTier } from "@/lib/types";
+import { dealTotals, isRecurring, priceLine } from "@/lib/offerings";
+import { formatZar } from "@/lib/money";
+import {
+  DEAL_STAGES,
+  DEAL_STAGE_LABEL,
+  type Client,
+  type Deal,
+  type DealAddon,
+  type Offering,
+  type OfferingTier,
+  type PricingModel,
+} from "@/lib/types";
 import type { ActionResult } from "@/lib/actions/helpers";
+
+/** One add-on row as the form holds it before it is posted. */
+interface AddonRow {
+  key: string;
+  offeringId: string;
+  qty: string;
+  price: string;
+  pricingModel: PricingModel;
+}
 
 export function DealForm({
   deal,
   clients,
   offerings,
   tiers,
+  addons = [],
   trigger,
   defaultStage,
 }: {
@@ -23,6 +45,7 @@ export function DealForm({
   clients: Client[];
   offerings: Offering[];
   tiers: OfferingTier[];
+  addons?: DealAddon[];
   trigger: React.ReactNode;
   defaultStage?: string;
 }) {
@@ -39,6 +62,44 @@ export function DealForm({
   const [onceOff, setOnceOff] = React.useState(
     deal?.once_off_value_zar != null ? String(Number(deal.once_off_value_zar)) : "",
   );
+  const [scope, setScope] = React.useState(deal?.scope ?? "");
+
+  const offeringById = React.useMemo(() => new Map(offerings.map((o) => [o.id, o])), [offerings]);
+  const addonOfferings = React.useMemo(
+    () => offerings.filter((o) => o.offering_type === "addon"),
+    [offerings],
+  );
+
+  const [rows, setRows] = React.useState<AddonRow[]>(() =>
+    addons
+      .filter((a) => a.deal_id === deal?.id)
+      .map((a, i) => ({
+        key: `${a.id}-${i}`,
+        offeringId: a.offering_id,
+        qty: String(a.qty),
+        price: a.price_zar != null ? String(Number(a.price_zar)) : "",
+        pricingModel: a.pricing_model,
+      })),
+  );
+
+  function addRow(offeringId: string) {
+    const picked = offeringById.get(offeringId);
+    if (!picked) return;
+    setRows((current) => [
+      ...current,
+      {
+        key: `${offeringId}-${Date.now()}`,
+        offeringId,
+        qty: "1",
+        price: "",
+        pricingModel: picked.pricing_model,
+      },
+    ]);
+  }
+
+  function patchRow(key: string, patch: Partial<AddonRow>) {
+    setRows((current) => current.map((r) => (r.key === key ? { ...r, ...patch } : r)));
+  }
 
   React.useEffect(() => {
     if (!state) return;
@@ -52,6 +113,19 @@ export function DealForm({
 
   const offering = offerings.find((o) => o.id === offeringId);
   const offeringTiers = tiers.filter((t) => t.offering_id === offeringId);
+  const isCustom = offering?.offering_type === "custom";
+
+  // What the deal is worth right now, split the way winning it will be actioned.
+  const totals = dealTotals(
+    { units: Number(units) || 1, once_off_value_zar: onceOff, monthly_value_zar: monthly },
+    rows.map((r) => ({
+      offering_id: r.offeringId,
+      qty: Number(r.qty) || 1,
+      price_zar: r.price === "" ? null : r.price,
+      pricing_model: r.pricingModel,
+    })),
+    offeringById,
+  );
 
   /** Values pre-fill from the offering (or tier) and can be overridden. */
   function applyOffering(id: string) {
@@ -59,6 +133,12 @@ export function DealForm({
     setTierId("");
     const picked = offerings.find((o) => o.id === id);
     if (!picked) return;
+    // A custom build has no list price to pre-fill — the quote is typed here.
+    if (picked.offering_type === "custom") {
+      setMonthly("");
+      setOnceOff("");
+      return;
+    }
     setMonthly(picked.monthly_fee_zar != null ? String(Number(picked.monthly_fee_zar)) : "");
     setOnceOff(picked.setup_fee_zar != null ? String(Number(picked.setup_fee_zar)) : "");
   }
@@ -113,6 +193,24 @@ export function DealForm({
             </Field>
           </div>
 
+          {isCustom ? (
+            <Field
+              label="Scope"
+              hint="What is actually being built. This is carried onto the invoice."
+            >
+              <Textarea
+                name="scope"
+                required
+                rows={4}
+                value={scope}
+                onChange={(e) => setScope(e.target.value)}
+                placeholder="Stock intake portal: supplier uploads, approval queue, Sage export."
+              />
+            </Field>
+          ) : (
+            <input type="hidden" name="scope" value="" />
+          )}
+
           <div className="grid grid-cols-2 gap-3">
             <Field label="Client">
               <Select name="client_id" defaultValue={deal?.client_id ?? ""}>
@@ -157,6 +255,89 @@ export function DealForm({
                 placeholder="0"
               />
             </Field>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <span className="text-[13px] font-medium text-ink">Add-ons</span>
+
+            {rows.length === 0 ? (
+              <p className="text-xs text-muted">None. Care plans and extras go here.</p>
+            ) : (
+              <ul className="flex flex-col gap-2">
+                {rows.map((row) => {
+                  const picked = offeringById.get(row.offeringId);
+                  return (
+                    <li key={row.key} className="flex items-end gap-1.5">
+                      <input type="hidden" name="addon_offering_id" value={row.offeringId} />
+                      <input type="hidden" name="addon_pricing_model" value={row.pricingModel} />
+
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-[13px] font-medium">{picked?.name ?? "Unknown"}</p>
+                        <p className="money text-xs text-muted">
+                          {picked ? priceLine(picked) : ""}
+                          {isRecurring(row.pricingModel) ? " · monthly" : " · once-off"}
+                        </p>
+                      </div>
+
+                      <div className="w-14">
+                        <Input
+                          name="addon_qty"
+                          inputMode="numeric"
+                          aria-label={`Quantity for ${picked?.name ?? "add-on"}`}
+                          value={row.qty}
+                          onChange={(e) => patchRow(row.key, { qty: e.target.value })}
+                        />
+                      </div>
+                      <div className="w-28">
+                        <Input
+                          name="addon_price"
+                          inputMode="decimal"
+                          aria-label={`Price override for ${picked?.name ?? "add-on"}`}
+                          placeholder="List"
+                          value={row.price}
+                          onChange={(e) => patchRow(row.key, { price: e.target.value })}
+                        />
+                      </div>
+                      <Button
+                        variant="ghost"
+                        onClick={() => setRows((c) => c.filter((r) => r.key !== row.key))}
+                        aria-label={`Remove ${picked?.name ?? "add-on"}`}
+                      >
+                        Remove
+                      </Button>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+
+            <Select
+              aria-label="Add an add-on"
+              value=""
+              onChange={(e) => {
+                if (e.target.value) addRow(e.target.value);
+              }}
+              disabled={addonOfferings.length === 0}
+            >
+              <option value="">
+                {addonOfferings.length ? "Add an add-on…" : "No add-ons in the catalogue yet"}
+              </option>
+              {addonOfferings.map((o) => (
+                <option key={o.id} value={o.id}>
+                  {o.name} — {priceLine(o)}
+                </option>
+              ))}
+            </Select>
+
+            <div className="flex flex-wrap items-center gap-2 rounded-[10px] bg-well px-3.5 py-2.5">
+              <span className="text-[13px] text-muted">Deal value</span>
+              <Badge tone="outline">
+                <span className="money">{formatZar(totals.onceOffCents / 100)} once-off</span>
+              </Badge>
+              <Badge tone="green">
+                <span className="money">{formatZar(totals.monthlyCents / 100)} / month</span>
+              </Badge>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">

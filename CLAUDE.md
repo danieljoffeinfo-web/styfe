@@ -94,6 +94,27 @@ deadlines are ordinary calendar dates.
   not, so migrations and seeds land under the right owner. It returns null if
   his auth user does not exist yet; `seed/seed.sql` claims those rows and
   `npm run db:claim` is the standalone repair.
+- **`offerings.offering_type`** (`standard` / `custom` / `addon`) is separate from
+  `kind` (service / product), because they answer different questions: kind is
+  what the thing is, offering_type is how it is sold. A SaaS product is
+  `standard` + `product`. The catalogue groups by `category` (the service line),
+  then orders standard → custom → add-ons.
+- **The v2 catalogue ships in the migration, not the seed.** Reference data
+  already works this way (`20260927090300_reference_data.sql`): migrations run
+  against every environment, the seed does not, and the v2 migration has to
+  create the new slugs anyway so it can repoint the deals and invoice lines that
+  hung off `whatsapp-ai` and `custom-bms`. Restating the rows in `seed/seed.sql`
+  as well would only let the two copies drift.
+- **Replaced offerings are archived, never deleted.** `subscriptions.offering_id`
+  is `ON DELETE RESTRICT` and the history has to keep resolving, so
+  `website-build` and `whatsapp-ai` remain as archived rows. `custom-bms` keeps
+  its id and is renamed to `custom-build`. The migration ends with a check that
+  raises if any deal, invoice line or subscription is left pointing at nothing.
+- **`deal_addons.price_zar` null means "use the list price".** A number is a
+  per-deal override. The same rule decides invoice lines and subscriptions when
+  the deal is won: once-off items become one invoice with a line each, monthly
+  items become one subscription each, and a custom line carries the deal's
+  `scope` text so the invoice still reads correctly after the deal is edited.
 - **The mockup's sidebar says "Chom HQ" and "Products".** The product is Styfe
   HQ and the brief's nav says "Offerings", so the app uses those. Everything
   else follows the mockup.

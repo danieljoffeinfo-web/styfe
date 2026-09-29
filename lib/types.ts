@@ -12,6 +12,15 @@ export type IsoDate = string;
 
 export type PricingModel = "once_off" | "monthly" | "per_unit_monthly" | "quote";
 export type OfferingKind = "service" | "product";
+/** What shape of thing this is, orthogonal to service/product.
+ *  standard: fixed scope at a list price. custom: scope and price per deal.
+ *  addon:    bolted onto a standard or custom sale. */
+export type OfferingType = "standard" | "custom" | "addon";
+/** One showcase link on an offering. */
+export interface PortfolioLink {
+  label: string;
+  url: string;
+}
 export type OfferingStatus = "active" | "archived";
 export type DealStage = "lead" | "meeting" | "proposal" | "pilot" | "won" | "lost";
 export type InvoiceStatus = "draft" | "sent" | "overdue" | "paid" | "void";
@@ -87,6 +96,8 @@ export interface Offering extends Owned {
   slug: string;
   name: string;
   kind: OfferingKind;
+  offering_type: OfferingType;
+  /** The service line the catalogue groups by. */
   category: string;
   pricing_model: PricingModel;
   setup_fee_zar: Numeric | null;
@@ -96,6 +107,10 @@ export interface Offering extends Owned {
   delivery_days: number | null;
   description: string | null;
   deliverables: string[];
+  /** What is not included — the line that stops scope creep. */
+  excludes: string[];
+  portfolio: PortfolioLink[];
+  ideal_for: string | null;
   status: OfferingStatus;
   sort: number;
   color: string | null;
@@ -139,6 +154,9 @@ export interface InvoiceLine extends Owned {
   offering_id: Uuid | null;
   tier_id: Uuid | null;
   description: string;
+  /** Copied off the deal when a custom build is won, so the invoice still
+   *  reads correctly after the deal is edited. */
+  scope: string | null;
   qty: Numeric;
   unit_price_zar: Numeric;
   sort: number;
@@ -192,7 +210,20 @@ export interface Deal extends Owned {
   won_at: IsoDate | null;
   lost_reason: string | null;
   notes: string | null;
+  /** The typed brief for custom work. Required when the offering is custom. */
+  scope: string | null;
   sort: number;
+}
+
+/** An extra attached to a deal: a Care Plan, an extra page, a second seat. */
+export interface DealAddon extends Owned {
+  deal_id: Uuid;
+  offering_id: Uuid;
+  tier_id: Uuid | null;
+  qty: number;
+  /** null means "use the add-on's list price". */
+  price_zar: Numeric | null;
+  pricing_model: PricingModel;
 }
 
 export interface Goal extends Owned {
@@ -286,6 +317,19 @@ export const PRICING_MODEL_LABEL: Record<PricingModel, string> = {
   monthly: "Monthly",
   per_unit_monthly: "Per unit / month",
   quote: "Quote",
+};
+
+export const OFFERING_TYPE_LABEL: Record<OfferingType, string> = {
+  standard: "Standard",
+  custom: "Custom",
+  addon: "Add-on",
+};
+
+/** Catalogue order within a service line: packages, then bespoke, then extras. */
+export const OFFERING_TYPE_ORDER: Record<OfferingType, number> = {
+  standard: 0,
+  custom: 1,
+  addon: 2,
 };
 
 export const DEAL_STAGES: DealStage[] = ["lead", "meeting", "proposal", "pilot", "won", "lost"];

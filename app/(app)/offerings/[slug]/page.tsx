@@ -15,6 +15,7 @@ import { getDeals } from "@/lib/queries/deals";
 import { getInvoices } from "@/lib/queries/invoices";
 import { createClient } from "@/lib/supabase/server";
 import { priceLine } from "@/lib/offerings";
+import { OFFERING_TYPE_LABEL } from "@/lib/types";
 import { toCents } from "@/lib/money";
 import { DEAL_STAGE_LABEL, PRICING_MODEL_LABEL } from "@/lib/types";
 import { formatDate, monthLabel } from "@/lib/dates";
@@ -87,6 +88,9 @@ export default async function OfferingDetailPage({ params }: { params: Promise<{
         <Card className="xl:col-span-2">
           <CardBody>
             <div className="flex flex-wrap items-center gap-2">
+              <Badge tone={offering.offering_type === "addon" ? "sand" : offering.offering_type === "custom" ? "blue" : "outline"}>
+                {OFFERING_TYPE_LABEL[offering.offering_type]}
+              </Badge>
               <Badge tone={offering.kind === "product" ? "blue" : "green"}>{offering.kind}</Badge>
               <Badge tone="outline">{offering.category}</Badge>
               <Badge tone="outline">{PRICING_MODEL_LABEL[offering.pricing_model]}</Badge>
@@ -94,6 +98,13 @@ export default async function OfferingDetailPage({ params }: { params: Promise<{
             </div>
 
             <p className="money text-2xl">{priceLine(offering)}</p>
+
+            {offering.ideal_for ? (
+              <p className="text-sm leading-relaxed">
+                <span className="text-muted">For: </span>
+                {offering.ideal_for}
+              </p>
+            ) : null}
 
             {offering.description ? (
               <p className="text-sm leading-relaxed text-muted">{offering.description}</p>
@@ -109,6 +120,42 @@ export default async function OfferingDetailPage({ params }: { params: Promise<{
                         ·
                       </span>
                       {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
+            {offering.excludes?.length ? (
+              <div>
+                <h3 className="text-[13px] font-medium">Not included</h3>
+                <ul className="mt-2 flex flex-col gap-1.5 text-sm text-muted">
+                  {offering.excludes.map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <span aria-hidden className="text-alert">
+                        ·
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
+            {offering.portfolio?.length ? (
+              <div>
+                <h3 className="text-[13px] font-medium">Portfolio</h3>
+                <ul className="mt-2 flex flex-col gap-1.5 text-sm">
+                  {offering.portfolio.map((link) => (
+                    <li key={link.url}>
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="text-blue underline underline-offset-4 hover:text-ink"
+                      >
+                        {link.label}
+                      </a>
                     </li>
                   ))}
                 </ul>

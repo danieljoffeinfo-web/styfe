@@ -1,5 +1,11 @@
-import { formatZar } from "@/lib/money";
-import type { Offering, OfferingTier, PricingModel } from "@/lib/types";
+import { formatZar, toCents } from "@/lib/money";
+import {
+  OFFERING_TYPE_ORDER,
+  type DealAddon,
+  type Offering,
+  type OfferingTier,
+  type PricingModel,
+} from "@/lib/types";
 
 type Priced = Pick<
   Offering,
@@ -65,26 +71,101 @@ export const OFFERING_COLORS = [
   { value: "#17171B", label: "Ink" },
 ];
 
-/** The text the "Copy price sheet" button puts on the clipboard. */
+/** Catalogue order inside a service line: packages, then bespoke, then extras. */
+export function compareCatalogue(
+  a: { offering: Offering },
+  b: { offering: Offering },
+): number {
+  const byType =
+    OFFERING_TYPE_ORDER[a.offering.offering_type] - OFFERING_TYPE_ORDER[b.offering.offering_type];
+  if (byType !== 0) return byType;
+  if (a.offering.sort !== b.offering.sort) return a.offering.sort - b.offering.sort;
+  return a.offering.name.localeCompare(b.offering.name);
+}
+
+/**
+ * Service line -> its offerings, each list in catalogue order. Insertion order
+ * of the map follows the first offering seen for a line, which is the `sort`
+ * order the page already queries in, so Dan's reordering still drives it.
+ */
+export function groupByServiceLine<T extends { offering: Offering }>(
+  entries: T[],
+): Map<string, T[]> {
+  const grouped = new Map<string, T[]>();
+  for (const entry of entries) {
+    const list = grouped.get(entry.offering.category) ?? [];
+    list.push(entry);
+    grouped.set(entry.offering.category, list);
+  }
+  for (const list of grouped.values()) list.sort(compareCatalogue);
+  return grouped;
+}
+
+/** An add-on's price in cents: the per-deal override, else the list price. */
+export function addonPriceCents(addon: Pick<DealAddon, "price_zar" | "qty" | "pricing_model">, offering?: Offering): number {
+  const override = addon.price_zar;
+  if (override !== null && override !== undefined && override !== "") {
+    return toCents(override) * addon.qty;
+  }
+  if (!offering) return 0;
+  const list =
+    addon.pricing_model === "once_off" ? offering.setup_fee_zar : offering.monthly_fee_zar;
+  return toCents(list) * addon.qty;
+}
+
+export function isRecurring(model: PricingModel): boolean {
+  return model === "monthly" || model === "per_unit_monthly";
+}
+
+/**
+ * What a deal is worth, split the way the win has to be actioned: the once-off
+ * side becomes invoice lines, the monthly side becomes subscriptions. Base
+ * values come off the deal itself (they are already the quoted amounts, tier
+ * and custom quotes included); add-ons price themselves.
+ */
+export function dealTotals(
+  deal: { units?: number | null; once_off_value_zar?: unknown; monthly_value_zar?: unknown },
+  addons: Pick<DealAddon, "price_zar" | "qty" | "pricing_model" | "offering_id">[] = [],
+  offeringsById: Map<string, Offering> = new Map(),
+): { onceOffCents: number; monthlyCents: number; totalCents: number } {
+  const units = deal.units && deal.units > 0 ? deal.units : 1;
+  let onceOffCents = toCents(deal.once_off_value_zar as never) * units;
+  let monthlyCents = toCents(deal.monthly_value_zar as never) * units;
+
+  for (const addon of addons) {
+    const cents = addonPriceCents(addon, offeringsById.get(addon.offering_id));
+    if (isRecurring(addon.pricing_model)) monthlyCents += cents;
+    else onceOffCents += cents;
+  }
+
+  return { onceOffCents, monthlyCents, totalCents: onceOffCents + monthlyCents };
+}
+
+/**
+ * The text the "Copy price sheet" button puts on the clipboard.
+ *
+ * Standard packages and add-ons carry a price, so they are listed. Custom work
+ * has none by definition, so a service line that contains any custom offering
+ * gets one line saying so rather than an entry per bespoke build.
+ */
 export function priceSheet(
   entries: { offering: Offering; tiers: OfferingTier[] }[],
   businessName: string,
 ): string {
   const lines: string[] = [`${businessName} — products & services`, ""];
-  const byCategory = new Map<string, typeof entries>();
+  const active = entries.filter((e) => e.offering.status === "active");
 
-  for (const entry of entries) {
-    if (entry.offering.status !== "active") continue;
-    const list = byCategory.get(entry.offering.category) ?? [];
-    list.push(entry);
-    byCategory.set(entry.offering.category, list);
-  }
+  for (const [serviceLine, items] of groupByServiceLine(active)) {
+    lines.push(serviceLine.toUpperCase());
 
-  for (const [category, items] of byCategory) {
-    lines.push(category.toUpperCase());
     for (const { offering, tiers } of items) {
-      lines.push(`  ${offering.name} — ${priceLine(offering)}`);
+      if (offering.offering_type === "custom") continue;
+
+      const prefix = offering.offering_type === "addon" ? "Add-on: " : "";
+      lines.push(`  ${prefix}${offering.name} — ${priceLine(offering)}`);
+      if (offering.ideal_for) lines.push(`    For: ${offering.ideal_for}`);
       if (offering.description) lines.push(`    ${offering.description}`);
+
       for (const deliverable of offering.deliverables ?? []) {
         lines.push(`    • ${deliverable}`);
       }
@@ -94,7 +175,18 @@ export function priceSheet(
           lines.push(`      • ${deliverable}`);
         }
       }
+      for (const exclude of offering.excludes ?? []) {
+        lines.push(`    Not included: ${exclude}`);
+      }
+      for (const link of offering.portfolio ?? []) {
+        lines.push(`    See: ${link.label} — ${link.url}`);
+      }
       if (offering.delivery_days) lines.push(`    Delivery: ${offering.delivery_days} days`);
+      lines.push("");
+    }
+
+    if (items.some((e) => e.offering.offering_type === "custom")) {
+      lines.push("  Custom builds: quoted per project.");
       lines.push("");
     }
   }

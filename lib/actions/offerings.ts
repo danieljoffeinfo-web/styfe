@@ -6,6 +6,8 @@ import { slugify } from "@/lib/utils";
 import { guard, ok, fail, withUser, type ActionResult } from "./helpers";
 import {
   parseList,
+  parsePortfolio,
+  zOfferingType,
   zMoney,
   zInt,
   zText,
@@ -19,6 +21,7 @@ import {
 const offeringSchema = z.object({
   name: zRequiredText,
   kind: zOfferingKind,
+  offering_type: zOfferingType,
   category: zRequiredText,
   pricing_model: zPricingModel,
   setup_fee_zar: zMoney,
@@ -27,6 +30,7 @@ const offeringSchema = z.object({
   unit_cost_monthly_zar: zMoney,
   delivery_days: zInt,
   description: zText,
+  ideal_for: zText,
   color: zText,
 });
 
@@ -34,6 +38,7 @@ function readOffering(formData: FormData) {
   return offeringSchema.safeParse({
     name: formData.get("name") ?? "",
     kind: formData.get("kind") ?? "service",
+    offering_type: formData.get("offering_type") ?? "standard",
     category: formData.get("category") ?? "Other",
     pricing_model: formData.get("pricing_model") ?? "once_off",
     setup_fee_zar: formData.get("setup_fee_zar"),
@@ -42,14 +47,30 @@ function readOffering(formData: FormData) {
     unit_cost_monthly_zar: formData.get("unit_cost_monthly_zar"),
     delivery_days: formData.get("delivery_days"),
     description: formData.get("description"),
+    ideal_for: formData.get("ideal_for"),
     color: formData.get("color"),
   });
 }
 
+/** The editors on the offering sheet, read the same way for create and update. */
+function readLists(formData: FormData) {
+  return {
+    deliverables: parseList(formData.getAll("deliverables")),
+    excludes: parseList(formData.getAll("excludes")),
+    portfolio: parsePortfolio(
+      formData.getAll("portfolio_label"),
+      formData.getAll("portfolio_url"),
+    ),
+  };
+}
+
 /** Fees that do not apply to the chosen pricing model are cleared, not kept. */
 function normaliseFees(values: z.infer<typeof offeringSchema>) {
-  const model = values.pricing_model;
+  // A custom build is priced per deal, so it never keeps a list price however
+  // the pricing model is left set.
+  const model = values.offering_type === "custom" ? "quote" : values.pricing_model;
   return {
+    pricing_model: model,
     setup_fee_zar: model === "quote" ? null : values.setup_fee_zar,
     monthly_fee_zar: model === "once_off" || model === "quote" ? null : values.monthly_fee_zar,
     unit_label: model === "per_unit_monthly" ? values.unit_label : null,
@@ -78,7 +99,7 @@ export async function createOffering(_: ActionResult | null, formData: FormData)
     const parsed = readOffering(formData);
     if (!parsed.success) return fail(zodMessage(parsed.error));
     const values = parsed.data;
-    const deliverables = parseList(formData.getAll("deliverables"));
+    const lists = readLists(formData);
 
     return withUser(async (supabase, userId) => {
       const slug = await uniqueSlug(supabase, slugify(values.name));
@@ -94,12 +115,13 @@ export async function createOffering(_: ActionResult | null, formData: FormData)
         slug,
         name: values.name,
         kind: values.kind,
+        offering_type: values.offering_type,
         category: values.category,
-        pricing_model: values.pricing_model,
         ...normaliseFees(values),
         delivery_days: values.delivery_days,
         description: values.description,
-        deliverables,
+        ideal_for: values.ideal_for,
+        ...lists,
         color: values.color,
         sort: ((last?.sort as number | undefined) ?? 0) + 10,
       });
@@ -119,7 +141,7 @@ export async function updateOffering(_: ActionResult | null, formData: FormData)
     const parsed = readOffering(formData);
     if (!parsed.success) return fail(zodMessage(parsed.error));
     const values = parsed.data;
-    const deliverables = parseList(formData.getAll("deliverables"));
+    const lists = readLists(formData);
     const status = zOfferingStatus.safeParse(formData.get("status") ?? "active");
 
     return withUser(async (supabase) => {
@@ -128,12 +150,13 @@ export async function updateOffering(_: ActionResult | null, formData: FormData)
         .update({
           name: values.name,
           kind: values.kind,
+          offering_type: values.offering_type,
           category: values.category,
-          pricing_model: values.pricing_model,
           ...normaliseFees(values),
           delivery_days: values.delivery_days,
           description: values.description,
-          deliverables,
+          ideal_for: values.ideal_for,
+          ...lists,
           color: values.color,
           status: status.success ? status.data : "active",
         })
@@ -197,6 +220,7 @@ export async function duplicateOffering(id: string): Promise<ActionResult> {
           slug,
           name,
           kind: source.kind,
+          offering_type: source.offering_type,
           category: source.category,
           pricing_model: source.pricing_model,
           setup_fee_zar: source.setup_fee_zar,
@@ -205,7 +229,10 @@ export async function duplicateOffering(id: string): Promise<ActionResult> {
           unit_cost_monthly_zar: source.unit_cost_monthly_zar,
           delivery_days: source.delivery_days,
           description: source.description,
+          ideal_for: source.ideal_for,
           deliverables: source.deliverables,
+          excludes: source.excludes,
+          portfolio: source.portfolio,
           color: source.color,
           sort: (source.sort ?? 0) + 1,
         })
