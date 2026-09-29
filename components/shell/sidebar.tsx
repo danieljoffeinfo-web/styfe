@@ -15,6 +15,11 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
           <Link
             key={item.href}
             href={item.href}
+            // Every app route is server-rendered on demand, so the default
+            // prefetch only fetches as far as the loading boundary. Forcing a
+            // full prefetch pulls the whole RSC payload before the click, which
+            // is the right trade for a single-user dashboard with ten links.
+            prefetch
             onClick={onNavigate}
             aria-current={active ? "page" : undefined}
             className={cn(

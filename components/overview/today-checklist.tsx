@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Plus, X } from "lucide-react";
 import { addTask, carryOverTasks, deleteTask, toggleTask } from "@/lib/actions/misc";
@@ -9,7 +10,16 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import type { DailyTask } from "@/lib/types";
 
-export function TodayChecklist({ tasks, date }: { tasks: DailyTask[]; date: string }) {
+export function TodayChecklist({
+  tasks,
+  date,
+  limit,
+}: {
+  tasks: DailyTask[];
+  date: string;
+  /** Show at most this many. The rest stay on the list, just not on screen. */
+  limit?: number;
+}) {
   const toast = useToast();
   const router = useRouter();
   const [items, setItems] = React.useState(tasks);
@@ -65,13 +75,18 @@ export function TodayChecklist({ tasks, date }: { tasks: DailyTask[]; date: stri
     });
   }
 
+  // Unticked work first, so the five on screen are the five that still matter.
+  const ordered = [...items].sort((a, b) => Number(a.done) - Number(b.done));
+  const shown = limit ? ordered.slice(0, limit) : ordered;
+  const hidden = ordered.length - shown.length;
+
   return (
     <div className="flex flex-col gap-1" aria-busy={pending}>
       {items.length === 0 ? (
         <p className="py-2 text-[13px] text-muted">Nothing on the list. Add the first thing.</p>
       ) : null}
 
-      {items.map((task) => (
+      {shown.map((task) => (
         <div key={task.id} className="group flex items-center gap-2">
           <button
             type="button"
@@ -100,6 +115,15 @@ export function TodayChecklist({ tasks, date }: { tasks: DailyTask[]; date: stri
           </button>
         </div>
       ))}
+
+      {hidden > 0 ? (
+        <p className="pt-1 text-xs text-muted">
+          {hidden} more on the list.{" "}
+          <Link href="/week" className="text-green underline underline-offset-4">
+            See all
+          </Link>
+        </p>
+      ) : null}
 
       <form onSubmit={onAdd} className="mt-2 flex items-center gap-2">
         <Input
