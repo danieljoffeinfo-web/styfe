@@ -4,21 +4,21 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[10px] text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-[background-color,border-color,color,transform] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-paper disabled:pointer-events-none disabled:opacity-50 active:translate-y-px [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        primary: "bg-green text-white font-semibold hover:bg-green-deep",
-        outline: "border border-control bg-card text-ink hover:bg-well",
+        primary: "border border-ink bg-ink text-white hover:bg-black",
+        outline: "border border-line bg-card text-ink hover:border-control hover:bg-well",
         ghost: "text-ink hover:bg-well",
-        dark: "bg-ink text-paper hover:bg-ink/90",
-        danger: "border border-alert/30 bg-alert-wash text-alert hover:bg-alert-wash/70",
-        link: "text-green underline-offset-4 hover:text-green-deep hover:underline",
+        dark: "bg-ink text-paper hover:bg-black",
+        danger: "border border-alert/25 bg-alert-wash text-alert hover:border-alert/40",
+        link: "text-ink underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-11 px-[18px]",
+        default: "h-10 px-4",
         sm: "h-8 px-3 text-[13px]",
-        icon: "h-11 w-11",
+        icon: "h-10 w-10",
         iconSm: "h-8 w-8",
       },
     },
