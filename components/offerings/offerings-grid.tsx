@@ -74,53 +74,56 @@ export function OfferingsGrid({
 
   return (
     <div className="flex flex-col gap-8">
-      {[...grouped.entries()].map(([category, items]) => (
-        <section key={category} className="flex flex-col gap-3">
-          <div className="flex items-center justify-between border-b border-line pb-2">
-            <h2 className="text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">{category}</h2>
-            <span className="text-xs text-muted">{items.length}</span>
-          </div>
+      {[...grouped.entries()].map(([category, items]) => {
+        const id = category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+        return (
+          <section key={category} id={`offering-${id}`} className="scroll-mt-24 flex flex-col gap-3">
+            <div className="flex items-center justify-between border-b border-line pb-2">
+              <h2 className="text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">{category}</h2>
+              <span className="text-xs text-muted">{items.length}</span>
+            </div>
 
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 2xl:grid-cols-3">
-            {items.map((entry) => (
-              <div
-                key={entry.offering.id}
-                draggable
-                onDragStart={() => setDragging(entry.offering.id)}
-                onDragEnd={() => setDragging(null)}
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={() => drop(entry.offering.id)}
-                className={dragging === entry.offering.id ? "opacity-50" : undefined}
-              >
-                <div className="relative h-full">
-                  <OfferingCard entry={entry} />
-                  <div className="absolute right-3 top-12 flex flex-col gap-0.5 opacity-50 transition-opacity hover:opacity-100">
-                    <button
-                      type="button"
-                      onClick={() => move(entry.offering.id, -1)}
-                      aria-label={`Move ${entry.offering.name} earlier`}
-                      className="flex size-7 items-center justify-center rounded-md text-muted hover:bg-well hover:text-ink"
-                    >
-                      <ArrowUp className="size-3.5" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => move(entry.offering.id, 1)}
-                      aria-label={`Move ${entry.offering.name} later`}
-                      className="flex size-7 items-center justify-center rounded-md text-muted hover:bg-well hover:text-ink"
-                    >
-                      <ArrowDown className="size-3.5" />
-                    </button>
-                    <span aria-hidden className="hidden size-7 cursor-grab items-center justify-center text-muted lg:flex">
-                      <GripVertical className="size-3.5" />
-                    </span>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 2xl:grid-cols-3">
+              {items.map((entry) => (
+                <div
+                  key={entry.offering.id}
+                  draggable
+                  onDragStart={() => setDragging(entry.offering.id)}
+                  onDragEnd={() => setDragging(null)}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={() => drop(entry.offering.id)}
+                  className={dragging === entry.offering.id ? "opacity-50" : undefined}
+                >
+                  <div className="relative h-full">
+                    <OfferingCard entry={entry} />
+                    <div className="absolute right-3 top-12 flex flex-col gap-0.5 opacity-50 transition-opacity hover:opacity-100">
+                      <button
+                        type="button"
+                        onClick={() => move(entry.offering.id, -1)}
+                        aria-label={`Move ${entry.offering.name} earlier`}
+                        className="flex size-7 items-center justify-center rounded-md text-muted hover:bg-well hover:text-ink"
+                      >
+                        <ArrowUp className="size-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => move(entry.offering.id, 1)}
+                        aria-label={`Move ${entry.offering.name} later`}
+                        className="flex size-7 items-center justify-center rounded-md text-muted hover:bg-well hover:text-ink"
+                      >
+                        <ArrowDown className="size-3.5" />
+                      </button>
+                      <span aria-hidden className="hidden size-7 cursor-grab items-center justify-center text-muted lg:flex">
+                        <GripVertical className="size-3.5" />
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      ))}
+              ))}
+            </div>
+          </section>
+        );
+      })}
     </div>
   );
 }
