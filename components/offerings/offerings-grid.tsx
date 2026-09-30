@@ -61,7 +61,7 @@ export function OfferingsGrid({
 
   if (order.length === 0) {
     return (
-      <div className="rounded-[14px] border border-dashed border-control p-8 text-center">
+      <div className="rounded-xl border border-dashed border-control p-8 text-center">
         <p className="font-medium">No offerings yet.</p>
         <p className="mt-1 text-[13px] text-muted">
           Start with the thing you sell most — a website build, a retainer, a SaaS seat.
@@ -77,11 +77,14 @@ export function OfferingsGrid({
   }
 
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-8">
       {[...grouped.entries()].map(([category, items]) => (
         <section key={category} className="flex flex-col gap-3">
-          <h2 className="eyebrow">{category}</h2>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3">
+          <div className="flex items-center justify-between border-b border-line pb-2">
+            <h2 className="text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">{category}</h2>
+            <span className="text-xs text-muted">{items.length}</span>
+          </div>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 2xl:grid-cols-3">
             {items.map((entry) => (
               <div
                 key={entry.offering.id}
@@ -94,12 +97,12 @@ export function OfferingsGrid({
               >
                 <div className="relative h-full">
                   <OfferingCard entry={entry} />
-                  <div className="absolute right-3 top-12 flex flex-col gap-0.5">
+                  <div className="absolute right-3 top-12 flex flex-col gap-0.5 opacity-50 transition-opacity hover:opacity-100">
                     <button
                       type="button"
                       onClick={() => move(entry.offering.id, -1)}
                       aria-label={`Move ${entry.offering.name} earlier`}
-                      className="flex size-7 items-center justify-center rounded-md text-muted-dark hover:bg-well hover:text-ink"
+                      className="flex size-7 items-center justify-center rounded-md text-muted hover:bg-well hover:text-ink"
                     >
                       <ArrowUp className="size-3.5" />
                     </button>
@@ -107,13 +110,13 @@ export function OfferingsGrid({
                       type="button"
                       onClick={() => move(entry.offering.id, 1)}
                       aria-label={`Move ${entry.offering.name} later`}
-                      className="flex size-7 items-center justify-center rounded-md text-muted-dark hover:bg-well hover:text-ink"
+                      className="flex size-7 items-center justify-center rounded-md text-muted hover:bg-well hover:text-ink"
                     >
                       <ArrowDown className="size-3.5" />
                     </button>
                     <span
                       aria-hidden
-                      className="hidden size-7 cursor-grab items-center justify-center text-muted-dark lg:flex"
+                      className="hidden size-7 cursor-grab items-center justify-center text-muted lg:flex"
                     >
                       <GripVertical className="size-3.5" />
                     </span>
