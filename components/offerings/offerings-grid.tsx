@@ -169,8 +169,8 @@ export function OfferingsGrid({
                     <div>Offering</div>
                     <div>Price</div>
                     <div>Live</div>
-                    <div>MRR</div>
-                    <div>Pipeline</div>
+                    <div>My cost</div>
+                    <div>Margin</div>
                     <div />
                   </div>
 
@@ -212,13 +212,21 @@ function OfferingRow({
   onDrop: () => void;
   onMove: (delta: number) => void;
 }) {
-  const { offering, stats, tiers } = entry;
-  const mrrCents = toCents(stats?.mrr_zar);
-  const pipelineCents = toCents(stats?.pipeline_value_zar);
+  const { offering, stats, tiers, costing } = entry;
   const liveCount =
     offering.pricing_model === "per_unit_monthly"
       ? (stats?.active_units ?? 0)
       : (stats?.active_subscriptions ?? 0);
+
+  // A monthly offering is judged on its monthly numbers, everything else on
+  // the once-off ones. An uncosted offering shows nothing rather than
+  // implying the whole price is profit.
+  const monthly = offering.pricing_model === "monthly" || offering.pricing_model === "per_unit_monthly";
+  const rawCost = monthly ? costing?.cost_monthly_zar : costing?.cost_setup_zar;
+  const costed = rawCost !== null && rawCost !== undefined;
+  const costCents = toCents(rawCost);
+  const marginCents = toCents(monthly ? costing?.price_monthly_zar : costing?.price_setup_zar) - costCents;
+  const marginPct = monthly ? costing?.margin_monthly_pct : costing?.margin_setup_pct;
 
   return (
     <div
@@ -274,11 +282,22 @@ function OfferingRow({
       <Metric label={offering.unit_label ? `Live ${offering.unit_label}s` : "Live"}>
         <span className="money font-medium">{liveCount}</span>
       </Metric>
-      <Metric label="MRR">
-        <span className="font-medium"><MoneyCents cents={mrrCents} /></span>
+      <Metric label={monthly ? "Cost / mo" : "My cost"}>
+        <span className="font-medium">
+          {costed ? <MoneyCents cents={costCents} /> : <span className="text-muted">—</span>}
+        </span>
       </Metric>
-      <Metric label="Pipeline">
-        <span className="font-medium"><MoneyCents cents={pipelineCents} /></span>
+      <Metric label="Margin">
+        {costed ? (
+          <span className={cn("font-medium", marginCents < 0 ? "text-alert" : "text-green-deep")}>
+            <MoneyCents cents={marginCents} />
+            {marginPct !== null && marginPct !== undefined ? (
+              <span className="ml-1 text-[11px] text-muted">{marginPct}%</span>
+            ) : null}
+          </span>
+        ) : (
+          <span className="text-[12px] text-muted">Not costed</span>
+        )}
       </Metric>
 
       <div className="mt-3 flex items-center gap-1 lg:mt-0 lg:justify-end">

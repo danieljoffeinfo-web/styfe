@@ -5,11 +5,9 @@ import { Button } from "@/components/ui/button";
 import { OfferingsGrid } from "@/components/offerings/offerings-grid";
 import { OfferingForm } from "@/components/offerings/offering-form";
 import { PriceSheetButton } from "@/components/offerings/price-sheet-button";
-import { MoneyCents } from "@/components/money";
 import { getCatalogue } from "@/lib/queries/offerings";
 import { getSettings } from "@/lib/queries/settings";
 import { priceSheet } from "@/lib/offerings";
-import { toCents } from "@/lib/money";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Offerings · Styfe HQ" };
@@ -27,11 +25,23 @@ export default async function OfferingsPage({
   const sheet = priceSheet(entries, settings.businessName);
 
   const activeEntries = entries.filter((entry) => entry.offering.status === "active");
-  const totalMrrCents = activeEntries.reduce((sum, entry) => sum + toCents(entry.stats?.mrr_zar), 0);
-  const pipelineCents = activeEntries.reduce(
-    (sum, entry) => sum + toCents(entry.stats?.pipeline_value_zar),
-    0,
+  // MRR and pipeline both read R0 and answered nothing. What the catalogue can
+  // actually tell you is whether it is priced properly.
+  const costedEntries = activeEntries.filter(
+    (entry) =>
+      entry.costing?.cost_setup_zar != null || entry.costing?.cost_monthly_zar != null,
   );
+  const marginPcts = costedEntries
+    .map((entry) =>
+      entry.offering.pricing_model === "monthly" ||
+      entry.offering.pricing_model === "per_unit_monthly"
+        ? entry.costing?.margin_monthly_pct
+        : entry.costing?.margin_setup_pct,
+    )
+    .filter((pct): pct is number => pct !== null && pct !== undefined);
+  const averageMarginPct = marginPcts.length
+    ? Math.round(marginPcts.reduce((sum, pct) => sum + pct, 0) / marginPcts.length)
+    : null;
   const activeRetainers = activeEntries
     .filter((entry) => /retainer/i.test(entry.offering.category))
     .reduce((sum, entry) => sum + (entry.stats?.active_subscriptions ?? 0), 0);
@@ -68,15 +78,19 @@ export default async function OfferingsPage({
         />
         <Summary
           icon={<WalletCards className="size-4" />}
-          label="Monthly recurring revenue"
-          value={<MoneyCents cents={totalMrrCents} />}
-          note="Across active offerings"
+          label="Costed"
+          value={`${costedEntries.length} / ${activeEntries.length}`}
+          note={
+            costedEntries.length === activeEntries.length
+              ? "Every offering has a cost"
+              : "Add what delivery costs you"
+          }
         />
         <Summary
           icon={<Clock3 className="size-4" />}
-          label="Pipeline value"
-          value={<MoneyCents cents={pipelineCents} />}
-          note="Open opportunity value"
+          label="Average margin"
+          value={averageMarginPct === null ? "—" : `${averageMarginPct}%`}
+          note={averageMarginPct === null ? "Nothing costed yet" : "Across costed offerings"}
         />
       </section>
 
