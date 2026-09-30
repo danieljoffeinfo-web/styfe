@@ -41,7 +41,7 @@ export function OfferingsGrid({
   }, [entries]);
 
   React.useEffect(() => {
-    if (!openCategory || !categoryNames.includes(openCategory)) {
+    if (openCategory && !categoryNames.includes(openCategory)) {
       setOpenCategory(categoryNames[0] ?? null);
     }
   }, [categoryNames, openCategory]);
