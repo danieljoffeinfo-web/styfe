@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 export function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("rounded-[14px] border border-line bg-card", className)}
+      className={cn("rounded-xl border border-line bg-card", className)}
       {...props}
     />
   );
@@ -22,8 +22,8 @@ export function CardHeader({
   children?: React.ReactNode;
 }) {
   return (
-    <div className={cn("flex items-baseline justify-between gap-3", className)}>
-      {title ? <h2 className="text-[17px] font-semibold">{title}</h2> : null}
+    <div className={cn("flex items-center justify-between gap-3", className)}>
+      {title ? <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-ink">{title}</h2> : null}
       {children}
       {aside ? <div className="text-xs text-muted">{aside}</div> : null}
     </div>
