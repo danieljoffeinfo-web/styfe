@@ -158,6 +158,47 @@ export default async function PrintInvoicePage({ params }: { params: Promise<{ i
           <p className="mt-4 text-xs text-muted">Not registered for VAT. No VAT charged.</p>
         ) : null}
 
+        {settings.bank.accountNumber || settings.bank.name ? (
+          <section className="mt-8 border-t border-line pt-5">
+            <p className="eyebrow">Banking details</p>
+            <dl className="mt-1.5 grid grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-[13px]">
+              {settings.bank.accountName ? (
+                <>
+                  <dt className="text-muted">Account name</dt>
+                  <dd>{settings.bank.accountName}</dd>
+                </>
+              ) : null}
+              {settings.bank.name ? (
+                <>
+                  <dt className="text-muted">Bank</dt>
+                  <dd>{settings.bank.name}</dd>
+                </>
+              ) : null}
+              {settings.bank.accountNumber ? (
+                <>
+                  <dt className="text-muted">Account number</dt>
+                  <dd className="money">{settings.bank.accountNumber}</dd>
+                </>
+              ) : null}
+              {settings.bank.branchCode ? (
+                <>
+                  <dt className="text-muted">Branch code</dt>
+                  <dd className="money">{settings.bank.branchCode}</dd>
+                </>
+              ) : null}
+              {settings.bank.swift ? (
+                <>
+                  <dt className="text-muted">SWIFT</dt>
+                  <dd className="money">{settings.bank.swift}</dd>
+                </>
+              ) : null}
+              <dt className="text-muted">Reference</dt>
+              {/* The invoice number is the reference unless Dan set one. */}
+              <dd className="money">{settings.bank.reference || invoice.number}</dd>
+            </dl>
+          </section>
+        ) : null}
+
         {invoice.notes ? (
           <section className="mt-8 border-t border-line pt-5">
             <p className="eyebrow">Notes</p>

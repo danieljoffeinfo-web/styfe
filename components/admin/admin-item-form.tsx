@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { SubmitButton } from "@/components/ui/submit-button";
 import { Field, Input, Select, Textarea } from "@/components/ui/input";
+import { DateInput } from "@/components/ui/date-input";
 import { useToast } from "@/components/ui/toast";
 import { saveAdminItem } from "@/lib/actions/admin";
 import type { AdminItem, AdminTrack, Client } from "@/lib/types";
@@ -83,7 +84,7 @@ export function AdminItemForm({
               </Field>
             ) : null}
             <Field label="Due date">
-              <Input type="date" name="due_date" defaultValue={item?.due_date ?? ""} />
+              <DateInput name="due_date" defaultValue={item?.due_date ?? ""} />
             </Field>
           </div>
 

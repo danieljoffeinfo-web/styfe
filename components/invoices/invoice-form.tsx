@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { SubmitButton } from "@/components/ui/submit-button";
 import { Card, CardBody, CardHeader } from "@/components/ui/card";
 import { Field, Input, Select, Textarea } from "@/components/ui/input";
+import { DateInput } from "@/components/ui/date-input";
 import { useToast } from "@/components/ui/toast";
 import { MoneyCents } from "@/components/money";
 import { createInvoice, updateInvoice } from "@/lib/actions/invoices";
@@ -138,10 +139,10 @@ export function InvoiceForm({
               </Select>
             </Field>
             <Field label="Issued">
-              <Input type="date" name="issued_at" defaultValue={invoice?.issued_at ?? today} />
+              <DateInput name="issued_at" defaultValue={invoice?.issued_at ?? today} />
             </Field>
             <Field label="Due">
-              <Input type="date" name="due_at" defaultValue={invoice?.due_at ?? addDaysIso(today, 30)} />
+              <DateInput name="due_at" defaultValue={invoice?.due_at ?? addDaysIso(today, 30)} />
             </Field>
             <Field label="Status">
               <Select name="status" defaultValue={invoice?.status ?? "draft"}>

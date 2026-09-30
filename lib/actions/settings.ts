@@ -35,6 +35,12 @@ const settingsSchema = z.object({
     .transform((v) => (v ?? "").trim())
     .refine((v) => v === "" || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v), "From email looks wrong")
     .transform((v) => (v === "" ? null : v)),
+  bank_name: zText,
+  bank_account_name: zText,
+  bank_account_number: zText,
+  bank_branch_code: zText,
+  bank_swift: zText,
+  payment_reference: zText,
   reply_to: z
     .union([z.string(), z.null(), z.undefined()])
     .transform((v) => (v ?? "").trim())
@@ -56,6 +62,12 @@ export async function saveSettings(_: ActionResult | null, formData: FormData): 
       from_name: formData.get("from_name"),
       from_email: formData.get("from_email"),
       reply_to: formData.get("reply_to"),
+      bank_name: formData.get("bank_name"),
+      bank_account_name: formData.get("bank_account_name"),
+      bank_account_number: formData.get("bank_account_number"),
+      bank_branch_code: formData.get("bank_branch_code"),
+      bank_swift: formData.get("bank_swift"),
+      payment_reference: formData.get("payment_reference"),
     });
     if (!parsed.success) return fail(zodMessage(parsed.error));
 

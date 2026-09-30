@@ -3,7 +3,8 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Field, Input, Select } from "@/components/ui/input";
+import { Field, Select } from "@/components/ui/input";
+import { DateInput } from "@/components/ui/date-input";
 import { useToast } from "@/components/ui/toast";
 import { setInvoiceStatus } from "@/lib/actions/invoices";
 import { formatZar } from "@/lib/money";
@@ -35,7 +36,7 @@ export function MarkPaidButton({
       >
         <div className="flex flex-col gap-4">
           <Field label="Paid on">
-            <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+            <DateInput name="paid_on" defaultValue={date} onResolve={setDate} />
           </Field>
 
           <Field
@@ -43,7 +44,7 @@ export function MarkPaidButton({
             hint={
               candidates.length
                 ? "Optional — links the payment so the client page ties up."
-                : "No unlinked income near this amount. Import a statement first."
+                : "Nothing to match — this only lists imported bank transactions."
             }
           >
             <Select value={txId} onChange={(e) => setTxId(e.target.value)} disabled={!candidates.length}>

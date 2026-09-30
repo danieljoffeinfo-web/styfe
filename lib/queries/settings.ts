@@ -16,6 +16,14 @@ export interface ResolvedSettings {
   fromName: string;
   fromEmail: string;
   replyTo: string;
+  bank: {
+    name: string;
+    accountName: string;
+    accountNumber: string;
+    branchCode: string;
+    swift: string;
+    reference: string;
+  };
 }
 
 export const SETTINGS_DEFAULTS: ResolvedSettings = {
@@ -31,6 +39,7 @@ export const SETTINGS_DEFAULTS: ResolvedSettings = {
   fromName: "",
   fromEmail: "",
   replyTo: "",
+  bank: { name: "", accountName: "", accountNumber: "", branchCode: "", swift: "", reference: "" },
 };
 
 export async function getSettings(): Promise<ResolvedSettings> {
@@ -51,6 +60,14 @@ export async function getSettings(): Promise<ResolvedSettings> {
     fromName: data.from_name ?? "",
     fromEmail: data.from_email ?? "",
     replyTo: data.reply_to ?? "",
+    bank: {
+      name: data.bank_name ?? "",
+      accountName: data.bank_account_name ?? "",
+      accountNumber: data.bank_account_number ?? "",
+      branchCode: data.bank_branch_code ?? "",
+      swift: data.bank_swift ?? "",
+      reference: data.payment_reference ?? "",
+    },
   };
 }
 

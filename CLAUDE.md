@@ -131,6 +131,23 @@ month" should mean the month on the calendar.
   once-off income) and `manual` (not tracked). All editable in Settings.
 - **No PDF library.** The printable invoice is a print stylesheet, so
   "Save as PDF" in the browser produces the file.
+- **Dates are typed, not picked.** `DateInput` (`components/ui/date-input.tsx`)
+  takes "8 oct", "8th October", "oct 8", "8/10", "08/10/2026", "today",
+  "tomorrow", "next fri", "+30", or a bare "8", and posts ISO through a hidden
+  field so nothing downstream changes. The native calendar is still behind the
+  button. `parseLooseDate()` in `lib/parse-date.ts` is deliberately hand-rolled
+  rather than a natural-language library: it reads numeric dates **day-first**
+  (South African, so 8/10 is 8 October), and returns null for anything it is
+  not sure of so the field says so instead of saving a wrong date. With no year
+  given it uses the current one, unless that lands more than three months in
+  the past — "8 Jan" typed in December means next January. `npm run check:dates`
+  asserts all of that against a fixed Wednesday.
+- **Bank details are structured, not prose.** They used to live inside
+  `business_details`, a free-text blob, which could not be laid out as a
+  labelled block — and a typo in an account number is the one invoice mistake
+  that costs real money. Six columns on `settings`; the printed invoice renders
+  the section only when there is something to render, and falls back to the
+  invoice number as the payment reference.
 - **An offering knows what it costs, not just what it charges.**
   `setup_fee_zar` / `monthly_fee_zar` are what the client pays;
   `cost_setup_zar` / `cost_monthly_zar` are what delivery costs Dan. Null is
@@ -244,6 +261,7 @@ npm run db:seed              # creates Dan's auth user, then runs seed/seed.sql
 npm run import:transactions  # loads seed/transactions_2026-03_to_2026-09.csv
 npm run db:claim             # repair: gives orphaned rows to Dan
 npm run check                # sanity checks against the live project — fails loudly
+npm run check:dates          # asserts what loose date entry accepts
 ./scripts/verify-sql.sh      # migrations + seed + numbers on a throwaway local Postgres
 npm run setup                # push + seed + check
 ```

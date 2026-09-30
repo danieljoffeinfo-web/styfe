@@ -56,6 +56,12 @@ export interface Settings extends Owned {
   from_name: string | null;
   from_email: string | null;
   reply_to: string | null;
+  bank_name: string | null;
+  bank_account_name: string | null;
+  bank_account_number: string | null;
+  bank_branch_code: string | null;
+  bank_swift: string | null;
+  payment_reference: string | null;
 }
 
 export interface PathSegment extends Owned {

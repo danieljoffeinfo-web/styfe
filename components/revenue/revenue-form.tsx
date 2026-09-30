@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { SubmitButton } from "@/components/ui/submit-button";
 import { Field, Input, Select, Textarea } from "@/components/ui/input";
+import { DateInput } from "@/components/ui/date-input";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/components/ui/toast";
 import { saveRevenueEntry } from "@/lib/actions/revenue";
@@ -62,7 +63,7 @@ export function RevenueForm({
 
           <div className="grid grid-cols-2 gap-3">
             <Field label="Date">
-              <Input type="date" name="date" required defaultValue={entry?.date ?? todayIso()} />
+              <DateInput name="date" required defaultValue={entry?.date ?? todayIso()} />
             </Field>
             <Field label="Amount (ex VAT)">
               <Input
@@ -97,7 +98,7 @@ export function RevenueForm({
 
           {recurring ? (
             <Field label="Stops after" hint="Leave blank while it is still running">
-              <Input type="date" name="ended_at" defaultValue={entry?.ended_at ?? ""} />
+              <DateInput name="ended_at" defaultValue={entry?.ended_at ?? ""} />
             </Field>
           ) : null}
 

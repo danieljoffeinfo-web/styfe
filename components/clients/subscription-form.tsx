@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { SubmitButton } from "@/components/ui/submit-button";
 import { Field, Input, Select, Textarea } from "@/components/ui/input";
+import { DateInput } from "@/components/ui/date-input";
 import { useToast } from "@/components/ui/toast";
 import { endSubscription, saveSubscription } from "@/lib/actions/clients";
 import { todayIso } from "@/lib/dates";
@@ -104,10 +105,10 @@ export function SubscriptionForm({
 
           <div className="grid grid-cols-3 gap-3">
             <Field label="Started">
-              <Input type="date" name="started_at" defaultValue={subscription?.started_at ?? todayIso()} />
+              <DateInput name="started_at" defaultValue={subscription?.started_at ?? todayIso()} />
             </Field>
             <Field label="Ended">
-              <Input type="date" name="ended_at" defaultValue={subscription?.ended_at ?? ""} />
+              <DateInput name="ended_at" defaultValue={subscription?.ended_at ?? ""} />
             </Field>
             <Field label="Status">
               <Select name="status" defaultValue={subscription?.status ?? "active"}>

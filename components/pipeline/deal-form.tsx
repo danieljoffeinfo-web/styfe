@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { SubmitButton } from "@/components/ui/submit-button";
 import { Field, Input, Select, Textarea } from "@/components/ui/input";
+import { DateInput } from "@/components/ui/date-input";
 import { useToast } from "@/components/ui/toast";
 import { Badge } from "@/components/ui/badge";
 import { saveDeal } from "@/lib/actions/deals";
@@ -357,7 +358,7 @@ export function DealForm({
               <Input name="next_step" defaultValue={deal?.next_step ?? ""} placeholder="Send retainer pitch" />
             </Field>
             <Field label="When">
-              <Input type="date" name="next_step_at" defaultValue={deal?.next_step_at ?? ""} />
+              <DateInput name="next_step_at" defaultValue={deal?.next_step_at ?? ""} />
             </Field>
           </div>
 

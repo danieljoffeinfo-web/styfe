@@ -68,6 +68,50 @@ export function SettingsForm({ settings }: { settings: ResolvedSettings }) {
 
       <Card>
         <CardBody>
+          <CardHeader title="Bank details" aside="Printed on every invoice" />
+          <p className="mb-3 text-[13px] text-muted">
+            Where clients pay you. Left blank, the invoice simply leaves the section off.
+          </p>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <Field label="Bank">
+              <Input name="bank_name" defaultValue={settings.bank.name} placeholder="FNB" />
+            </Field>
+            <Field label="Account name">
+              <Input
+                name="bank_account_name"
+                defaultValue={settings.bank.accountName}
+                placeholder="D Joffe"
+              />
+            </Field>
+            <Field label="Account number">
+              <Input
+                name="bank_account_number"
+                defaultValue={settings.bank.accountNumber}
+                inputMode="numeric"
+                className="money"
+              />
+            </Field>
+            <Field label="Branch code">
+              <Input
+                name="bank_branch_code"
+                defaultValue={settings.bank.branchCode}
+                inputMode="numeric"
+                className="money"
+                placeholder="250655"
+              />
+            </Field>
+            <Field label="SWIFT / BIC" hint="Only needed for payments from abroad">
+              <Input name="bank_swift" defaultValue={settings.bank.swift} className="money" />
+            </Field>
+            <Field label="Payment reference" hint="Blank uses the invoice number">
+              <Input name="payment_reference" defaultValue={settings.bank.reference} />
+            </Field>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardBody>
           <CardHeader title="Sending email" aside="Used when you email an offering" />
           <p className="mb-3 text-[13px] text-muted">
             Resend will only deliver to clients from a domain you have verified in its dashboard.
