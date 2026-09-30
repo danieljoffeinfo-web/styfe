@@ -69,7 +69,7 @@ export function OfferingsGrid({
 
   if (order.length === 0) {
     return (
-      <div className="rounded-[14px] border border-dashed border-control p-8 text-center">
+      <div className="rounded-xl border border-dashed border-control p-8 text-center">
         <p className="font-medium">No offerings yet.</p>
         <p className="mt-1 text-[13px] text-muted">
           Start with the thing you sell most — a website build, a retainer, a
@@ -86,10 +86,15 @@ export function OfferingsGrid({
   }
 
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-8">
       {[...grouped.entries()].map(([category, items]) => {
-        // Packages, bespoke and add-ons answer different questions, so each gets
-        // its own labelled band rather than all sharing one grid.
+        const id = category
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "");
+
+        // Packages, bespoke and add-ons answer different questions, so each
+        // gets its own labelled band rather than all sharing one grid.
         const byType = new Map<OfferingType, CatalogueEntry[]>();
         for (const entry of items) {
           const key = entry.offering.offering_type;
@@ -102,19 +107,25 @@ export function OfferingsGrid({
         return (
           <section
             key={category}
-            className="flex flex-col gap-4 rounded-[16px] border border-line bg-card/60 p-4 sm:p-5"
+            id={`offering-${id}`}
+            className="scroll-mt-24 flex flex-col gap-4"
           >
-            <div className="flex items-baseline justify-between gap-3 border-b border-line pb-3">
-              <h2 className="display text-xl">{category}</h2>
-              <span className="money text-xs text-muted">
-                {items.length} {items.length === 1 ? "offering" : "offerings"}
-              </span>
+            <div className="flex items-center justify-between border-b border-line pb-2">
+              <h2 className="text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">
+                {category}
+              </h2>
+              <span className="text-xs text-muted">{items.length}</span>
             </div>
 
             {bands.map(([type, bandItems]) => (
               <div key={type} className="flex flex-col gap-3">
-                <h3 className="eyebrow">{TYPE_HEADING[type]}</h3>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3">
+                {/* Only worth labelling when the service line actually mixes types. */}
+                {bands.length > 1 ? (
+                  <h3 className="text-[11px] font-medium uppercase tracking-[0.08em] text-muted-dark">
+                    {TYPE_HEADING[type]}
+                  </h3>
+                ) : null}
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2 2xl:grid-cols-3">
                   {bandItems.map((entry) => (
                     <div
                       key={entry.offering.id}
@@ -131,12 +142,12 @@ export function OfferingsGrid({
                     >
                       <div className="relative h-full">
                         <OfferingCard entry={entry} />
-                        <div className="absolute right-3 top-12 flex flex-col gap-0.5">
+                        <div className="absolute right-3 top-12 flex flex-col gap-0.5 opacity-50 transition-opacity hover:opacity-100">
                           <button
                             type="button"
                             onClick={() => move(entry.offering.id, -1)}
                             aria-label={`Move ${entry.offering.name} earlier`}
-                            className="flex size-7 items-center justify-center rounded-md text-muted-dark hover:bg-well hover:text-ink"
+                            className="flex size-7 items-center justify-center rounded-md text-muted hover:bg-well hover:text-ink"
                           >
                             <ArrowUp className="size-3.5" />
                           </button>
@@ -144,13 +155,13 @@ export function OfferingsGrid({
                             type="button"
                             onClick={() => move(entry.offering.id, 1)}
                             aria-label={`Move ${entry.offering.name} later`}
-                            className="flex size-7 items-center justify-center rounded-md text-muted-dark hover:bg-well hover:text-ink"
+                            className="flex size-7 items-center justify-center rounded-md text-muted hover:bg-well hover:text-ink"
                           >
                             <ArrowDown className="size-3.5" />
                           </button>
                           <span
                             aria-hidden
-                            className="hidden size-7 cursor-grab items-center justify-center text-muted-dark lg:flex"
+                            className="hidden size-7 cursor-grab items-center justify-center text-muted lg:flex"
                           >
                             <GripVertical className="size-3.5" />
                           </span>

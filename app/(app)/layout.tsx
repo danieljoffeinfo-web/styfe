@@ -12,11 +12,11 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       <Sidebar
         footer={
           <>
-            Everything here is what you entered.
-            <br />
-            Today {formatDate(todayIso())}
+            <div className="font-medium text-ink">Workspace</div>
+            <div className="mt-1">Everything here is what you entered</div>
+            <div className="mt-1">Today {formatDate(todayIso())}</div>
             <form action="/auth/sign-out" method="post" className="mt-3">
-              <button type="submit" className="text-sidebar-item underline underline-offset-4 hover:text-paper">
+              <button type="submit" className="font-medium text-ink underline underline-offset-4 hover:text-muted">
                 Sign out
               </button>
             </form>
@@ -25,8 +25,10 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       />
       <div className="flex min-w-0 flex-1 flex-col">
         <MobileNav />
-        <main className="flex flex-1 flex-col gap-5 px-4 py-6 sm:px-6 lg:gap-6 lg:px-10 lg:py-9">
-          {children}
+        <main className="flex flex-1 flex-col gap-6 px-4 py-5 sm:px-6 lg:px-8 lg:py-7 xl:px-10">
+          <div className="mx-auto flex w-full max-w-[1480px] flex-col gap-6">
+            {children}
+          </div>
         </main>
       </div>
     </div>

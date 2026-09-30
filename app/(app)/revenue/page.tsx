@@ -32,6 +32,7 @@ export default async function RevenuePage() {
       <PageHeader
         eyebrow="Entered by hand — ex VAT"
         title="Revenue"
+        subtitle="Track recurring income, projects and the clients and offerings driving the business."
         actions={
           <RevenueForm
             clients={clients}
@@ -41,7 +42,7 @@ export default async function RevenuePage() {
         }
       />
 
-      <section aria-label="Totals" className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <section aria-label="Totals" className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <StatCard
           label={`This month · ${monthLabelLong(thisMonth)}`}
           value={<MoneyCents cents={thisMonthPoint?.totalCents ?? 0} />}

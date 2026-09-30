@@ -20,18 +20,18 @@ export function OfferingCard({ entry }: { entry: CatalogueEntry }) {
   const revenueCents = toCents(stats?.revenue_ytd_zar);
 
   return (
-    <article className="flex h-full flex-col gap-3 rounded-[14px] border border-line bg-card p-5">
+    <article className="group flex h-full flex-col gap-4 rounded-xl border border-line bg-card p-5 transition-colors hover:border-control">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <Link href={`/offerings/${offering.slug}`} className="text-[15px] font-semibold hover:underline">
+          <Link href={`/offerings/${offering.slug}`} className="text-[15px] font-semibold tracking-[-0.01em] text-ink hover:underline">
             {offering.name}
           </Link>
-          <p className="money mt-1 text-[13px] text-muted">{priceLine(offering)}</p>
+          <p className="money mt-1.5 text-[12.5px] text-muted">{priceLine(offering)}</p>
         </div>
         <span
           aria-hidden
           className="mt-1 size-2.5 shrink-0 rounded-full"
-          style={{ background: offering.color ?? "#CFCAC0" }}
+          style={{ background: offering.color ?? "#86868B" }}
         />
       </div>
 
@@ -46,7 +46,7 @@ export function OfferingCard({ entry }: { entry: CatalogueEntry }) {
       </div>
 
       {offering.description ? (
-        <p className="line-clamp-2 text-[13px] leading-relaxed text-muted">{offering.description}</p>
+        <p className="line-clamp-2 min-h-[40px] text-[13px] leading-relaxed text-muted">{offering.description}</p>
       ) : null}
 
       {offering.portfolio?.length ? (
@@ -66,7 +66,7 @@ export function OfferingCard({ entry }: { entry: CatalogueEntry }) {
         </ul>
       ) : null}
 
-      <dl className="mt-auto grid grid-cols-2 gap-x-3 gap-y-2 border-t border-line-soft pt-3 text-[13px]">
+      <dl className="mt-auto grid grid-cols-2 gap-2 border-t border-line pt-4 text-[13px]">
         <Stat
           label={offering.unit_label ? `Live ${offering.unit_label}s` : "Live subs"}
           value={String(
@@ -91,9 +91,9 @@ export function OfferingCard({ entry }: { entry: CatalogueEntry }) {
 
 function Stat({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div>
-      <dt className="text-xs text-muted">{label}</dt>
-      <dd className="money mt-0.5">{value}</dd>
+    <div className="rounded-lg bg-well px-3 py-2.5">
+      <dt className="text-[11px] font-medium uppercase tracking-[0.04em] text-muted">{label}</dt>
+      <dd className="money mt-1 text-[13px] font-medium text-ink">{value}</dd>
     </div>
   );
 }
