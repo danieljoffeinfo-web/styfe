@@ -33,6 +33,8 @@ export type Severity = "low" | "med" | "high";
 export type PathSource = "subscriptions" | "project_average" | "manual";
 /** Admin work is split into Dan's client obligations and his own projects. */
 export type AdminTrack = "client" | "business";
+/** How a client pays: once for a piece of work, or every month. */
+export type BillingType = "once_off" | "recurring";
 export type AdminStatus = "todo" | "doing" | "done";
 
 interface Owned {
@@ -91,6 +93,8 @@ export interface Client extends Owned {
   contact_phone: string | null;
   contact_email: string | null;
   relationship: ClientRelationship;
+  /** What the invoice turns on. `relationship` is kept for history only. */
+  billing_type: BillingType;
   status: ClientStatus;
   notes: string | null;
   /** null means "not chosen" — the UI falls back to the relationship colour. */
@@ -105,6 +109,8 @@ export interface Client extends Owned {
 /** Revenue is entered by hand now, not derived from an imported statement. */
 export interface RevenueEntry extends Owned {
   date: IsoDate;
+  /** Recurring entries only: the month the stream stops. Null means running. */
+  ended_at?: IsoDate | null;
   description: string;
   amount_zar: Numeric;
   recurring: boolean;
@@ -297,6 +303,8 @@ export interface DailyTask extends Owned {
   label: string;
   done: boolean;
   sort: number;
+  /** Which side of Admin the reminder belongs to. */
+  track: AdminTrack;
 }
 
 export interface Alert extends Owned {
@@ -364,18 +372,21 @@ export const OFFERING_TYPE_ORDER: Record<OfferingType, number> = {
   addon: 2,
 };
 
+export const BILLING_TYPE_LABEL: Record<BillingType, string> = {
+  once_off: "Once-off",
+  recurring: "Recurring",
+};
+
 export const ADMIN_TRACK_LABEL: Record<AdminTrack, string> = {
   client: "Clients",
   business: "Business",
 };
 
+/**
+ * `doing` is still a valid status in the database, but nothing in the UI sets
+ * it any more: Admin is a list with a tick, not three columns.
+ */
 export const ADMIN_STATUSES: AdminStatus[] = ["todo", "doing", "done"];
-
-export const ADMIN_STATUS_LABEL: Record<AdminStatus, string> = {
-  todo: "To do",
-  doing: "In progress",
-  done: "Done",
-};
 
 export const DEAL_STAGES: DealStage[] = ["lead", "meeting", "proposal", "pilot", "won", "lost"];
 

@@ -1,13 +1,11 @@
 import { PageHeader } from "@/components/shell/page-header";
-import { Card, CardBody, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AdminBoard } from "@/components/admin/admin-board";
 import { AdminItemForm } from "@/components/admin/admin-item-form";
-import { TodayChecklist } from "@/components/overview/today-checklist";
 import { getAdminItems } from "@/lib/queries/admin";
 import { getClients } from "@/lib/queries/clients";
 import { getDailyTasks } from "@/lib/queries/misc";
-import { formatDate, todayIso } from "@/lib/dates";
+import { todayIso } from "@/lib/dates";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Admin · Styfe HQ" };
@@ -30,15 +28,9 @@ export default async function AdminPage() {
         }
       />
 
-      <AdminBoard items={items} clients={clients} />
-
-      {/* The Overview shows five of these; this is the whole list. */}
-      <Card id="today">
-        <CardBody>
-          <CardHeader title="Today" aside={formatDate(today, "long")} />
-          <TodayChecklist tasks={tasks} date={today} />
-        </CardBody>
-      </Card>
+      {/* Reminders live inside each track, so the Business side never shows
+          client work. The Overview's five-task card links in here. */}
+      <AdminBoard items={items} clients={clients} tasks={tasks} date={today} />
     </>
   );
 }

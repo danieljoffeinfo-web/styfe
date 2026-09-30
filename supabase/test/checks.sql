@@ -181,3 +181,99 @@ begin
 
   raise notice 'Revenue, client and admin checks passed.';
 end $$;
+
+-- Recurring revenue, secured MRR and the Admin tracks -------------------
+do $$
+declare
+  n bigint;
+  v numeric;
+  ok boolean;
+begin
+  -- Every client says how it bills, and the seed sets it (a migration backfill
+  -- would run before these rows exist).
+  select count(*) into n from clients where billing_type = 'recurring';
+  if n <> 2 then
+    raise exception 'Expected 2 recurring clients (Proto, IE Global), found %', n;
+  end if;
+
+  -- One recurring entry means one monthly stream, so it has to appear in every
+  -- month it covers rather than only the month it was typed.
+  insert into revenue_entries (date, description, amount_zar, recurring) values
+    ('2026-10-01', 'Check: live retainer', 8000, true);
+  insert into revenue_entries (date, description, amount_zar, recurring, ended_at) values
+    ('2026-06-01', 'Check: stopped retainer', 5000, true, '2026-08-31');
+  insert into revenue_entries (date, description, amount_zar, recurring) values
+    ('2026-09-15', 'Check: once-off build', 16900, false);
+
+  select count(*) into n
+  from v_monthly_revenue
+  where to_char(month, 'YYYY-MM') in ('2026-06', '2026-07', '2026-08');
+  if n <> 3 then
+    raise exception 'A stopped retainer covered % months, expected 3', n;
+  end if;
+
+  select recurring_zar into v from v_monthly_revenue where to_char(month,'YYYY-MM') = '2026-07';
+  if coalesce(v, 0) <> 5000 then
+    raise exception 'July recurring is %, expected the retainer at 5000', coalesce(v, 0);
+  end if;
+
+  -- It must stop at ended_at, not run forever.
+  select count(*) into n from v_monthly_revenue where to_char(month,'YYYY-MM') = '2026-09'
+    and coalesce(recurring_zar, 0) > 0;
+  if n <> 0 then
+    raise exception 'A retainer ended in August still counted in September';
+  end if;
+
+  select once_off_zar into v from v_monthly_revenue where to_char(month,'YYYY-MM') = '2026-09';
+  if coalesce(v, 0) <> 16900 then
+    raise exception 'September once-off is %, expected 16900', coalesce(v, 0);
+  end if;
+
+  -- Secured MRR is subscriptions plus live recurring revenue: the seed's Proto
+  -- subscription (8000) plus the live entry (8000). The stopped one is out.
+  select mrr_zar into v from v_secured_mrr;
+  if coalesce(v, 0) <> 16000 then
+    raise exception 'Secured MRR is %, expected 16000', coalesce(v, 0);
+  end if;
+  select recurring_entry_count into n from v_secured_mrr;
+  if n <> 1 then
+    raise exception 'Secured MRR counted % live recurring entries, expected 1', n;
+  end if;
+  delete from revenue_entries where description like 'Check: %';
+
+  -- Reminders belong to a track, so the Business side never shows client work.
+  select count(*) into n from daily_tasks where track <> 'client';
+  if n <> 0 then
+    raise exception 'Seeded reminders should all start on the client track';
+  end if;
+
+  ok := false;
+  begin
+    insert into daily_tasks (date, label, track) values (current_date, 'Check: bad track', 'personal');
+  exception when check_violation then ok := true;
+  end;
+  if not ok then
+    raise exception 'daily_tasks accepted an unknown track';
+  end if;
+
+  ok := false;
+  begin
+    update clients set billing_type = 'sometimes' where slug = 'britos';
+  exception when check_violation then ok := true;
+  end;
+  if not ok then
+    raise exception 'clients accepted an unknown billing_type';
+  end if;
+
+  -- anon must not reach either new view.
+  select count(*) into n
+  from information_schema.role_table_grants
+  where table_schema = 'public'
+    and table_name in ('v_monthly_revenue', 'v_secured_mrr')
+    and grantee = 'anon';
+  if n <> 0 then
+    raise exception 'anon holds % grant(s) on the revenue views', n;
+  end if;
+
+  raise notice 'Recurring revenue, MRR and track checks passed.';
+end $$;

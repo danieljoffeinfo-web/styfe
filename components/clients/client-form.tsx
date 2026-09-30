@@ -33,6 +33,8 @@ export function ClientForm({ client, trigger }: { client?: Client; trigger: Reac
       <SheetContent title={client ? client.name : "New client"}>
         <form action={formAction} className="flex flex-col gap-5">
           {client ? <input type="hidden" name="id" value={client.id} /> : null}
+          {/* Kept for history and the colour fallback; Billing is what Dan sets. */}
+          <input type="hidden" name="relationship" value={client?.relationship ?? "project"} />
 
           <Field label="Name">
             <Input name="name" required defaultValue={client?.name} placeholder="Cattle Baron" />
@@ -57,11 +59,10 @@ export function ClientForm({ client, trigger }: { client?: Client; trigger: Reac
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <Field label="Relationship">
-              <Select name="relationship" defaultValue={client?.relationship ?? "project"}>
-                <option value="project">Project</option>
-                <option value="retainer">Retainer</option>
-                <option value="employer">Employer</option>
+            <Field label="Billing" hint="Do they pay once, or every month?">
+              <Select name="billing_type" defaultValue={client?.billing_type ?? "once_off"}>
+                <option value="once_off">Once-off</option>
+                <option value="recurring">Recurring</option>
               </Select>
             </Field>
             <Field label="Status">

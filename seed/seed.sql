@@ -36,14 +36,16 @@ end $$;
 -- Each client gets its own swatch so the list is legible on a fresh install.
 -- `color` null would still render, via the relationship fallback in lib/clients.ts,
 -- but then every project client would look the same.
-insert into clients (slug, name, contact_name, relationship, status, color, notes) values
-  ('proto-trading',   'Proto Trading',             'George',            'retainer', 'active', '#1D6B4F', 'Pays R8,000/month regardless of workload. Paid on/around month end.'),
-  ('visit-the-cape',  'Visit the Cape',            'Tanya Price',       'project',  'active', '#2C6E6B', 'Tour company — site, gallery, content.'),
-  ('wulf-golf-carts', 'Wulf Golf Carts',           'Rian',              'project',  'active', '#6B6B31', 'Retainer pitch target.'),
-  ('la-familia',      'La Familia Street Culture', 'Vato Kayde',        'project',  'active', '#6B3F63', null),
-  ('britos',          'Britos',                    'Fernando da Silva', 'project',  'active', '#8A3E12', 'Website + AI services. R16,900 outstanding.'),
-  ('cattle-baron',    'Cattle Baron',              'Shaun',             'project',  'active', '#C9A77A', 'R8,300 outstanding. WhatsApp onboarding planned in 3 phases. Top retainer pitch target.'),
-  ('ie-global',       'IE Global',                 null,                'employer', 'ended',  '#2F5D8A', 'Salary R6,500/month (pays as Patin Trading 84 T/A). Ended Sep 2026.')
+-- billing_type is set here rather than left to the migration's backfill:
+-- migrations run before the seed, so a backfill never sees these rows.
+insert into clients (slug, name, contact_name, relationship, billing_type, status, color, notes) values
+  ('proto-trading',   'Proto Trading',             'George',            'retainer', 'recurring', 'active', '#1D6B4F', 'Pays R8,000/month regardless of workload. Paid on/around month end.'),
+  ('visit-the-cape',  'Visit the Cape',            'Tanya Price',       'project',  'once_off',  'active', '#2C6E6B', 'Tour company — site, gallery, content.'),
+  ('wulf-golf-carts', 'Wulf Golf Carts',           'Rian',              'project',  'once_off',  'active', '#6B6B31', 'Retainer pitch target.'),
+  ('la-familia',      'La Familia Street Culture', 'Vato Kayde',        'project',  'once_off',  'active', '#6B3F63', null),
+  ('britos',          'Britos',                    'Fernando da Silva', 'project',  'once_off',  'active', '#8A3E12', 'Website + AI services. R16,900 outstanding.'),
+  ('cattle-baron',    'Cattle Baron',              'Shaun',             'project',  'once_off',  'active', '#C9A77A', 'R8,300 outstanding. WhatsApp onboarding planned in 3 phases. Top retainer pitch target.'),
+  ('ie-global',       'IE Global',                 null,                'employer', 'recurring', 'ended',  '#2F5D8A', 'Salary R6,500/month (pays as Patin Trading 84 T/A). Ended Sep 2026.')
 on conflict (owner_id, slug) do nothing;
 
 -- OFFERINGS -----------------------------------------------------------

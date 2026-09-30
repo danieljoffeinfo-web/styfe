@@ -8,17 +8,20 @@ import { addTask, carryOverTasks, deleteTask, toggleTask } from "@/lib/actions/m
 import { useToast } from "@/components/ui/toast";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import type { DailyTask } from "@/lib/types";
+import type { AdminTrack, DailyTask } from "@/lib/types";
 
 export function TodayChecklist({
   tasks,
   date,
   limit,
+  track = "client",
 }: {
   tasks: DailyTask[];
   date: string;
   /** Show at most this many. The rest stay on the list, just not on screen. */
   limit?: number;
+  /** Which side of Admin a new reminder lands on. */
+  track?: AdminTrack;
 }) {
   const toast = useToast();
   const router = useRouter();
@@ -60,6 +63,7 @@ export function TodayChecklist({
     const formData = new FormData();
     formData.set("label", text);
     formData.set("date", date);
+    formData.set("track", track);
     setLabel("");
     startTransition(async () => {
       const result = await addTask(null, formData);
@@ -129,8 +133,8 @@ export function TodayChecklist({
         <Input
           value={label}
           onChange={(e) => setLabel(e.target.value)}
-          placeholder="Add to today"
-          aria-label="Add a task to today"
+          placeholder="Add a reminder"
+          aria-label="Add a reminder"
           className="h-10"
         />
         <button

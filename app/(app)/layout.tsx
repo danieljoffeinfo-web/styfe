@@ -12,7 +12,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       <Sidebar
         footer={
           <>
-            Data: FNB CSV import, invoices, pipeline.
+            Everything here is what you entered.
             <br />
             Today {formatDate(todayIso())}
             <form action="/auth/sign-out" method="post" className="mt-3">

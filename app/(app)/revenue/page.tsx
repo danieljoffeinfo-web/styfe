@@ -3,7 +3,6 @@ import { Card, CardBody, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { StatCard } from "@/components/stat-card";
 import { MoneyCents } from "@/components/money";
-import { IncomeChart, ChartLegend } from "@/components/charts/income-chart";
 import { RevenueForm } from "@/components/revenue/revenue-form";
 import { RevenueTable } from "@/components/revenue/revenue-table";
 import { getMonthlyRevenue, getRevenueEntries } from "@/lib/queries/revenue";
@@ -60,19 +59,6 @@ export default async function RevenuePage() {
           note="Projects and builds"
         />
       </section>
-
-      <Card>
-        <CardBody>
-          <CardHeader title="Money in, by month" aside="Once-off vs recurring" />
-          <IncomeChart data={months} />
-          <ChartLegend
-            items={[
-              { color: "#1D6B4F", label: "Recurring (retainers, salary)" },
-              { color: "#C9A77A", label: "Once-off / projects" },
-            ]}
-          />
-        </CardBody>
-      </Card>
 
       <Card>
         <CardBody>

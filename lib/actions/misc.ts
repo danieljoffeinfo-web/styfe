@@ -5,7 +5,16 @@ import { z } from "zod";
 import { todayIso, weekStartIso } from "@/lib/dates";
 import { slugify } from "@/lib/utils";
 import { guard, ok, fail, withUser, type ActionResult } from "./helpers";
-import { zDate, zInt, zMoney, zRequiredText, zSignedMoney, zText, zodMessage } from "./schemas";
+import {
+  zAdminTrack,
+  zDate,
+  zInt,
+  zMoney,
+  zRequiredText,
+  zSignedMoney,
+  zText,
+  zodMessage,
+} from "./schemas";
 
 /* -------------------------------------------------------------- daily ---- */
 
@@ -15,6 +24,7 @@ export async function toggleTask(id: string, done: boolean): Promise<ActionResul
       const { error } = await supabase.from("daily_tasks").update({ done }).eq("id", id);
       if (error) return fail(error.message);
       revalidatePath("/");
+      revalidatePath("/admin");
       return ok();
     }),
   );
@@ -25,6 +35,8 @@ export async function addTask(_: ActionResult | null, formData: FormData): Promi
     const parsed = zRequiredText.safeParse(formData.get("label") ?? "");
     if (!parsed.success) return fail("Type something to add.");
     const date = zDate.parse(formData.get("date")) ?? todayIso();
+    // A reminder belongs to one side of Admin, so the other side never shows it.
+    const track = zAdminTrack.catch("client").parse(formData.get("track") ?? "client");
 
     return withUser(async (supabase, userId) => {
       const { data: last } = await supabase
@@ -38,11 +50,13 @@ export async function addTask(_: ActionResult | null, formData: FormData): Promi
       const { error } = await supabase.from("daily_tasks").insert({
         owner_id: userId,
         date,
+        track,
         label: parsed.data,
         sort: ((last?.sort as number | undefined) ?? 0) + 1,
       });
       if (error) return fail(error.message);
       revalidatePath("/");
+      revalidatePath("/admin");
       return ok("Added.");
     });
   });
@@ -54,6 +68,7 @@ export async function deleteTask(id: string): Promise<ActionResult> {
       const { error } = await supabase.from("daily_tasks").delete().eq("id", id);
       if (error) return fail(error.message);
       revalidatePath("/");
+      revalidatePath("/admin");
       return ok("Removed.");
     }),
   );
@@ -69,7 +84,7 @@ export async function carryOverTasks(): Promise<ActionResult> {
       const today = todayIso();
       const { data: stale } = await supabase
         .from("daily_tasks")
-        .select("id, label, sort")
+        .select("id, label, sort, track")
         .eq("done", false)
         .lt("date", today)
         .order("date")
@@ -77,8 +92,12 @@ export async function carryOverTasks(): Promise<ActionResult> {
 
       if (!stale?.length) return ok();
 
-      const { data: existing } = await supabase.from("daily_tasks").select("label").eq("date", today);
-      const seen = new Set((existing ?? []).map((t) => t.label));
+      const { data: existing } = await supabase
+        .from("daily_tasks")
+        .select("label, track")
+        .eq("date", today);
+      // Keyed by track too, so the same wording on both sides survives.
+      const seen = new Set((existing ?? []).map((t) => `${t.track}:${t.label}`));
 
       const { data: last } = await supabase
         .from("daily_tasks")
@@ -91,9 +110,16 @@ export async function carryOverTasks(): Promise<ActionResult> {
 
       const toInsert = [];
       for (const task of stale) {
-        if (seen.has(task.label)) continue;
-        seen.add(task.label);
-        toInsert.push({ owner_id: userId, date: today, label: task.label, sort: sort++ });
+        const key = `${task.track}:${task.label}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        toInsert.push({
+          owner_id: userId,
+          date: today,
+          track: task.track,
+          label: task.label,
+          sort: sort++,
+        });
       }
 
       if (toInsert.length) {
@@ -108,6 +134,7 @@ export async function carryOverTasks(): Promise<ActionResult> {
       if (cleanupError) return fail(cleanupError.message);
 
       revalidatePath("/");
+      revalidatePath("/admin");
       return ok(toInsert.length ? `${toInsert.length} carried over.` : undefined);
     }),
   );

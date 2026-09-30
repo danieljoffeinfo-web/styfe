@@ -20,10 +20,11 @@ Source brief: `docs/HANDOVER.md`. Approved design: `design/overview-mockup.dc.ht
 1. **No service-role key in `app/` or `components/`.** `SUPABASE_SECRET_KEY`
    lives in `.env.local` and is read only by `scripts/`. The app talks to
    Supabase with the publishable key and Dan's session, so RLS always applies.
-2. **Derived numbers live in SQL views**, not in components: `v_mrr`,
+2. **Derived numbers live in SQL views**, not in components: `v_secured_mrr`,
    `v_receivables`, `v_invoices`, `v_monthly_revenue`, `v_monthly_income`,
    `v_monthly_spend`, `v_offering_stats`. If a number is typed into a
-   component, that is a bug.
+   component, that is a bug. (`v_mrr` still exists — subscriptions only — but
+   nothing reads it; `v_secured_mrr` is the one the app uses.)
 3. **Money maths in cents.** `toCents` on the way in, `formatZar` on the way out.
 4. **Schema changes are migrations.** `supabase/migrations/`, never the
    dashboard. Views must be `security_invoker = true` and must be granted to
@@ -129,6 +130,39 @@ month" should mean the month on the calendar.
   once-off income) and `manual` (not tracked). All editable in Settings.
 - **No PDF library.** The printable invoice is a print stylesheet, so
   "Save as PDF" in the browser produces the file.
+- **A recurring revenue entry is a monthly stream, not a row per month.** One
+  entry means "this much, every month, from `date` until `ended_at`". Null
+  `ended_at` means it is still running, which is exactly what makes it count
+  toward secured MRR. `v_monthly_revenue` expands each recurring entry across
+  every month it covers, so a retainer entered once shows up every month.
+- **Secured MRR is both sources at once.** `v_secured_mrr` sums active
+  subscriptions (from won deals) and live recurring revenue entries, because
+  they are the same promise of money next month. It used to be subscriptions
+  only, which meant a retainer typed into Revenue never reached the Overview.
+  The MRR card on the Overview can add one without leaving the page.
+- **`clients.billing_type`** (`once_off` / `recurring`) is the question the
+  invoice actually turns on. `relationship` (project / retainer / employer) is
+  kept for history and the colour fallback, but nothing asks for it any more.
+  The seed sets `billing_type` directly, for the same reason it sets `color`.
+- **Clients can be deleted, but not at the cost of the books.** The action
+  refuses while invoices or subscriptions still point at the client and says
+  which, rather than cascading. Revenue entries and admin items are
+  `ON DELETE SET NULL`, so they survive with their history intact.
+- **`daily_tasks.track`** matches `admin_items.track`. Without it the daily list
+  was shared, so client reminders surfaced while Dan was looking at his own
+  projects. Carry-over keys on `(track, label)` so the same wording on both
+  sides survives.
+- **Admin is a list with a tick, not three columns.** `status` still allows
+  `doing` in the database, but nothing in the UI sets it: the columns read as
+  unexplained jargon. The two tracks are told apart by colour — client work
+  blue (`#2F5D8A`), Dan's own projects green (`#1D6B4F`) — carried through the
+  tab, each item's rail and the reminders beneath.
+- **No charts on Revenue or the Overview.** "Money in, by month" was the last
+  thing carrying statement-era framing, and its empty state told Dan to import
+  an FNB statement on a page that no longer exists. The stat cards answer the
+  same question without it.
+- **Invoices filter to Open, Sent and Paid.** Open is anything still owed, so a
+  draft lives there rather than behind its own chip; Sent includes overdue.
 - **Revenue is entered by hand, in `revenue_entries`.** It used to be derived
   from imported transactions. Revenue and the Overview now both read
   `v_monthly_revenue`, so the same month reads the same on both pages, and
@@ -148,7 +182,7 @@ month" should mean the month on the calendar.
   so a fresh row never renders grey. The seed gives each client a distinct
   swatch because migrations run before the seed, so a backfill would not reach
   rows that do not exist yet.
-- **Invoicing details live on the client**, not on the invoice: billing email,
+- **Invoicing details also live on the client**, not on the invoice: billing email,
   billing address, VAT number, company registration and payment terms. The
   printable invoice prefers them and falls back to the contact details, and a
   blank due date is the issue date plus that client's payment terms rather than

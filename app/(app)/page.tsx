@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { StatCard } from "@/components/stat-card";
 import { MoneyCents } from "@/components/money";
 import { PageHeader } from "@/components/shell/page-header";
-import { IncomeChart, ChartLegend } from "@/components/charts/income-chart";
 import { TodayChecklist } from "@/components/overview/today-checklist";
+import { RevenueForm } from "@/components/revenue/revenue-form";
 import { PathToTarget } from "@/components/overview/path-to-target";
 import { ResolveAlertButton } from "@/components/overview/resolve-alert-button";
 import { getMrr, pathToTarget } from "@/lib/queries/money";
@@ -101,6 +101,23 @@ export default async function OverviewPage() {
           value={<MoneyCents cents={mrr.mrrCents} />}
           meter={{ value: percent(mrr.mrrCents, settings.mrrTargetCents) }}
           note={`${percent(mrr.mrrCents, settings.mrrTargetCents)}% of ${zar(settings.mrrTargetCents)} target`}
+          action={
+            // Anything ticked Recurring counts here every month, so it can be
+            // added without leaving the Overview.
+            <RevenueForm
+              recurringByDefault
+              clients={clients}
+              offerings={offerings}
+              trigger={
+                <button
+                  type="button"
+                  className="min-h-9 text-xs text-green underline-offset-4 hover:underline"
+                >
+                  + Add recurring income
+                </button>
+              }
+            />
+          }
         />
         <StatCard
           label="Receivables"
@@ -124,14 +141,12 @@ export default async function OverviewPage() {
       <section className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <Card className="xl:col-span-2">
           <CardBody>
-            <CardHeader title="Money in, by month" aside="Once-off vs recurring" />
-            <IncomeChart data={income} />
-            <ChartLegend
-              items={[
-                { color: "#1D6B4F", label: "Recurring (retainers, salary)" },
-                { color: "#C9A77A", label: "Once-off / projects" },
-              ]}
-            />
+            <CardHeader title="Tasks" aside={`Top ${TASKS_SHOWN}`}>
+              <Link href="/admin#today" className="text-[13px] text-green underline-offset-4 hover:underline">
+                All tasks
+              </Link>
+            </CardHeader>
+            <TodayChecklist tasks={tasks} date={today} limit={TASKS_SHOWN} />
           </CardBody>
         </Card>
 
@@ -153,19 +168,8 @@ export default async function OverviewPage() {
         </Card>
       </section>
 
-      <section className="grid grid-cols-1 gap-4 xl:grid-cols-3">
-        <Card className="xl:col-span-2">
-          <CardBody>
-            <CardHeader title="Tasks" aside={`Top ${TASKS_SHOWN}`}>
-              <Link href="/admin#today" className="text-[13px] text-green underline-offset-4 hover:underline">
-                All tasks
-              </Link>
-            </CardHeader>
-            <TodayChecklist tasks={tasks} date={today} limit={TASKS_SHOWN} />
-          </CardBody>
-        </Card>
-
-        {alerts.length ? (
+      {alerts.length ? (
+        <section className="grid grid-cols-1 gap-4 xl:grid-cols-3">
           <Card>
             <CardBody className="gap-2.5">
               <CardHeader title="Needs attention" />
@@ -183,8 +187,8 @@ export default async function OverviewPage() {
               ))}
             </CardBody>
           </Card>
-        ) : null}
-      </section>
+        </section>
+      ) : null}
 
       <Card>
         <CardBody>

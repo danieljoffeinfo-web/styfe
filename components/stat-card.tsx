@@ -9,6 +9,7 @@ export function StatCard({
   meter,
   dark,
   suffix,
+  action,
 }: {
   label: string;
   value: React.ReactNode;
@@ -17,6 +18,8 @@ export function StatCard({
   meter?: { value: number; tone?: "green" | "sand" | "blue" | "alert" | "ink" };
   dark?: boolean;
   suffix?: React.ReactNode;
+  /** Sits at the foot of the card — for a stat you can add to from here. */
+  action?: React.ReactNode;
 }) {
   return (
     <div
@@ -47,6 +50,7 @@ export function StatCard({
           {note}
         </div>
       ) : null}
+      {action ? <div className="mt-0.5">{action}</div> : null}
     </div>
   );
 }

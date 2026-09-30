@@ -85,6 +85,8 @@ export const zDealStage = z.enum(["lead", "meeting", "proposal", "pilot", "won",
 export const zInvoiceStatus = z.enum(["draft", "sent", "overdue", "paid", "void"]);
 export const zClientRelationship = z.enum(["retainer", "project", "employer"]);
 export const zClientStatus = z.enum(["active", "paused", "ended"]);
+export const zBillingType = z.enum(["once_off", "recurring"]);
+export const zAdminTrack = z.enum(["client", "business"]);
 export const zSubscriptionStatus = z.enum(["active", "paused", "cancelled"]);
 
 /** A client colour is a #rrggbb swatch or nothing at all. Anything else is

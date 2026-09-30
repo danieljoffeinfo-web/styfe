@@ -8,13 +8,7 @@ import { SubmitButton } from "@/components/ui/submit-button";
 import { Field, Input, Select, Textarea } from "@/components/ui/input";
 import { useToast } from "@/components/ui/toast";
 import { saveAdminItem } from "@/lib/actions/admin";
-import {
-  ADMIN_STATUSES,
-  ADMIN_STATUS_LABEL,
-  type AdminItem,
-  type AdminTrack,
-  type Client,
-} from "@/lib/types";
+import type { AdminItem, AdminTrack, Client } from "@/lib/types";
 import type { ActionResult } from "@/lib/actions/helpers";
 
 /** The quick add on the board covers the title; everything else lives here. */
@@ -60,27 +54,19 @@ export function AdminItemForm({
             <Textarea name="detail" defaultValue={item?.detail ?? ""} />
           </Field>
 
-          <div className="grid grid-cols-2 gap-3">
-            <Field label="Track">
-              <Select
-                name="track"
-                value={selectedTrack}
-                onChange={(e) => setSelectedTrack(e.target.value as AdminTrack)}
-              >
-                <option value="client">Clients</option>
-                <option value="business">Business</option>
-              </Select>
-            </Field>
-            <Field label="Status">
-              <Select name="status" defaultValue={item?.status ?? "todo"}>
-                {ADMIN_STATUSES.map((s) => (
-                  <option key={s} value={s}>
-                    {ADMIN_STATUS_LABEL[s]}
-                  </option>
-                ))}
-              </Select>
-            </Field>
-          </div>
+          <Field label="Track">
+            <Select
+              name="track"
+              value={selectedTrack}
+              onChange={(e) => setSelectedTrack(e.target.value as AdminTrack)}
+            >
+              <option value="client">Clients</option>
+              <option value="business">Business</option>
+            </Select>
+          </Field>
+
+          {/* Done is the tick on the list, not a dropdown in here. */}
+          <input type="hidden" name="status" value={item?.status ?? "todo"} />
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {/* Business items are Dan's own, so the client picker goes away. */}

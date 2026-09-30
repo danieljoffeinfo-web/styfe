@@ -15,14 +15,11 @@ import { cn } from "@/lib/utils";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Invoices · Styfe HQ" };
 
+/** Three states, which is all Dan tracks: not paid yet, sent, done. */
 const FILTERS: { key: string; label: string }[] = [
   { key: "open", label: "Open" },
-  { key: "all", label: "All" },
-  { key: "draft", label: "Draft" },
   { key: "sent", label: "Sent" },
-  { key: "overdue", label: "Overdue" },
   { key: "paid", label: "Paid" },
-  { key: "void", label: "Void" },
 ];
 
 export default async function InvoicesPage({
@@ -34,8 +31,10 @@ export default async function InvoicesPage({
   const [invoices, settings] = await Promise.all([getInvoices(), getSettings()]);
 
   const rows = invoices.filter((invoice) => {
-    if (status === "all") return true;
+    // Open means anything still owed — a draft lives here rather than behind
+    // its own chip, so nothing is hidden from the only view that matters.
     if (status === "open") return invoice.effective_status !== "paid" && invoice.effective_status !== "void";
+    if (status === "sent") return invoice.effective_status === "sent" || invoice.effective_status === "overdue";
     return invoice.effective_status === status;
   });
 

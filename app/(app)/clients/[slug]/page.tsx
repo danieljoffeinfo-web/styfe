@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MoneyCents } from "@/components/money";
 import { ClientForm } from "@/components/clients/client-form";
+import { DeleteClientButton } from "@/components/clients/delete-client-button";
 import { SubscriptionForm, EndSubscriptionButton } from "@/components/clients/subscription-form";
 import { InvoiceStatusBadge } from "@/components/invoices/status-badge";
 import { getClientBySlug, getSubscriptions } from "@/lib/queries/clients";
@@ -110,6 +111,7 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ s
               <Link href={`/invoices/new?client=${client.slug}`}>New invoice</Link>
             </Button>
             <ClientForm client={client} trigger={<Button variant="primary">Edit</Button>} />
+            <DeleteClientButton id={client.id} name={client.name} />
           </>
         }
       />
@@ -203,7 +205,7 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ s
               {client.notes || "Nothing noted."}
             </p>
             <dl className="mt-2 flex flex-col gap-1 border-t border-line-soft pt-3 text-[13px]">
-              <Row label="Relationship" value={client.relationship} />
+              <Row label="Billing" value={client.billing_type === "recurring" ? "Recurring" : "Once-off"} />
               <Row label="Status" value={client.status} />
               <Row label="Contact" value={client.contact_name ?? "—"} />
               <Row label="Phone" value={client.contact_phone ?? "—"} />

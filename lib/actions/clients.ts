@@ -5,6 +5,7 @@ import { z } from "zod";
 import { slugify } from "@/lib/utils";
 import { guard, ok, fail, withUser, type ActionResult } from "./helpers";
 import {
+  zBillingType,
   zClientRelationship,
   zClientStatus,
   zDate,
@@ -23,6 +24,7 @@ const clientSchema = z.object({
   contact_phone: zText,
   contact_email: zText,
   relationship: zClientRelationship,
+  billing_type: zBillingType,
   status: zClientStatus,
   notes: zText,
   color: zHexColor,
@@ -41,6 +43,7 @@ function readClient(formData: FormData) {
     contact_phone: formData.get("contact_phone"),
     contact_email: formData.get("contact_email"),
     relationship: formData.get("relationship") ?? "project",
+    billing_type: formData.get("billing_type") ?? "once_off",
     status: formData.get("status") ?? "active",
     notes: formData.get("notes"),
     color: formData.get("color"),
@@ -79,6 +82,42 @@ export async function saveClient(_: ActionResult | null, formData: FormData): Pr
       return ok("Saved.");
     });
   });
+}
+
+/**
+ * Clients are deletable, but not at the cost of the books: an invoice or a
+ * subscription pointing at one is history that still has to resolve, so the
+ * delete is refused with the reason rather than cascading. Revenue entries and
+ * admin items are ON DELETE SET NULL, so those survive the client going away.
+ */
+export async function deleteClient(id: string): Promise<ActionResult> {
+  return guard(async () =>
+    withUser(async (supabase) => {
+      const [{ count: invoices }, { count: subscriptions }] = await Promise.all([
+        supabase.from("invoices").select("id", { count: "exact", head: true }).eq("client_id", id),
+        supabase.from("subscriptions").select("id", { count: "exact", head: true }).eq("client_id", id),
+      ]);
+
+      const blockers = [
+        invoices ? `${invoices} invoice${invoices === 1 ? "" : "s"}` : null,
+        subscriptions ? `${subscriptions} subscription${subscriptions === 1 ? "" : "s"}` : null,
+      ].filter(Boolean);
+
+      if (blockers.length) {
+        return fail(
+          `This client still has ${blockers.join(" and ")}. Remove or reassign them first, or set the client to ended instead.`,
+        );
+      }
+
+      const { error } = await supabase.from("clients").delete().eq("id", id);
+      if (error) return fail(error.message);
+
+      revalidatePath("/clients");
+      revalidatePath("/admin");
+      revalidatePath("/");
+      return ok("Client deleted.");
+    }),
+  );
 }
 
 const subscriptionSchema = z.object({

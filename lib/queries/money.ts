@@ -18,13 +18,21 @@ export interface MrrSummary {
   unitCostCents: number;
   subscriptionCount: number;
   unitCount: number;
+  /** Recurring revenue entries Dan typed in, as opposed to won subscriptions. */
+  recurringEntryCount: number;
 }
 
+/**
+ * Secured MRR is both sources at once — a subscription created from a won deal
+ * and a recurring revenue entry are the same promise of money next month, so
+ * v_secured_mrr sums them. It used to read v_mrr, which was subscriptions only,
+ * and a retainer typed into Revenue never reached the Overview.
+ */
 export async function getMrr(): Promise<MrrSummary> {
   const supabase = await createClient();
   const { data } = await supabase
-    .from("v_mrr")
-    .select("mrr_zar, unit_cost_zar, subscription_count, unit_count")
+    .from("v_secured_mrr")
+    .select("mrr_zar, unit_cost_zar, subscription_count, unit_count, recurring_entry_count")
     .maybeSingle();
 
   return {
@@ -32,6 +40,7 @@ export async function getMrr(): Promise<MrrSummary> {
     unitCostCents: toCents(data?.unit_cost_zar),
     subscriptionCount: data?.subscription_count ?? 0,
     unitCount: data?.unit_count ?? 0,
+    recurringEntryCount: data?.recurring_entry_count ?? 0,
   };
 }
 

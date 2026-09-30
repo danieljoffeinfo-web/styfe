@@ -9,6 +9,7 @@ import { getClients, getSubscriptions } from "@/lib/queries/clients";
 import { getReceivables } from "@/lib/queries/invoices";
 import { toCents } from "@/lib/money";
 import { clientColor } from "@/lib/clients";
+import { BILLING_TYPE_LABEL } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Clients · Styfe HQ" };
@@ -62,7 +63,12 @@ export default async function ClientsPage() {
                 />
                 <div className="flex items-start justify-between gap-3">
                   <h2 className="font-semibold">{client.name}</h2>
-                  <Badge tone={client.status === "active" ? "green" : "neutral"}>{client.status}</Badge>
+                  <div className="flex shrink-0 items-center gap-1.5">
+                    <Badge tone={client.billing_type === "recurring" ? "green" : "sand"}>
+                      {BILLING_TYPE_LABEL[client.billing_type]}
+                    </Badge>
+                    <Badge tone={client.status === "active" ? "green" : "neutral"}>{client.status}</Badge>
+                  </div>
                 </div>
                 <p className="text-[13px] text-muted">
                   {[client.contact_name, client.contact_phone].filter(Boolean).join(" · ") || "No contact yet"}
@@ -75,7 +81,9 @@ export default async function ClientsPage() {
                         /mo
                       </>
                     ) : (
-                      <span className="text-muted">{client.relationship}</span>
+                      <span className="text-muted">
+                        {client.billing_type === "recurring" ? "Monthly" : "Per project"}
+                      </span>
                     )}
                   </span>
                   {owedCents > 0 ? (

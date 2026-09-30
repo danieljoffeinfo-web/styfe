@@ -22,16 +22,19 @@ export function RevenueForm({
   clients,
   offerings,
   trigger,
+  recurringByDefault = false,
 }: {
   entry?: RevenueEntry;
   clients: Client[];
   offerings: Offering[];
   trigger: React.ReactNode;
+  /** Opened from the MRR card, where the whole point is a monthly amount. */
+  recurringByDefault?: boolean;
 }) {
   const [open, setOpen] = React.useState(false);
   const toast = useToast();
   const [state, formAction] = useActionState<ActionResult | null, FormData>(saveRevenueEntry, null);
-  const [recurring, setRecurring] = React.useState(entry?.recurring ?? false);
+  const [recurring, setRecurring] = React.useState(entry?.recurring ?? recurringByDefault);
 
   React.useEffect(() => {
     if (!state) return;
@@ -48,7 +51,11 @@ export function RevenueForm({
       <SheetTrigger asChild>{trigger}</SheetTrigger>
       <SheetContent
         title={entry ? "Edit revenue" : "Add revenue"}
-        description="Money actually received, ex VAT."
+        description={
+          recurring
+            ? "A monthly amount, ex VAT. Enter it once — it counts every month."
+            : "Money actually received, ex VAT."
+        }
       >
         <form action={formAction} className="flex flex-col gap-5">
           {entry ? <input type="hidden" name="id" value={entry.id} /> : null}
@@ -81,12 +88,18 @@ export function RevenueForm({
             <div>
               <p className="text-[13px] font-medium">Recurring</p>
               <p className="text-xs text-muted">
-                Retainers and salary. Drives the recurring / once-off split.
+                Counts toward secured MRR and repeats every month until you end it.
               </p>
             </div>
             <input type="hidden" name="recurring" value={recurring ? "true" : "false"} />
             <Switch checked={recurring} onCheckedChange={setRecurring} aria-label="Recurring" />
           </div>
+
+          {recurring ? (
+            <Field label="Stops after" hint="Leave blank while it is still running">
+              <Input type="date" name="ended_at" defaultValue={entry?.ended_at ?? ""} />
+            </Field>
+          ) : null}
 
           <div className="grid grid-cols-2 gap-3">
             <Field label="Client">
