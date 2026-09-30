@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { PageHeader } from "@/components/shell/page-header";
 import { Card, CardBody } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -34,6 +35,7 @@ export default async function ClientsPage() {
       <PageHeader
         eyebrow="Who you work with"
         title="Clients"
+        subtitle="A quick view of active relationships, recurring value and outstanding balances."
         actions={<ClientForm trigger={<Button variant="primary">New client</Button>} />}
       />
 
@@ -44,7 +46,7 @@ export default async function ClientsPage() {
           </CardBody>
         </Card>
       ) : (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
           {clients.map((client) => {
             const mrrCents = mrrByClient.get(client.id) ?? 0;
             const owedCents = owedByClient.get(client.id) ?? 0;
@@ -52,17 +54,13 @@ export default async function ClientsPage() {
               <Link
                 key={client.id}
                 href={`/clients/${client.slug}`}
-                className="relative flex flex-col gap-2 overflow-hidden rounded-[14px] border border-line bg-card p-5 pl-6 transition-colors hover:bg-well"
+                className="group flex min-h-[166px] flex-col rounded-xl border border-line bg-card p-5 transition-colors hover:border-control hover:bg-[#fcfcfd]"
               >
-                {/* The client's colour as a rail down the card, so the grid reads at a glance. */}
-                <span
-                  aria-hidden
-                  className="absolute inset-y-0 left-0 w-1.5"
-                  style={{ background: clientColor(client) }}
-                />
+
                 <div className="flex items-start justify-between gap-3">
-                  <h2 className="font-semibold">{client.name}</h2>
+                  <div className="flex items-center gap-2"><span aria-hidden className="size-2.5 shrink-0 rounded-full" style={{ background: clientColor(client) }} /><h2 className="font-semibold">{client.name}</h2></div>
                   <Badge tone={client.status === "active" ? "green" : "neutral"}>{client.status}</Badge>
+                  <ArrowUpRight className="size-4 text-muted opacity-0 transition-opacity group-hover:opacity-100" />
                 </div>
                 <p className="text-[13px] text-muted">
                   {[client.contact_name, client.contact_phone].filter(Boolean).join(" · ") || "No contact yet"}
