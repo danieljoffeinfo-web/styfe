@@ -100,7 +100,7 @@ export function OfferingsGrid({
       <nav aria-label="Offering categories" className="no-scrollbar flex gap-2 overflow-x-auto pb-1">
         <button
           type="button"
-          onClick={() => open(categoryNames[0])}
+          onClick={() => categoryNames[0] && open(categoryNames[0])}
           className="flex h-9 shrink-0 items-center gap-1.5 rounded-lg border border-line bg-card px-3 text-[12.5px] font-medium text-muted transition-colors hover:border-control hover:text-ink"
         >
           All
@@ -140,13 +140,14 @@ export function OfferingsGrid({
             >
               <button
                 type="button"
-                onClick={() => setOpenCategory(expanded ? null : category)}
+                onClick={() => setOpenCategory(category)}
                 className="flex w-full items-center gap-3 px-4 py-3.5 text-left transition-colors hover:bg-well/60 sm:px-5"
                 aria-expanded={expanded}
               >
                 <span
                   aria-hidden
                   className="size-2.5 shrink-0 rounded-full bg-muted-dark"
+                  style={{ background: items[0]?.offering.color ?? "#86868B" }}
                 />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
