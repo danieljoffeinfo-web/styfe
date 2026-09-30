@@ -83,6 +83,7 @@ export default async function OverviewPage() {
       <PageHeader
         eyebrow={formatDate(today, "long")}
         title={`${greeting()}, Dan.`}
+        subtitle="A live view of revenue, receivables, pipeline and the work that needs your attention."
         actions={
           <>
             <Button asChild>
@@ -95,7 +96,7 @@ export default async function OverviewPage() {
         }
       />
 
-      <section aria-label="Key numbers" className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section aria-label="Key numbers" className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
           label="Secured monthly (MRR)"
           value={<MoneyCents cents={mrr.mrrCents} />}
@@ -128,8 +129,8 @@ export default async function OverviewPage() {
             <IncomeChart data={income} />
             <ChartLegend
               items={[
-                { color: "#1D6B4F", label: "Recurring (retainers, salary)" },
-                { color: "#C9A77A", label: "Once-off / projects" },
+                { color: "#197A30", label: "Recurring (retainers, salary)" },
+                { color: "#D7C29E", label: "Once-off / projects" },
               ]}
             />
           </CardBody>
@@ -157,7 +158,7 @@ export default async function OverviewPage() {
         <Card className="xl:col-span-2">
           <CardBody>
             <CardHeader title="Tasks" aside={`Top ${TASKS_SHOWN}`}>
-              <Link href="/admin#today" className="text-[13px] text-green underline-offset-4 hover:underline">
+              <Link href="/admin#today" className="text-[13px] font-medium text-ink underline-offset-4 hover:underline">
                 All tasks
               </Link>
             </CardHeader>
@@ -189,7 +190,7 @@ export default async function OverviewPage() {
       <Card>
         <CardBody>
           <CardHeader title="Pipeline" aside="Lead → Meeting → Proposal → Pilot → Won">
-            <Link href="/pipeline" className="text-[13px] text-green underline-offset-4 hover:underline">
+            <Link href="/pipeline" className="text-[13px] font-medium text-ink underline-offset-4 hover:underline">
               Open pipeline
             </Link>
           </CardHeader>

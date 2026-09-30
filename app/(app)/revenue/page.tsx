@@ -33,6 +33,7 @@ export default async function RevenuePage() {
       <PageHeader
         eyebrow="Entered by hand — ex VAT"
         title="Revenue"
+        subtitle="Track recurring income, projects and the clients and offerings driving the business."
         actions={
           <RevenueForm
             clients={clients}
@@ -42,7 +43,7 @@ export default async function RevenuePage() {
         }
       />
 
-      <section aria-label="Totals" className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <section aria-label="Totals" className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <StatCard
           label={`This month · ${monthLabelLong(thisMonth)}`}
           value={<MoneyCents cents={thisMonthPoint?.totalCents ?? 0} />}
@@ -67,8 +68,8 @@ export default async function RevenuePage() {
           <IncomeChart data={months} />
           <ChartLegend
             items={[
-              { color: "#1D6B4F", label: "Recurring (retainers, salary)" },
-              { color: "#C9A77A", label: "Once-off / projects" },
+              { color: "#197A30", label: "Recurring (retainers, salary)" },
+              { color: "#D7C29E", label: "Once-off / projects" },
             ]}
           />
         </CardBody>
