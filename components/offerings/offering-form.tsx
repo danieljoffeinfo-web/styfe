@@ -189,6 +189,42 @@ export function OfferingForm({
             </div>
           ) : null}
 
+          <section className="flex flex-col gap-3 rounded-[10px] bg-well p-3.5">
+            <div>
+              <h3 className="text-[13px] font-semibold">What it costs you</h3>
+              <p className="text-xs text-muted">
+                Your own cost to deliver — sub-contractors, licences, hosting, your time if you
+                price it. Blank means not costed yet, which is not the same as free.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <Field label="Once-off cost">
+                <Input
+                  name="cost_setup_zar"
+                  inputMode="decimal"
+                  defaultValue={offering?.cost_setup_zar ?? ""}
+                  placeholder="2500"
+                />
+              </Field>
+              <Field label="Monthly cost">
+                <Input
+                  name="cost_monthly_zar"
+                  inputMode="decimal"
+                  defaultValue={offering?.cost_monthly_zar ?? ""}
+                  placeholder="400"
+                />
+              </Field>
+            </div>
+            <Field label="Cost notes" hint="What makes up that number">
+              <Textarea
+                name="cost_notes"
+                rows={2}
+                defaultValue={offering?.cost_notes ?? ""}
+                placeholder="Hosting R120/mo, Cloudinary R280/mo"
+              />
+            </Field>
+          </section>
+
           <div className="grid grid-cols-2 gap-3">
             <Field label="Delivery (days)">
               <Input

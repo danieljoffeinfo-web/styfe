@@ -9,7 +9,16 @@ import { MoneyBarChart } from "@/components/charts/simple-charts";
 import { OfferingForm } from "@/components/offerings/offering-form";
 import { OfferingActions } from "@/components/offerings/offering-actions";
 import { TierEditor } from "@/components/offerings/tier-editor";
-import { getOfferingBySlug, getOfferingStats, getOfferingTiers, getOfferings } from "@/lib/queries/offerings";
+import {
+  getOfferingBySlug,
+  getOfferingCosting,
+  getOfferingSends,
+  getOfferingStats,
+  getOfferingTiers,
+  getOfferings,
+} from "@/lib/queries/offerings";
+import { getSettings } from "@/lib/queries/settings";
+import { OfferingDeliveryPanel } from "@/components/offerings/offering-delivery-panel";
 import { getClients, getSubscriptions } from "@/lib/queries/clients";
 import { getDeals } from "@/lib/queries/deals";
 import { getInvoices } from "@/lib/queries/invoices";
@@ -27,18 +36,24 @@ export default async function OfferingDetailPage({ params }: { params: Promise<{
   const offering = await getOfferingBySlug(slug);
   if (!offering) notFound();
 
-  const [tiers, stats, subscriptions, clients, deals, invoices, offerings, supabase] = await Promise.all([
-    getOfferingTiers([offering.id]),
-    getOfferingStats(),
-    getSubscriptions(),
-    getClients(),
-    getDeals(),
-    getInvoices(),
-    getOfferings(true),
-    createClient(),
-  ]);
+  const [tiers, stats, costing, sends, settings, subscriptions, clients, deals, invoices, offerings, supabase] =
+    await Promise.all([
+      getOfferingTiers([offering.id]),
+      getOfferingStats(),
+      getOfferingCosting(),
+      getOfferingSends(offering.id),
+      getSettings(),
+      getSubscriptions(),
+      getClients(),
+      getDeals(),
+      getInvoices(),
+      getOfferings(true),
+      createClient(),
+    ]);
 
   const stat = stats.find((s) => s.offering_id === offering.id) ?? null;
+  const cost = costing.find((c) => c.offering_id === offering.id) ?? null;
+  const costed = cost?.cost_setup_zar != null || cost?.cost_monthly_zar != null;
   const clientById = new Map(clients.map((c) => [c.id, c]));
   const offeringSubs = subscriptions.filter((s) => s.offering_id === offering.id);
   const offeringDeals = deals.filter((d) => d.offering_id === offering.id);
@@ -172,39 +187,90 @@ export default async function OfferingDetailPage({ params }: { params: Promise<{
 
         <Card>
           <CardBody>
-            <CardHeader title="Live numbers" />
+            <CardHeader title="Costing" aside="What it earns against what it costs" />
+            {!costed ? (
+              <p className="mb-3 rounded-[10px] bg-well px-3.5 py-2.5 text-[13px] text-muted">
+                Not costed yet. Edit the offering and fill in what delivery costs you — margin
+                stays blank until you do, rather than reading as pure profit.
+              </p>
+            ) : null}
             <dl className="grid grid-cols-2 gap-x-3 gap-y-3 text-sm">
-              <Stat
-                label={offering.unit_label ? `Active ${offering.unit_label}s` : "Active subs"}
-                value={String(
-                  offering.pricing_model === "per_unit_monthly"
-                    ? (stat?.active_units ?? 0)
-                    : (stat?.active_subscriptions ?? 0),
-                )}
-              />
-              <Stat label="MRR" value={<MoneyCents cents={toCents(stat?.mrr_zar)} />} />
-              <Stat label="Revenue YTD" value={<MoneyCents cents={toCents(stat?.revenue_ytd_zar)} />} />
-              <Stat label="Invoiced ever" value={<MoneyCents cents={toCents(stat?.invoiced_zar)} />} />
-              <Stat label="Open deals" value={String(stat?.open_deals ?? 0)} />
-              <Stat label="Pipeline · 12mo" value={<MoneyCents cents={toCents(stat?.pipeline_value_zar)} />} />
-              <Stat
-                label="Win rate"
-                value={stat?.win_rate_pct === null || stat?.win_rate_pct === undefined ? "—" : `${stat.win_rate_pct}%`}
-              />
-              {offering.unit_cost_monthly_zar ? (
+              {cost?.price_setup_zar != null || cost?.cost_setup_zar != null ? (
+                <>
+                  <Stat label="Once-off price" value={<MoneyCents cents={toCents(cost?.price_setup_zar)} />} />
+                  <Stat
+                    label="Once-off cost"
+                    value={cost?.cost_setup_zar != null ? <MoneyCents cents={toCents(cost.cost_setup_zar)} /> : "—"}
+                  />
+                  <Stat
+                    label="Once-off margin"
+                    value={
+                      cost?.margin_setup_zar != null ? (
+                        <>
+                          <MoneyCents cents={toCents(cost.margin_setup_zar)} />
+                          {cost.margin_setup_pct != null ? (
+                            <span className="ml-1 text-xs text-muted">{cost.margin_setup_pct}%</span>
+                          ) : null}
+                        </>
+                      ) : (
+                        "—"
+                      )
+                    }
+                  />
+                </>
+              ) : null}
+
+              {cost?.price_monthly_zar != null || cost?.cost_monthly_zar != null ? (
+                <>
+                  <Stat label="Monthly price" value={<MoneyCents cents={toCents(cost?.price_monthly_zar)} />} />
+                  <Stat
+                    label="Monthly cost"
+                    value={cost?.cost_monthly_zar != null ? <MoneyCents cents={toCents(cost.cost_monthly_zar)} /> : "—"}
+                  />
+                  <Stat
+                    label="Monthly margin"
+                    value={
+                      cost?.margin_monthly_zar != null ? (
+                        <>
+                          <MoneyCents cents={toCents(cost.margin_monthly_zar)} />
+                          {cost.margin_monthly_pct != null ? (
+                            <span className="ml-1 text-xs text-muted">{cost.margin_monthly_pct}%</span>
+                          ) : null}
+                        </>
+                      ) : (
+                        "—"
+                      )
+                    }
+                  />
+                </>
+              ) : null}
+
+              {(stat?.active_subscriptions ?? 0) > 0 || (stat?.active_units ?? 0) > 0 ? (
                 <Stat
-                  label="Margin / unit"
-                  value={
-                    <MoneyCents
-                      cents={toCents(offering.monthly_fee_zar) - toCents(offering.unit_cost_monthly_zar)}
-                    />
-                  }
+                  label={offering.unit_label ? `Live ${offering.unit_label}s` : "Live clients"}
+                  value={String(
+                    offering.pricing_model === "per_unit_monthly"
+                      ? (stat?.active_units ?? 0)
+                      : (stat?.active_subscriptions ?? 0),
+                  )}
                 />
               ) : null}
             </dl>
+            {offering.cost_notes ? (
+              <p className="mt-3 whitespace-pre-line border-t border-line-soft pt-3 text-[13px] leading-relaxed text-muted">
+                {offering.cost_notes}
+              </p>
+            ) : null}
           </CardBody>
         </Card>
       </section>
+
+      <OfferingDeliveryPanel
+        offering={offering}
+        clients={clients}
+        sends={sends}
+        fromEmail={settings.fromEmail}
+      />
 
       <Card>
         <CardBody>

@@ -32,6 +32,10 @@ const offeringSchema = z.object({
   description: zText,
   ideal_for: zText,
   color: zText,
+  // What delivery costs Dan. Null stays null — "not costed yet" is not zero.
+  cost_setup_zar: zMoney,
+  cost_monthly_zar: zMoney,
+  cost_notes: zText,
 });
 
 function readOffering(formData: FormData) {
@@ -49,6 +53,9 @@ function readOffering(formData: FormData) {
     description: formData.get("description"),
     ideal_for: formData.get("ideal_for"),
     color: formData.get("color"),
+    cost_setup_zar: formData.get("cost_setup_zar"),
+    cost_monthly_zar: formData.get("cost_monthly_zar"),
+    cost_notes: formData.get("cost_notes"),
   });
 }
 
@@ -123,6 +130,9 @@ export async function createOffering(_: ActionResult | null, formData: FormData)
         ideal_for: values.ideal_for,
         ...lists,
         color: values.color,
+        cost_setup_zar: values.cost_setup_zar,
+        cost_monthly_zar: values.cost_monthly_zar,
+        cost_notes: values.cost_notes,
         sort: ((last?.sort as number | undefined) ?? 0) + 10,
       });
       if (error) return fail(error.message);
@@ -158,6 +168,9 @@ export async function updateOffering(_: ActionResult | null, formData: FormData)
           ideal_for: values.ideal_for,
           ...lists,
           color: values.color,
+          cost_setup_zar: values.cost_setup_zar,
+          cost_monthly_zar: values.cost_monthly_zar,
+          cost_notes: values.cost_notes,
           status: status.success ? status.data : "active",
         })
         .eq("id", id);

@@ -53,6 +53,9 @@ export interface Settings extends Owned {
   business_details: string | null;
   mrr_target_zar: Numeric;
   spend_cap_zar: Numeric;
+  from_name: string | null;
+  from_email: string | null;
+  reply_to: string | null;
 }
 
 export interface PathSegment extends Owned {
@@ -152,6 +155,41 @@ export interface Offering extends Owned {
   status: OfferingStatus;
   sort: number;
   color: string | null;
+  /** What delivery costs Dan. Null means not costed yet, which is not zero. */
+  cost_setup_zar: Numeric | null;
+  cost_monthly_zar: Numeric | null;
+  cost_notes: string | null;
+  /** Object path inside the private offering-pdfs bucket. */
+  pdf_path: string | null;
+  pdf_name: string | null;
+  email_subject: string | null;
+  email_html: string | null;
+}
+
+/** public.v_offering_costing — price, cost and the margin between them. */
+export interface OfferingCosting {
+  offering_id: Uuid;
+  owner_id: Uuid | null;
+  price_setup_zar: Numeric | null;
+  price_monthly_zar: Numeric | null;
+  cost_setup_zar: Numeric | null;
+  cost_monthly_zar: Numeric | null;
+  margin_setup_zar: Numeric | null;
+  margin_monthly_zar: Numeric | null;
+  margin_setup_pct: number | null;
+  margin_monthly_pct: number | null;
+}
+
+export type SendStatus = "sent" | "failed";
+
+export interface OfferingSend extends Owned {
+  offering_id: Uuid;
+  client_id: Uuid | null;
+  to_email: string;
+  subject: string;
+  status: SendStatus;
+  provider_id: string | null;
+  error: string | null;
 }
 
 export interface OfferingTier extends Owned {

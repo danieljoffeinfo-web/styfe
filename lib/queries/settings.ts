@@ -13,6 +13,9 @@ export interface ResolvedSettings {
   businessDetails: string;
   mrrTargetCents: number;
   spendCapCents: number;
+  fromName: string;
+  fromEmail: string;
+  replyTo: string;
 }
 
 export const SETTINGS_DEFAULTS: ResolvedSettings = {
@@ -25,6 +28,9 @@ export const SETTINGS_DEFAULTS: ResolvedSettings = {
   businessDetails: "",
   mrrTargetCents: 5_000_000,
   spendCapCents: 1_500_000,
+  fromName: "",
+  fromEmail: "",
+  replyTo: "",
 };
 
 export async function getSettings(): Promise<ResolvedSettings> {
@@ -42,6 +48,9 @@ export async function getSettings(): Promise<ResolvedSettings> {
     businessDetails: data.business_details ?? "",
     mrrTargetCents: toCents(data.mrr_target_zar) || SETTINGS_DEFAULTS.mrrTargetCents,
     spendCapCents: toCents(data.spend_cap_zar) || SETTINGS_DEFAULTS.spendCapCents,
+    fromName: data.from_name ?? "",
+    fromEmail: data.from_email ?? "",
+    replyTo: data.reply_to ?? "",
   };
 }
 

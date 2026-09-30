@@ -68,6 +68,32 @@ export function SettingsForm({ settings }: { settings: ResolvedSettings }) {
 
       <Card>
         <CardBody>
+          <CardHeader title="Sending email" aside="Used when you email an offering" />
+          <p className="mb-3 text-[13px] text-muted">
+            Resend will only deliver to clients from a domain you have verified in its dashboard.
+            Until then a send only reaches your own address.
+          </p>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <Field label="From name">
+              <Input name="from_name" defaultValue={settings.fromName} placeholder="Dan Joffe" />
+            </Field>
+            <Field label="From email" hint="Must be on a domain verified in Resend">
+              <Input
+                name="from_email"
+                type="email"
+                defaultValue={settings.fromEmail}
+                placeholder="dan@styfe.co.za"
+              />
+            </Field>
+          </div>
+          <Field label="Reply-to" hint="Optional — where replies land if not the from address">
+            <Input name="reply_to" type="email" defaultValue={settings.replyTo} />
+          </Field>
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardBody>
           <CardHeader title="Targets" />
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <Field label="Secured monthly income target">

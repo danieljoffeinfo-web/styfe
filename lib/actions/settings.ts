@@ -27,6 +27,19 @@ const settingsSchema = z.object({
   business_details: zText,
   mrr_target_zar: zMoney.transform((v) => v ?? 50000),
   spend_cap_zar: zMoney.transform((v) => v ?? 15000),
+  from_name: zText,
+  // Resend only delivers to arbitrary recipients from a verified domain, so a
+  // blank here is the honest state rather than a guessed default.
+  from_email: z
+    .union([z.string(), z.null(), z.undefined()])
+    .transform((v) => (v ?? "").trim())
+    .refine((v) => v === "" || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v), "From email looks wrong")
+    .transform((v) => (v === "" ? null : v)),
+  reply_to: z
+    .union([z.string(), z.null(), z.undefined()])
+    .transform((v) => (v ?? "").trim())
+    .refine((v) => v === "" || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v), "Reply-to looks wrong")
+    .transform((v) => (v === "" ? null : v)),
 });
 
 export async function saveSettings(_: ActionResult | null, formData: FormData): Promise<ActionResult> {
@@ -40,6 +53,9 @@ export async function saveSettings(_: ActionResult | null, formData: FormData): 
       business_details: formData.get("business_details"),
       mrr_target_zar: formData.get("mrr_target_zar"),
       spend_cap_zar: formData.get("spend_cap_zar"),
+      from_name: formData.get("from_name"),
+      from_email: formData.get("from_email"),
+      reply_to: formData.get("reply_to"),
     });
     if (!parsed.success) return fail(zodMessage(parsed.error));
 
@@ -49,6 +65,7 @@ export async function saveSettings(_: ActionResult | null, formData: FormData): 
       if (error) return fail(error.message);
 
       revalidatePath("/settings");
+      revalidatePath("/offerings");
       revalidatePath("/invoices");
       revalidatePath("/");
       return ok("Settings saved.");

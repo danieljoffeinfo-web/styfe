@@ -21,6 +21,7 @@ Source brief: `docs/HANDOVER.md`. Approved design: `design/overview-mockup.dc.ht
    lives in `.env.local` and is read only by `scripts/`. The app talks to
    Supabase with the publishable key and Dan's session, so RLS always applies.
 2. **Derived numbers live in SQL views**, not in components: `v_secured_mrr`,
+   `v_offering_costing`,
    `v_receivables`, `v_invoices`, `v_monthly_revenue`, `v_monthly_income`,
    `v_monthly_spend`, `v_offering_stats`. If a number is typed into a
    component, that is a bug. (`v_mrr` still exists — subscriptions only — but
@@ -130,6 +131,33 @@ month" should mean the month on the calendar.
   once-off income) and `manual` (not tracked). All editable in Settings.
 - **No PDF library.** The printable invoice is a print stylesheet, so
   "Save as PDF" in the browser produces the file.
+- **An offering knows what it costs, not just what it charges.**
+  `setup_fee_zar` / `monthly_fee_zar` are what the client pays;
+  `cost_setup_zar` / `cost_monthly_zar` are what delivery costs Dan. Null is
+  "not costed yet", which is deliberately not zero — `v_offering_costing`
+  returns a null margin rather than reporting the full price as profit. A
+  negative margin is shown as negative, never clamped.
+- **The offering cards show costing, not activity.** Price, cost and margin
+  replaced MRR / Revenue YTD / Pipeline, which all read R0 and answered nothing.
+  A live client count only appears when there is one. Monthly offerings are
+  judged on their monthly figures, everything else on the once-off ones.
+- **Each offering carries its own PDF and covering email.** The PDF lives in a
+  private `offering-pdfs` storage bucket under the owner's user id, which is
+  what the storage policy keys on, and is reached through a ten-minute signed
+  URL — the bucket is never public. `email_subject` and `email_html` are the
+  saved default; the send sheet lets Dan edit both for one client without
+  rewriting the template.
+- **Email goes through Resend**, called over plain fetch in `lib/email.ts`.
+  Resend only delivers to arbitrary recipients from a domain verified in its
+  dashboard, so the from address is a setting (`settings.from_email`) rather
+  than a constant, and a send with none set fails with that explanation rather
+  than pretending to work. `RESEND_API_KEY` is a Vercel environment variable,
+  never in the repo. Every send is logged to `offering_sends`, failures
+  included, with Resend's own error text — "it said sent but nothing arrived"
+  is the one outcome worth engineering against.
+- **Email templates take five tokens**, not a template language:
+  `{{client_name}}`, `{{contact_name}}`, `{{offering_name}}`, `{{price}}` and
+  `{{business_name}}`. Values are HTML-escaped on the way in.
 - **A recurring revenue entry is a monthly stream, not a row per month.** One
   entry means "this much, every month, from `date` until `ended_at`". Null
   `ended_at` means it is still running, which is exactly what makes it count

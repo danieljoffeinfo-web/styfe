@@ -277,3 +277,87 @@ begin
 
   raise notice 'Recurring revenue, MRR and track checks passed.';
 end $$;
+
+-- Offering costing and sends --------------------------------------------
+do $$
+declare
+  n  bigint;
+  v  numeric;
+  i  int;
+  ok boolean;
+  oid uuid;
+begin
+  select id into oid from offerings where slug = 'whatsapp-assistant';
+  if oid is null then
+    raise exception 'whatsapp-assistant is missing from the catalogue';
+  end if;
+
+  -- An uncosted offering must read as unknown, never as pure profit: margin
+  -- is null until a cost is entered.
+  update offerings set cost_setup_zar = null where id = oid;
+  select margin_setup_zar into v from v_offering_costing where offering_id = oid;
+  if v is not null then
+    raise exception 'An uncosted offering reported a margin of %', v;
+  end if;
+
+  -- whatsapp-assistant lists at 7300. Cost it at 2300 and the margin is 5000
+  -- at 68%.
+  update offerings set cost_setup_zar = 2300 where id = oid;
+  select margin_setup_zar into v from v_offering_costing where offering_id = oid;
+  if coalesce(v, 0) <> 5000 then
+    raise exception 'Once-off margin is %, expected 5000', coalesce(v, 0);
+  end if;
+  select margin_setup_pct into i from v_offering_costing where offering_id = oid;
+  if coalesce(i, 0) <> 68 then
+    raise exception 'Once-off margin is %%%, expected 68%%', coalesce(i, 0);
+  end if;
+
+  -- Selling below cost has to show as negative, not clamp at zero.
+  update offerings set cost_setup_zar = 9000 where id = oid;
+  select margin_setup_zar into v from v_offering_costing where offering_id = oid;
+  if coalesce(v, 0) <> -1700 then
+    raise exception 'A loss-making offering reported %, expected -1700', coalesce(v, 0);
+  end if;
+  update offerings set cost_setup_zar = null where id = oid;
+
+  -- Sends are logged either way, and only the two states exist.
+  insert into offering_sends (offering_id, to_email, subject, status, provider_id)
+  values (oid, 'client@example.com', 'Check: sent', 'sent', 'abc123');
+  insert into offering_sends (offering_id, to_email, subject, status, error)
+  values (oid, 'client@example.com', 'Check: failed', 'failed', 'Domain not verified');
+  select count(*) into n from offering_sends where subject like 'Check: %';
+  if n <> 2 then
+    raise exception 'Send log did not record both outcomes';
+  end if;
+
+  ok := false;
+  begin
+    insert into offering_sends (offering_id, to_email, subject, status)
+    values (oid, 'client@example.com', 'Check: bad', 'queued');
+  exception when check_violation then ok := true;
+  end;
+  if not ok then
+    raise exception 'offering_sends accepted an unknown status';
+  end if;
+  delete from offering_sends where subject like 'Check: %';
+
+  -- Deleting an offering must not strand its send history.
+  select count(*) into n
+  from pg_constraint
+  where conname like 'offering_sends_offering_id%' and confdeltype = 'c';
+  if n <> 1 then
+    raise exception 'offering_sends does not cascade from its offering';
+  end if;
+
+  -- anon must not reach the costing view or the log.
+  select count(*) into n
+  from information_schema.role_table_grants
+  where table_schema = 'public'
+    and table_name in ('offering_sends', 'v_offering_costing')
+    and grantee = 'anon';
+  if n <> 0 then
+    raise exception 'anon holds % grant(s) on the costing tables', n;
+  end if;
+
+  raise notice 'Offering costing and send checks passed.';
+end $$;
