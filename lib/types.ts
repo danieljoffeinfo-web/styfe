@@ -31,6 +31,9 @@ export type CategoryGroup = "income" | "business" | "personal" | "internal";
 export type GoalKind = "savings" | "mrr" | "spend_cap";
 export type Severity = "low" | "med" | "high";
 export type PathSource = "subscriptions" | "project_average" | "manual";
+/** Admin work is split into Dan's client obligations and his own projects. */
+export type AdminTrack = "client" | "business";
+export type AdminStatus = "todo" | "doing" | "done";
 
 interface Owned {
   id: Uuid;
@@ -90,6 +93,35 @@ export interface Client extends Owned {
   relationship: ClientRelationship;
   status: ClientStatus;
   notes: string | null;
+  /** null means "not chosen" — the UI falls back to the relationship colour. */
+  color: string | null;
+  billing_email: string | null;
+  billing_address: string | null;
+  vat_number: string | null;
+  registration_number: string | null;
+  payment_terms_days: number;
+}
+
+/** Revenue is entered by hand now, not derived from an imported statement. */
+export interface RevenueEntry extends Owned {
+  date: IsoDate;
+  description: string;
+  amount_zar: Numeric;
+  recurring: boolean;
+  client_id: Uuid | null;
+  offering_id: Uuid | null;
+  invoice_id: Uuid | null;
+  notes: string | null;
+}
+
+export interface AdminItem extends Owned {
+  track: AdminTrack;
+  title: string;
+  detail: string | null;
+  status: AdminStatus;
+  client_id: Uuid | null;
+  due_date: IsoDate | null;
+  sort: number;
 }
 
 export interface Offering extends Owned {
@@ -330,6 +362,19 @@ export const OFFERING_TYPE_ORDER: Record<OfferingType, number> = {
   standard: 0,
   custom: 1,
   addon: 2,
+};
+
+export const ADMIN_TRACK_LABEL: Record<AdminTrack, string> = {
+  client: "Clients",
+  business: "Business",
+};
+
+export const ADMIN_STATUSES: AdminStatus[] = ["todo", "doing", "done"];
+
+export const ADMIN_STATUS_LABEL: Record<AdminStatus, string> = {
+  todo: "To do",
+  doing: "In progress",
+  done: "Done",
 };
 
 export const DEAL_STAGES: DealStage[] = ["lead", "meeting", "proposal", "pilot", "won", "lost"];

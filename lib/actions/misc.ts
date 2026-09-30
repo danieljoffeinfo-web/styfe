@@ -134,7 +134,6 @@ export async function bumpWeeklyScore(metric: string, delta: number, weekStart?:
             .insert({ owner_id: userId, week_start: week, metric, value: next });
       if (error) return fail(error.message);
 
-      revalidatePath("/week");
       revalidatePath("/");
       return ok();
     }),
@@ -157,7 +156,6 @@ export async function saveWeeklyTarget(_: ActionResult | null, formData: FormDat
           { onConflict: "metric" },
         );
       if (error) return fail(error.message);
-      revalidatePath("/week");
       revalidatePath("/");
       return ok("Target saved.");
     });
@@ -169,7 +167,6 @@ export async function deleteWeeklyTarget(metric: string): Promise<ActionResult> 
     withUser(async (supabase) => {
       const { error } = await supabase.from("weekly_targets").delete().eq("metric", metric);
       if (error) return fail(error.message);
-      revalidatePath("/week");
       return ok("Metric removed.");
     }),
   );
@@ -207,7 +204,6 @@ export async function saveGoal(_: ActionResult | null, formData: FormData): Prom
           .insert({ ...parsed.data, slug: slugify(parsed.data.name), owner_id: userId });
         if (error) return fail(error.message);
       }
-      revalidatePath("/goals");
       revalidatePath("/");
       return ok("Goal saved.");
     });
@@ -241,7 +237,6 @@ export async function addGoalEntry(_: ActionResult | null, formData: FormData): 
         .eq("id", goalId);
       if (updateError) return fail(updateError.message);
 
-      revalidatePath("/goals");
       revalidatePath("/");
       return ok("Deposit recorded.");
     });
@@ -264,7 +259,6 @@ export async function deleteGoalEntry(id: string): Promise<ActionResult> {
         await supabase.from("goals").update({ current_zar: total }).eq("id", entry.goal_id);
       }
 
-      revalidatePath("/goals");
       return ok("Removed.");
     }),
   );

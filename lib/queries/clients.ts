@@ -14,6 +14,12 @@ export async function getClientBySlug(slug: string): Promise<Client | null> {
   return data;
 }
 
+export async function getClientById(id: string): Promise<Client | null> {
+  const supabase = await createClient();
+  const { data } = await supabase.from("clients").select("*").eq("id", id).maybeSingle<Client>();
+  return data;
+}
+
 export async function getSubscriptions(): Promise<Subscription[]> {
   const supabase = await createClient();
   const { data } = await supabase.from("subscriptions").select("*").order("started_at", { ascending: false });

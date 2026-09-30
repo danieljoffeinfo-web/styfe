@@ -8,6 +8,7 @@ import { ClientForm } from "@/components/clients/client-form";
 import { getClients, getSubscriptions } from "@/lib/queries/clients";
 import { getReceivables } from "@/lib/queries/invoices";
 import { toCents } from "@/lib/money";
+import { clientColor } from "@/lib/clients";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Clients · Styfe HQ" };
@@ -51,8 +52,14 @@ export default async function ClientsPage() {
               <Link
                 key={client.id}
                 href={`/clients/${client.slug}`}
-                className="flex flex-col gap-2 rounded-[14px] border border-line bg-card p-5 transition-colors hover:bg-well"
+                className="relative flex flex-col gap-2 overflow-hidden rounded-[14px] border border-line bg-card p-5 pl-6 transition-colors hover:bg-well"
               >
+                {/* The client's colour as a rail down the card, so the grid reads at a glance. */}
+                <span
+                  aria-hidden
+                  className="absolute inset-y-0 left-0 w-1.5"
+                  style={{ background: clientColor(client) }}
+                />
                 <div className="flex items-start justify-between gap-3">
                   <h2 className="font-semibold">{client.name}</h2>
                   <Badge tone={client.status === "active" ? "green" : "neutral"}>{client.status}</Badge>

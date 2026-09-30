@@ -7,6 +7,18 @@ import { todayIso, addDaysIso } from "@/lib/dates";
 import { guard, ok, fail, withUser, ensureSettings, type ActionResult } from "./helpers";
 import { zDate, zInvoiceStatus, zMoney, zText, zodMessage } from "./schemas";
 import type { Offering } from "@/lib/types";
+import type { SupabaseClient } from "@supabase/supabase-js";
+
+/** A blank due date follows the client's own payment terms, 30 days by default. */
+async function paymentTermsDays(supabase: SupabaseClient, clientId: string): Promise<number> {
+  const { data } = await supabase
+    .from("clients")
+    .select("payment_terms_days")
+    .eq("id", clientId)
+    .maybeSingle<{ payment_terms_days: number | null }>();
+  const days = Number(data?.payment_terms_days);
+  return Number.isFinite(days) && days >= 0 ? days : 30;
+}
 
 const lineSchema = z.object({
   description: z.string().trim().min(1, "Every line needs a description").max(300),
@@ -81,7 +93,9 @@ export async function createInvoice(_: ActionResult | null, formData: FormData):
           client_id: parsed.data.client_id,
           number,
           issued_at: issued,
-          due_at: parsed.data.due_at ?? (issued ? addDaysIso(issued, 30) : null),
+          due_at:
+            parsed.data.due_at ??
+            (issued ? addDaysIso(issued, await paymentTermsDays(supabase, parsed.data.client_id)) : null),
           status: parsed.data.status,
           notes: parsed.data.notes,
         })
@@ -282,7 +296,7 @@ export async function createInvoiceFromDeal(dealId: string): Promise<ActionResul
           client_id: deal.client_id,
           number,
           issued_at: issued,
-          due_at: addDaysIso(issued, 30),
+          due_at: addDaysIso(issued, await paymentTermsDays(supabase, deal.client_id)),
           status: "draft",
           notes: `From deal: ${deal.title}`,
         })

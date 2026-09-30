@@ -1,7 +1,7 @@
 import "server-only";
 import { createClient } from "@/lib/supabase/server";
 import { toCents } from "@/lib/money";
-import { calendarMonth, monthRange, statementMonth, todayIso } from "@/lib/dates";
+import { monthRange, statementMonth, todayIso } from "@/lib/dates";
 import { merchantName } from "./money.client";
 import type {
   Category,
@@ -58,41 +58,6 @@ export async function getMonthlyIncome(months: number, endMonth?: string): Promi
   // dominated by empty months when Dan has not imported recently.
   const latest = rows.length ? String(rows[rows.length - 1].month).slice(0, 7) : statementMonth(todayIso());
   const end = endMonth ?? latest;
-
-  return monthRange(end, months).map((month) => {
-    const row = byMonth.get(month);
-    return {
-      month,
-      label: month,
-      recurringCents: toCents(row?.recurring_zar),
-      onceOffCents: toCents(row?.once_off_zar),
-      totalCents: toCents(row?.total_zar),
-    };
-  });
-}
-
-/**
- * Income by calendar month, for the Overview.
- *
- * The statement month is right where the numbers have to reconcile against
- * FNB (Revenue, Spend). On the dashboard "this month" should mean the month
- * on the calendar, so this reads v_monthly_income_calendar and anchors on the
- * current month rather than on the last month that happens to have data —
- * a quiet month should read as a quiet month, not disappear.
- */
-export async function getCalendarMonthlyIncome(
-  months: number,
-  endMonth?: string,
-): Promise<MonthPoint[]> {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from("v_monthly_income_calendar")
-    .select("month, total_zar, recurring_zar, once_off_zar")
-    .order("month");
-
-  const rows = (data ?? []) as MonthlyIncome[];
-  const byMonth = new Map(rows.map((r) => [String(r.month).slice(0, 7), r]));
-  const end = endMonth ?? calendarMonth(todayIso());
 
   return monthRange(end, months).map((month) => {
     const row = byMonth.get(month);

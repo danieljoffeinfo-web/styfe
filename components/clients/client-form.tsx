@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { SubmitButton } from "@/components/ui/submit-button";
 import { Field, Input, Select, Textarea } from "@/components/ui/input";
 import { useToast } from "@/components/ui/toast";
+import { ColorPicker } from "./color-picker";
 import { saveClient } from "@/lib/actions/clients";
 import type { Client } from "@/lib/types";
 import type { ActionResult } from "@/lib/actions/helpers";
@@ -72,11 +73,63 @@ export function ClientForm({ client, trigger }: { client?: Client; trigger: Reac
             </Field>
           </div>
 
+          <ColorPicker defaultValue={client?.color} />
+
           <Field label="Notes">
             <Textarea name="notes" defaultValue={client?.notes ?? ""} />
           </Field>
 
-          <div className="flex gap-2">
+          <section className="flex flex-col gap-4 border-t border-line pt-5">
+            <div>
+              <h3 className="text-[13px] font-semibold">Invoicing</h3>
+              <p className="text-xs text-muted">
+                What goes on their invoice. Blank falls back to the contact details above.
+              </p>
+            </div>
+
+            <Field label="Billing email" hint="Where the invoice is sent">
+              <Input
+                name="billing_email"
+                type="email"
+                defaultValue={client?.billing_email ?? ""}
+                placeholder="accounts@client.co.za"
+              />
+            </Field>
+
+            <Field label="Billing address">
+              <Textarea
+                name="billing_address"
+                defaultValue={client?.billing_address ?? ""}
+                placeholder={"12 Main Road\nRosebank\nJohannesburg, 2196"}
+              />
+            </Field>
+
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <Field label="VAT number">
+                <Input name="vat_number" defaultValue={client?.vat_number ?? ""} placeholder="4123456789" />
+              </Field>
+              <Field label="Company registration">
+                <Input
+                  name="registration_number"
+                  defaultValue={client?.registration_number ?? ""}
+                  placeholder="2021/123456/07"
+                />
+              </Field>
+            </div>
+
+            <Field label="Payment terms" hint="Days from the invoice date until it is due">
+              <Input
+                name="payment_terms_days"
+                type="number"
+                min={0}
+                max={365}
+                inputMode="numeric"
+                defaultValue={client?.payment_terms_days ?? 30}
+              />
+            </Field>
+          </section>
+
+          <div className="sticky bottom-0 -mx-5 flex gap-2 border-t border-line bg-paper px-5 py-4 sm:-mx-6 sm:px-6">
             <SubmitButton variant="primary">{client ? "Save client" : "Add client"}</SubmitButton>
             <Button variant="ghost" onClick={() => setOpen(false)}>
               Cancel

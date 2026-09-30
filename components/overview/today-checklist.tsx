@@ -119,7 +119,7 @@ export function TodayChecklist({
       {hidden > 0 ? (
         <p className="pt-1 text-xs text-muted">
           {hidden} more on the list.{" "}
-          <Link href="/week" className="text-green underline underline-offset-4">
+          <Link href="/admin#today" className="text-green underline underline-offset-4">
             See all
           </Link>
         </p>

@@ -8,7 +8,8 @@ import { IncomeChart, ChartLegend } from "@/components/charts/income-chart";
 import { TodayChecklist } from "@/components/overview/today-checklist";
 import { PathToTarget } from "@/components/overview/path-to-target";
 import { ResolveAlertButton } from "@/components/overview/resolve-alert-button";
-import { getCalendarMonthlyIncome, getMrr, pathToTarget } from "@/lib/queries/money";
+import { getMrr, pathToTarget } from "@/lib/queries/money";
+import { getMonthlyRevenue } from "@/lib/queries/revenue";
 import { getReceivables } from "@/lib/queries/invoices";
 import { getPathSegments, getSettings } from "@/lib/queries/settings";
 import { getClients, getSubscriptions } from "@/lib/queries/clients";
@@ -38,8 +39,9 @@ export default async function OverviewPage() {
     await Promise.all([
       getSettings(),
       getMrr(),
-      // Calendar months here, not statement months — see the view's comment.
-      getCalendarMonthlyIncome(6),
+      // Revenue is entered by hand and sits on calendar months, so the Overview
+      // and the Revenue page always show the same figure for the same month.
+      getMonthlyRevenue(6),
       getReceivables(),
       getPathSegments(),
       getSubscriptions(),
@@ -84,7 +86,7 @@ export default async function OverviewPage() {
         actions={
           <>
             <Button asChild>
-              <Link href="/spend/import">Import statement</Link>
+              <Link href="/revenue">Add revenue</Link>
             </Button>
             <Button asChild variant="primary">
               <Link href="/invoices/new">New invoice</Link>
@@ -155,7 +157,7 @@ export default async function OverviewPage() {
         <Card className="xl:col-span-2">
           <CardBody>
             <CardHeader title="Tasks" aside={`Top ${TASKS_SHOWN}`}>
-              <Link href="/week" className="text-[13px] text-green underline-offset-4 hover:underline">
+              <Link href="/admin#today" className="text-[13px] text-green underline-offset-4 hover:underline">
                 All tasks
               </Link>
             </CardHeader>

@@ -10,7 +10,6 @@ export async function recategoriseTransaction(id: string, category: string): Pro
     withUser(async (supabase) => {
       const { error } = await supabase.from("transactions").update({ category }).eq("id", id);
       if (error) return fail(error.message);
-      revalidatePath("/spend");
       revalidatePath("/");
       return ok("Re-categorised.");
     }),
@@ -70,7 +69,6 @@ export async function saveCategoryRule(_: ActionResult | null, formData: FormDat
         }
       }
 
-      revalidatePath("/spend");
       revalidatePath("/settings");
       revalidatePath("/");
       return ok(touched ? `Rule saved. ${touched} transactions updated.` : "Rule saved.");
@@ -83,7 +81,6 @@ export async function deleteCategoryRule(id: string): Promise<ActionResult> {
     withUser(async (supabase) => {
       const { error } = await supabase.from("category_rules").delete().eq("id", id);
       if (error) return fail(error.message);
-      revalidatePath("/spend");
       revalidatePath("/settings");
       return ok("Rule removed.");
     }),
@@ -120,7 +117,6 @@ export async function saveCategory(_: ActionResult | null, formData: FormData): 
         ? await supabase.from("categories").update({ ...rest, group }).eq("slug", slug)
         : await supabase.from("categories").insert({ slug, group, ...rest, owner_id: userId });
       if (error) return fail(error.message);
-      revalidatePath("/spend");
       revalidatePath("/settings");
       return ok("Category saved.");
     });
@@ -170,7 +166,6 @@ export async function commitImport(rows: ImportRow[], source: string): Promise<A
         inserted += data?.length ?? 0;
       }
 
-      revalidatePath("/spend");
       revalidatePath("/revenue");
       revalidatePath("/");
       const skipped = rows.length - inserted;

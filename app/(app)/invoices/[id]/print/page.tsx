@@ -5,6 +5,7 @@ import { MoneyCents } from "@/components/money";
 import { PrintButton } from "@/components/invoices/print-button";
 import { getInvoice, getInvoiceLines } from "@/lib/queries/invoices";
 import { getSettings } from "@/lib/queries/settings";
+import { getClientById } from "@/lib/queries/clients";
 import { toCents, vatOnCents } from "@/lib/money";
 import { formatDate } from "@/lib/dates";
 
@@ -15,7 +16,11 @@ export default async function PrintInvoicePage({ params }: { params: Promise<{ i
   const invoice = await getInvoice(id);
   if (!invoice) notFound();
 
-  const [lines, settings] = await Promise.all([getInvoiceLines(invoice.id), getSettings()]);
+  const [lines, settings, client] = await Promise.all([
+    getInvoiceLines(invoice.id),
+    getSettings(),
+    getClientById(invoice.client_id),
+  ]);
 
   const subtotalCents = lines.reduce(
     (acc, line) => acc + Math.round(Number(line.qty) * toCents(line.unit_price_zar)),
@@ -67,9 +72,31 @@ export default async function PrintInvoicePage({ params }: { params: Promise<{ i
         <section className="mt-10">
           <p className="eyebrow">Bill to</p>
           <p className="mt-1.5 text-lg font-semibold">{invoice.client_name}</p>
+          {client?.billing_address ? (
+            <p className="mt-1 whitespace-pre-line text-[13px] leading-relaxed text-muted">
+              {client.billing_address}
+            </p>
+          ) : null}
           <p className="text-[13px] text-muted">
-            {[invoice.contact_name, invoice.contact_email, invoice.contact_phone].filter(Boolean).join(" · ")}
+            {[
+              invoice.contact_name,
+              // The billing address takes over from the contact email once it is set.
+              client?.billing_email ?? invoice.contact_email,
+              invoice.contact_phone,
+            ]
+              .filter(Boolean)
+              .join(" · ")}
           </p>
+          {client?.vat_number || client?.registration_number ? (
+            <p className="mt-1 text-[13px] text-muted">
+              {[
+                client.vat_number ? `VAT ${client.vat_number}` : null,
+                client.registration_number ? `Reg ${client.registration_number}` : null,
+              ]
+                .filter(Boolean)
+                .join(" · ")}
+            </p>
+          ) : null}
         </section>
 
         <table className="mt-8 w-full border-collapse text-sm">

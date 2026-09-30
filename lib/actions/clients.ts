@@ -8,6 +8,7 @@ import {
   zClientRelationship,
   zClientStatus,
   zDate,
+  zHexColor,
   zInt,
   zMoney,
   zRequiredText,
@@ -24,6 +25,13 @@ const clientSchema = z.object({
   relationship: zClientRelationship,
   status: zClientStatus,
   notes: zText,
+  color: zHexColor,
+  billing_email: zText,
+  billing_address: zText,
+  vat_number: zText,
+  registration_number: zText,
+  // Blank means the default 30 days rather than "due immediately".
+  payment_terms_days: zInt.transform((v) => (v !== null && v >= 0 && v <= 365 ? v : 30)),
 });
 
 function readClient(formData: FormData) {
@@ -35,6 +43,12 @@ function readClient(formData: FormData) {
     relationship: formData.get("relationship") ?? "project",
     status: formData.get("status") ?? "active",
     notes: formData.get("notes"),
+    color: formData.get("color"),
+    billing_email: formData.get("billing_email"),
+    billing_address: formData.get("billing_address"),
+    vat_number: formData.get("vat_number"),
+    registration_number: formData.get("registration_number"),
+    payment_terms_days: formData.get("payment_terms_days"),
   });
 }
 
@@ -60,6 +74,7 @@ export async function saveClient(_: ActionResult | null, formData: FormData): Pr
         if (error) return fail(error.message);
       }
       revalidatePath("/clients");
+      revalidatePath("/invoices");
       revalidatePath("/");
       return ok("Saved.");
     });

@@ -16,7 +16,8 @@ import { getDeals } from "@/lib/queries/deals";
 import { createClient } from "@/lib/supabase/server";
 import { toCents } from "@/lib/money";
 import { formatDate } from "@/lib/dates";
-import { DEAL_STAGE_LABEL, type InvoiceStatus, type Transaction } from "@/lib/types";
+import { clientColor } from "@/lib/clients";
+import { DEAL_STAGE_LABEL, type InvoiceStatus, type RevenueEntry } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
@@ -34,13 +35,18 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ s
   ]);
   const tiers = await getOfferingTiers(offerings.map((o) => o.id));
 
-  const { data: txRows } = await supabase
-    .from("transactions")
-    .select("*")
+  // Money in is entered by hand now, so this is revenue_entries rather than
+  // the imported bank transactions the page used to show.
+  const { data: revenueRows } = await supabase
+    .from("revenue_entries")
+    .select("id, date, description, amount_zar, recurring")
     .eq("client_id", client.id)
     .order("date", { ascending: false })
     .limit(50);
-  const transactions = (txRows ?? []) as Transaction[];
+  const revenue = (revenueRows ?? []) as Pick<
+    RevenueEntry,
+    "id" | "date" | "description" | "amount_zar" | "recurring"
+  >[];
 
   const offeringById = new Map(offerings.map((o) => [o.id, o]));
   const clientSubs = subscriptions.filter((s) => s.client_id === client.id);
@@ -67,7 +73,16 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ s
             ← Clients
           </Link>
         }
-        title={client.name}
+        title={
+          <span className="flex items-center gap-3">
+            <span
+              aria-hidden
+              className="h-3.5 w-3.5 shrink-0 rounded-full"
+              style={{ background: clientColor(client) }}
+            />
+            {client.name}
+          </span>
+        }
         actions={
           <>
             {waNumber ? (
@@ -194,6 +209,18 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ s
               <Row label="Phone" value={client.contact_phone ?? "—"} />
               <Row label="Email" value={client.contact_email ?? "—"} />
             </dl>
+            <dl className="mt-2 flex flex-col gap-1 border-t border-line-soft pt-3 text-[13px]">
+              <p className="eyebrow pb-1">Invoicing</p>
+              <Row label="Billing email" value={client.billing_email ?? client.contact_email ?? "—"} />
+              <Row label="VAT number" value={client.vat_number ?? "—"} />
+              <Row label="Registration" value={client.registration_number ?? "—"} />
+              <Row label="Payment terms" value={`${client.payment_terms_days} days`} />
+              {client.billing_address ? (
+                <p className="whitespace-pre-line pt-1 text-xs leading-relaxed text-muted">
+                  {client.billing_address}
+                </p>
+              ) : null}
+            </dl>
           </CardBody>
         </Card>
       </section>
@@ -254,19 +281,29 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ s
 
       <Card>
         <CardBody>
-          <CardHeader title="Transactions" aside="Payments linked to this client" />
-          {transactions.length === 0 ? (
+          <CardHeader title="Revenue" aside="What this client has actually paid">
+            <Link href="/revenue" className="text-[13px] text-green underline-offset-4 hover:underline">
+              Add revenue
+            </Link>
+          </CardHeader>
+          {revenue.length === 0 ? (
             <p className="text-[13px] text-muted">
-              No payments linked yet. Imports link Proto, Britos and IE Global automatically.
+              Nothing recorded yet. Add it on the Revenue page and pick this client.
             </p>
           ) : (
             <ul className="flex flex-col gap-1.5 text-sm">
-              {transactions.map((tx) => (
-                <li key={tx.id} className="flex items-center justify-between gap-3 border-b border-line-soft py-1.5 last:border-b-0">
-                  <span className="text-xs text-muted">{formatDate(tx.date)}</span>
-                  <span className="min-w-0 flex-1 truncate">{tx.description || "—"}</span>
+              {revenue.map((entry) => (
+                <li
+                  key={entry.id}
+                  className="flex items-center justify-between gap-3 border-b border-line-soft py-1.5 last:border-b-0"
+                >
+                  <span className="text-xs text-muted">{formatDate(entry.date)}</span>
+                  <span className="min-w-0 flex-1 truncate">{entry.description || "—"}</span>
+                  <Badge tone={entry.recurring ? "green" : "sand"}>
+                    {entry.recurring ? "Recurring" : "Once-off"}
+                  </Badge>
                   <span className="money">
-                    <MoneyCents cents={toCents(tx.amount_zar)} withCents />
+                    <MoneyCents cents={toCents(entry.amount_zar)} withCents />
                   </span>
                 </li>
               ))}

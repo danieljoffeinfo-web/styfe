@@ -87,6 +87,15 @@ export const zClientRelationship = z.enum(["retainer", "project", "employer"]);
 export const zClientStatus = z.enum(["active", "paused", "ended"]);
 export const zSubscriptionStatus = z.enum(["active", "paused", "cancelled"]);
 
+/** A client colour is a #rrggbb swatch or nothing at all. Anything else is
+ *  dropped rather than rejected, so a stale form never blocks a save. */
+export const zHexColor = z
+  .union([z.string(), z.null(), z.undefined()])
+  .transform((v) => {
+    const t = (v ?? "").trim();
+    return /^#[0-9a-fA-F]{6}$/.test(t) ? t.toUpperCase() : null;
+  });
+
 /** Turns a zod error into the single sentence the forms show. */
 export function zodMessage(error: z.ZodError): string {
   const issue = error.issues[0];

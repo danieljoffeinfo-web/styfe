@@ -21,8 +21,9 @@ Source brief: `docs/HANDOVER.md`. Approved design: `design/overview-mockup.dc.ht
    lives in `.env.local` and is read only by `scripts/`. The app talks to
    Supabase with the publishable key and Dan's session, so RLS always applies.
 2. **Derived numbers live in SQL views**, not in components: `v_mrr`,
-   `v_receivables`, `v_invoices`, `v_monthly_income`, `v_monthly_spend`,
-   `v_offering_stats`. If a number is typed into a component, that is a bug.
+   `v_receivables`, `v_invoices`, `v_monthly_revenue`, `v_monthly_income`,
+   `v_monthly_spend`, `v_offering_stats`. If a number is typed into a
+   component, that is a bug.
 3. **Money maths in cents.** `toCents` on the way in, `formatZar` on the way out.
 4. **Schema changes are migrations.** `supabase/migrations/`, never the
    dashboard. Views must be `security_invoker = true` and must be granted to
@@ -30,7 +31,9 @@ Source brief: `docs/HANDOVER.md`. Approved design: `design/overview-mockup.dc.ht
    them — Supabase's default privileges hand new relations to `anon` otherwise.
 5. **Prices are ex VAT everywhere.** VAT is applied once, in
    `v_invoice_totals` and in `vatOnCents`, from the global setting.
-6. **Statement months, not calendar months.** See below.
+6. **Statement months, not calendar months** — for anything derived from the
+   bank statement. Revenue is typed in by hand and sits on calendar months.
+   See below.
 7. **390px is a supported width.** Tables become cards, the sidebar becomes a
    sheet, touch targets stay at 44px.
 8. No emoji, no gradient washes. Inter for titles and UI, JetBrains Mono for
@@ -53,15 +56,18 @@ Defined once as Tailwind v4 theme variables in `app/globals.css`:
 
 ## The statement month
 
-FNB's cycle runs from the 4th of a month to the 3rd of the next and is labelled
-with the month it starts in. Bucketing Dan's CSV by calendar month gives
+This still governs anything read out of `transactions`, even though the sample
+data is gone. FNB's cycle runs from the 4th of a month to the 3rd of the next
+and is labelled with the month it starts in. Bucketing Dan's CSV by calendar month gives
 Jun 43.0k / Jul 43.0k / Aug 32.2k; bucketing by statement month gives
 **Jun 72.1k · Jul 43.9k · Aug 8.7k**, which is exactly what his statements say.
 
 So: `public.statement_month(date)` in SQL and `statementMonth()` in
 `lib/dates.ts` both shift the date back three days before truncating to the
-month. Every income and spend view groups this way. Invoice dates and goal
-deadlines are ordinary calendar dates.
+month. Every view over `transactions` groups this way. Invoice dates, goal
+deadlines and **`revenue_entries`** are ordinary calendar dates — Dan types
+revenue in himself, so there is no statement to reconcile against and "this
+month" should mean the month on the calendar.
 
 ## Decisions taken where the brief was ambiguous
 
@@ -123,6 +129,40 @@ deadlines are ordinary calendar dates.
   once-off income) and `manual` (not tracked). All editable in Settings.
 - **No PDF library.** The printable invoice is a print stylesheet, so
   "Save as PDF" in the browser produces the file.
+- **Revenue is entered by hand, in `revenue_entries`.** It used to be derived
+  from imported transactions. Revenue and the Overview now both read
+  `v_monthly_revenue`, so the same month reads the same on both pages, and
+  `revenue_entries` starts empty on purpose.
+- **The imported statement was mock data and has been cleared.** All 1,469 rows
+  were deleted from the live project; nothing in the app reads `transactions`
+  any more. The table, `v_monthly_income`, `v_monthly_spend`, `statement_month()`
+  and `npm run import:transactions` all remain, so a real FNB export can still be
+  loaded, but `npm run setup` no longer imports the sample CSV and
+  `npm run check` no longer asserts its figures — it checks structure instead
+  (catalogue present and typed, nothing unowned, every relation readable).
+  `seed/transactions_2026-03_to_2026-09.csv` is still in the repo and in its
+  git history; `supabase/test/checks.sql` uses it to prove the importer and the
+  statement-month maths on a throwaway Postgres.
+- **Clients carry a colour.** `clients.color` is a `#RRGGBB` swatch, null until
+  one is picked; `clientColor()` in `lib/clients.ts` falls back by relationship
+  so a fresh row never renders grey. The seed gives each client a distinct
+  swatch because migrations run before the seed, so a backfill would not reach
+  rows that do not exist yet.
+- **Invoicing details live on the client**, not on the invoice: billing email,
+  billing address, VAT number, company registration and payment terms. The
+  printable invoice prefers them and falls back to the contact details, and a
+  blank due date is the issue date plus that client's payment terms rather than
+  a flat 30 days.
+- **Spend, Goals and Week are gone from the nav.** The tables, views, actions
+  and the import script all remain, so nothing is lost and the routes can come
+  back; only the unreachable pages and their components were deleted.
+- **The Admin tab has two tracks**, `admin_items.track`: `client` (work,
+  requests and admin that belongs to a client) and `business` (Dan's own
+  projects, the ones meant to be sold). One table rather than two because they
+  differ by whose work it is, not by shape. A business item cannot carry a
+  client — the action nulls it rather than storing something nobody can explain
+  later. Admin is also where the full daily checklist lives, at `/admin#today`;
+  the Overview shows five of it.
 
 ## Not built (out of scope for v1)
 
@@ -143,5 +183,5 @@ npm run import:transactions  # loads seed/transactions_2026-03_to_2026-09.csv
 npm run db:claim             # repair: gives orphaned rows to Dan
 npm run check                # sanity checks against the live project — fails loudly
 ./scripts/verify-sql.sh      # migrations + seed + numbers on a throwaway local Postgres
-npm run setup                # push + seed + import + check
+npm run setup                # push + seed + check
 ```
