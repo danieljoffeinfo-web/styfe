@@ -21,22 +21,22 @@ export function StatCard({
   return (
     <div
       className={cn(
-        "flex flex-col gap-2 rounded-[14px] p-[18px_20px]",
+        "flex min-h-[132px] flex-col rounded-xl p-5",
         dark ? "bg-ink text-paper" : "border border-line bg-card",
       )}
     >
-      <div className={cn("text-[13px]", dark ? "text-muted-light" : "text-muted")}>{label}</div>
-      <div className="money text-[26px] font-medium leading-tight sm:text-[30px]">
+      <div className={cn("text-[12.5px] font-medium", dark ? "text-white/60" : "text-muted")}>{label}</div>
+      <div className="money mt-2 text-[28px] font-medium leading-none tracking-[-0.04em] sm:text-[30px]">
         {value}
-        {suffix ? <span className="ml-1 text-base text-muted-dark">{suffix}</span> : null}
+        {suffix ? <span className="ml-1 text-sm text-muted-dark">{suffix}</span> : null}
       </div>
-      {meter ? <Meter value={meter.value} tone={meter.tone ?? "green"} /> : null}
+      {meter ? <Meter value={meter.value} tone={meter.tone ?? "green"} className="mt-4" height={5} /> : null}
       {note ? (
         <div
           className={cn(
-            "text-xs",
+            "mt-auto pt-3 text-xs",
             dark
-              ? "text-muted-light"
+              ? "text-white/60"
               : noteTone === "alert"
                 ? "text-alert"
                 : noteTone === "green"
