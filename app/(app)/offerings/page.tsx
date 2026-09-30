@@ -69,12 +69,14 @@ export default async function OfferingsPage({
           label="Total offerings"
           value={String(activeEntries.length)}
           note={showArchived ? "Active shown with archived" : "Active catalogue"}
+          tone="blue"
         />
         <Summary
           icon={<UsersRound className="size-4" />}
           label="Active retainers"
           value={String(activeRetainers)}
           note="Live recurring clients"
+          tone="green"
         />
         <Summary
           icon={<WalletCards className="size-4" />}
@@ -85,12 +87,14 @@ export default async function OfferingsPage({
               ? "Every offering has a cost"
               : "Add what delivery costs you"
           }
+          tone="sand"
         />
         <Summary
           icon={<Clock3 className="size-4" />}
           label="Average margin"
           value={averageMarginPct === null ? "—" : `${averageMarginPct}%`}
           note={averageMarginPct === null ? "Nothing costed yet" : "Across costed offerings"}
+          tone="green"
         />
       </section>
 
@@ -127,16 +131,25 @@ function Summary({
   label,
   value,
   note,
+  tone,
 }: {
   icon: React.ReactNode;
   label: string;
   value: React.ReactNode;
   note: string;
+  tone: "blue" | "green" | "sand";
 }) {
+  const toneClass =
+    tone === "blue"
+      ? "bg-[#EAF2FC] text-blue"
+      : tone === "green"
+        ? "bg-green-wash text-green-deep"
+        : "bg-sand-soft text-sand";
+
   return (
     <div className="rounded-xl border border-line bg-card p-5">
       <div className="flex items-center gap-2.5">
-        <span className="grid size-8 place-items-center rounded-lg bg-well text-muted">{icon}</span>
+        <span className={`grid size-8 place-items-center rounded-lg ${toneClass}`}>{icon}</span>
         <span className="text-[12.5px] font-medium text-muted">{label}</span>
       </div>
       <div className="money mt-3 text-[26px] font-semibold leading-none tracking-[-0.04em] text-ink">

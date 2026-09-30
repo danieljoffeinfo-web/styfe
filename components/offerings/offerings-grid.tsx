@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ArrowDown, ArrowUp, ChevronDown, ExternalLink } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronDown, ExternalLink, Pencil } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MoneyCents } from "@/components/money";
@@ -41,7 +41,7 @@ export function OfferingsGrid({
   }, [entries]);
 
   React.useEffect(() => {
-    if (!openCategory || !categoryNames.includes(openCategory)) {
+    if (openCategory && !categoryNames.includes(openCategory)) {
       setOpenCategory(categoryNames[0] ?? null);
     }
   }, [categoryNames, openCategory]);
@@ -108,20 +108,20 @@ export function OfferingsGrid({
         </button>
         {categoryNames.map((category) => {
           const selected = openCategory === category;
+          const tone = categoryTone(category);
           return (
             <button
               key={category}
               type="button"
               onClick={() => open(category)}
               className={cn(
-                "flex h-9 shrink-0 items-center gap-1.5 rounded-lg border px-3 text-[12.5px] font-medium transition-colors",
-                selected
-                  ? "border-ink bg-ink text-white"
-                  : "border-line bg-card text-muted hover:border-control hover:text-ink",
+                "flex h-9 shrink-0 items-center gap-2 rounded-lg border px-3 text-[12.5px] font-medium transition-colors",
+                selected ? tone.active : "border-line bg-card text-muted hover:border-control hover:text-ink",
               )}
             >
+              <span className={cn("size-2 rounded-full", tone.dot)} />
               {category}
-              <span className={selected ? "text-white/60" : "text-muted-dark"}>
+              <span className={selected ? "opacity-70" : "text-muted-dark"}>
                 {grouped.get(category)?.length ?? 0}
               </span>
             </button>
@@ -136,18 +136,20 @@ export function OfferingsGrid({
             <section
               key={category}
               id={categoryId(category)}
-              className="scroll-mt-24 overflow-hidden rounded-xl border border-line bg-card"
+              className={cn(
+                "scroll-mt-24 overflow-hidden rounded-xl border bg-card",
+                categoryTone(category).border,
+              )}
             >
               <button
                 type="button"
-                onClick={() => setOpenCategory(category)}
+                onClick={() => setOpenCategory(expanded ? null : category)}
                 className="flex w-full items-center gap-3 px-4 py-3.5 text-left transition-colors hover:bg-well/60 sm:px-5"
                 aria-expanded={expanded}
               >
                 <span
                   aria-hidden
-                  className="size-2.5 shrink-0 rounded-full bg-muted-dark"
-                  style={{ background: items[0]?.offering.color ?? "#86868B" }}
+                  className={cn("size-2.5 shrink-0 rounded-full", categoryTone(category).dot)}
                 />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
@@ -184,6 +186,7 @@ export function OfferingsGrid({
                         onDragEnd={() => setDragging(null)}
                         onDrop={() => drop(entry.offering.id)}
                         onMove={(delta) => move(entry.offering.id, delta)}
+                        categories={categories}
                       />
                     ))}
                   </div>
@@ -204,6 +207,7 @@ function OfferingRow({
   onDragEnd,
   onDrop,
   onMove,
+  categories,
 }: {
   entry: CatalogueEntry;
   dragging: boolean;
@@ -211,6 +215,7 @@ function OfferingRow({
   onDragEnd: () => void;
   onDrop: () => void;
   onMove: (delta: number) => void;
+  categories: string[];
 }) {
   const { offering, stats, tiers, costing } = entry;
   const liveCount =
@@ -277,22 +282,45 @@ function OfferingRow({
       </div>
 
       <Metric label="Price" className="mt-3 lg:mt-0">
-        <span className="money text-[12.5px] text-ink">{priceLine(offering)}</span>
+        <OfferingForm
+          offering={offering}
+          categories={categories}
+          trigger={
+            <button
+              type="button"
+              className="group/price inline-flex items-center gap-1.5 rounded-md px-1.5 py-1 -ml-1.5 text-left transition-colors hover:bg-sand-soft"
+              aria-label={`Edit price for ${offering.name}`}
+            >
+              <span className="money text-[12.5px] font-medium text-ink">{priceLine(offering)}</span>
+              <Pencil className="size-3 text-sand opacity-0 transition-opacity group-hover/price:opacity-100" />
+            </button>
+          }
+        />
       </Metric>
       <Metric label={offering.unit_label ? `Live ${offering.unit_label}s` : "Live"}>
         <span className="money font-medium">{liveCount}</span>
       </Metric>
       <Metric label={monthly ? "Cost / mo" : "My cost"}>
-        <span className="font-medium">
-          {costed ? <MoneyCents cents={costCents} /> : <span className="text-muted">—</span>}
+        <span
+          className={cn(
+            "inline-flex rounded-md px-2 py-1 font-medium",
+            costed ? "bg-sand-soft text-sand" : "text-muted",
+          )}
+        >
+          {costed ? <MoneyCents cents={costCents} /> : "—"}
         </span>
       </Metric>
       <Metric label="Margin">
         {costed ? (
-          <span className={cn("font-medium", marginCents < 0 ? "text-alert" : "text-green-deep")}>
+          <span
+            className={cn(
+              "inline-flex rounded-md px-2 py-1 font-medium",
+              marginCents < 0 ? "bg-alert-wash text-alert" : "bg-green-wash text-green-deep",
+            )}
+          >
             <MoneyCents cents={marginCents} />
             {marginPct !== null && marginPct !== undefined ? (
-              <span className="ml-1 text-[11px] text-muted">{marginPct}%</span>
+              <span className="ml-1 text-[11px] opacity-70">{marginPct}%</span>
             ) : null}
           </span>
         ) : (
@@ -341,6 +369,56 @@ function Metric({
 
 function categoryId(category: string) {
   return `offering-${category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`;
+}
+
+function categoryTone(category: string) {
+  const value = category.toLowerCase();
+
+  if (value.includes("web")) {
+    return {
+      dot: "bg-blue",
+      border: "border-blue/20",
+      active: "border-blue/30 bg-[#EAF2FC] text-blue",
+    };
+  }
+
+  if (value.includes("whatsapp") || value.includes("ai")) {
+    return {
+      dot: "bg-green",
+      border: "border-green/20",
+      active: "border-green/30 bg-green-wash text-green-deep",
+    };
+  }
+
+  if (value.includes("system")) {
+    return {
+      dot: "bg-[#6750A4]",
+      border: "border-[#6750A4]/20",
+      active: "border-[#6750A4]/30 bg-[#F1ECFB] text-[#553C8B]",
+    };
+  }
+
+  if (value.includes("retainer")) {
+    return {
+      dot: "bg-sand",
+      border: "border-sand/20",
+      active: "border-sand/30 bg-sand-soft text-sand",
+    };
+  }
+
+  if (value.includes("saas")) {
+    return {
+      dot: "bg-[#0F8B8D]",
+      border: "border-[#0F8B8D]/20",
+      active: "border-[#0F8B8D]/30 bg-[#E6F7F7] text-[#0A6668]",
+    };
+  }
+
+  return {
+    dot: "bg-muted-dark",
+    border: "border-line",
+    active: "border-ink bg-ink text-white",
+  };
 }
 
 function categoryDescription(category: string) {
