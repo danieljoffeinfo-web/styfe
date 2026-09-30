@@ -78,8 +78,10 @@ export function OfferingsGrid({
 
   return (
     <div className="flex flex-col gap-8">
-      {[...grouped.entries()].map(([category, items]) => (
-        <section key={category} className="flex flex-col gap-3">
+      {[...grouped.entries()].map(([category, items]) => {
+        const id = category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+        return (
+        <section key={category} id={`offering-${id}`} className="scroll-mt-24 flex flex-col gap-3">
           <div className="flex items-center justify-between border-b border-line pb-2">
             <h2 className="text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">{category}</h2>
             <span className="text-xs text-muted">{items.length}</span>
@@ -126,7 +128,8 @@ export function OfferingsGrid({
             ))}
           </div>
         </section>
-      ))}
+        );
+      })}
     </div>
   );
 }
