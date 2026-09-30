@@ -28,6 +28,7 @@ export default async function OfferingsPage({
       <PageHeader
         eyebrow="Products & services"
         title="Offerings"
+        subtitle="Manage what Styfe sells, how it is priced and how each offering performs."
         actions={
           <>
             <PriceSheetButton text={sheet} />
@@ -36,15 +37,40 @@ export default async function OfferingsPage({
                 {showArchived ? "Hide archived" : "Show archived"}
               </Link>
             </Button>
-            <OfferingForm
-              categories={categories}
-              trigger={<Button variant="primary">New offering</Button>}
-            />
+            <OfferingForm categories={categories} trigger={<Button variant="primary">New offering</Button>} />
           </>
         }
       />
 
-      <OfferingsGrid entries={entries} categories={categories} />
+      {categories.length ? (
+        <nav aria-label="Offering categories" className="no-scrollbar flex gap-2 overflow-x-auto pb-1">
+          <Link
+            href="#all-offerings"
+            className="flex h-9 shrink-0 items-center rounded-lg border border-ink bg-ink px-3 text-[12.5px] font-medium text-white"
+          >
+            All
+            <span className="ml-1.5 text-white/60">{entries.length}</span>
+          </Link>
+          {categories.map((category) => {
+            const count = entries.filter((entry) => entry.offering.category === category).length;
+            const id = category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+            return (
+              <Link
+                key={category}
+                href={`#offering-${id}`}
+                className="flex h-9 shrink-0 items-center rounded-lg border border-line bg-card px-3 text-[12.5px] font-medium text-muted transition-colors hover:border-control hover:text-ink"
+              >
+                {category}
+                <span className="ml-1.5 text-muted-dark">{count}</span>
+              </Link>
+            );
+          })}
+        </nav>
+      ) : null}
+
+      <div id="all-offerings">
+        <OfferingsGrid entries={entries} categories={categories} />
+      </div>
     </>
   );
 }

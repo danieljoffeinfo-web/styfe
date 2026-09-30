@@ -119,6 +119,7 @@ export default async function OverviewPage() {
       <PageHeader
         eyebrow={formatDate(today, "long")}
         title={`${greeting()}, Dan.`}
+        subtitle="A live view of revenue, receivables, pipeline and the work that needs your attention."
         actions={
           <>
             <Button asChild>
@@ -131,7 +132,7 @@ export default async function OverviewPage() {
         }
       />
 
-      <section aria-label="Key numbers" className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
+      <section aria-label="Key numbers" className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
         <StatCard
           label="Secured monthly (MRR)"
           value={<MoneyCents cents={mrr.mrrCents} />}
@@ -192,8 +193,8 @@ export default async function OverviewPage() {
             <IncomeChart data={income} />
             <ChartLegend
               items={[
-                { color: "#1D6B4F", label: "Recurring (retainers, salary)" },
-                { color: "#C9A77A", label: "Once-off / projects" },
+                { color: "#197A30", label: "Recurring (retainers, salary)" },
+                { color: "#D7C29E", label: "Once-off / projects" },
               ]}
             />
           </CardBody>
@@ -211,7 +212,7 @@ export default async function OverviewPage() {
             ) : (
               <p className="text-[13px] text-muted">
                 No segments yet.{" "}
-                <Link href="/settings" className="text-green underline underline-offset-4">
+                <Link href="/settings" className="font-medium text-ink underline underline-offset-4">
                   Set them up in Settings
                 </Link>
                 .
@@ -225,7 +226,7 @@ export default async function OverviewPage() {
         <Card className="xl:col-span-2">
           <CardBody>
             <CardHeader title="Receivables">
-              <Link href="/invoices" className="text-[13px] text-green underline-offset-4 hover:underline">
+              <Link href="/invoices" className="text-[13px] font-medium text-ink underline-offset-4 hover:underline">
                 All invoices
               </Link>
             </CardHeader>
@@ -245,7 +246,7 @@ export default async function OverviewPage() {
         <Card className="xl:col-span-2">
           <CardBody>
             <CardHeader title="Pipeline" aside="Lead → Meeting → Proposal → Pilot → Won">
-              <Link href="/pipeline" className="text-[13px] text-green underline-offset-4 hover:underline">
+              <Link href="/pipeline" className="text-[13px] font-medium text-ink underline-offset-4 hover:underline">
                 Open pipeline
               </Link>
             </CardHeader>
@@ -290,7 +291,7 @@ export default async function OverviewPage() {
           <Card>
             <CardBody className="gap-3">
               <CardHeader title="This week">
-                <Link href="/week" className="text-[13px] text-green underline-offset-4 hover:underline">
+                <Link href="/week" className="text-[13px] font-medium text-ink underline-offset-4 hover:underline">
                   Week
                 </Link>
               </CardHeader>
@@ -320,7 +321,7 @@ export default async function OverviewPage() {
           <Card>
             <CardBody className="gap-2.5">
               <CardHeader title="Spend watch · 6-mo avg">
-                <Link href="/spend" className="text-[13px] text-green underline-offset-4 hover:underline">
+                <Link href="/spend" className="text-[13px] font-medium text-ink underline-offset-4 hover:underline">
                   Spend
                 </Link>
               </CardHeader>
@@ -354,7 +355,7 @@ export default async function OverviewPage() {
       <Card>
         <CardBody>
           <CardHeader title="Clients">
-            <Link href="/clients" className="text-[13px] text-green underline-offset-4 hover:underline">
+            <Link href="/clients" className="text-[13px] font-medium text-ink underline-offset-4 hover:underline">
               All clients
             </Link>
           </CardHeader>

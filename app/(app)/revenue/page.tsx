@@ -89,9 +89,9 @@ export default async function RevenuePage() {
 
   return (
     <>
-      <PageHeader eyebrow="Money in" title="Revenue" />
+      <PageHeader eyebrow="Money in" title="Revenue" subtitle="Track recurring income, projects and the clients and offerings driving the business." />
 
-      <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <section className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <Card>
           <CardBody className="gap-1">
             <p className="text-[13px] text-muted">Last 12 statement months</p>
@@ -130,8 +130,8 @@ export default async function RevenuePage() {
           <IncomeChart data={income} height={300} />
           <ChartLegend
             items={[
-              { color: "#1D6B4F", label: "Recurring (retainers, salary)" },
-              { color: "#C9A77A", label: "Once-off / projects" },
+              { color: "#197A30", label: "Recurring (retainers, salary)" },
+              { color: "#D7C29E", label: "Once-off / projects" },
             ]}
           />
         </CardBody>
@@ -174,7 +174,7 @@ export default async function RevenuePage() {
         <Card>
           <CardBody>
             <CardHeader title="By offering" aside="Paid invoice lines">
-              <Link href="/offerings" className="text-[13px] text-green underline-offset-4 hover:underline">
+              <Link href="/offerings" className="text-[13px] font-medium text-ink underline-offset-4 hover:underline">
                 Offerings
               </Link>
             </CardHeader>
@@ -182,7 +182,7 @@ export default async function RevenuePage() {
               <MoneyBarChart
                 data={offeringSeries}
                 horizontal
-                color="#2F5D8A"
+                color="#0B63C5"
                 height={Math.max(180, offeringSeries.length * 42)}
               />
             ) : (
@@ -198,7 +198,7 @@ export default async function RevenuePage() {
               <MoneyBarChart
                 data={offeringCategorySeries}
                 horizontal
-                color="#C9A77A"
+                color="#D7C29E"
                 height={Math.max(180, offeringCategorySeries.length * 42)}
               />
             ) : (

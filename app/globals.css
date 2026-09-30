@@ -1,57 +1,71 @@
 @import "tailwindcss";
 
 @theme {
-  /* Styfe HQ palette — see CLAUDE.md §Design */
-  --color-paper: #F3F1EC;
-  --color-card: #FFFFFF;
-  --color-line: #E2DED5;
-  --color-line-soft: #F0EDE6;
-  --color-ink: #17171B;
-  --color-muted: #5E5B55;
-  --color-muted-dark: #A8A396;
-  --color-muted-light: #C9C4B8;
-  --color-track: #ECE8E0;
-  --color-well: #F7F5F0;
-  --color-control: #CFCAC0;
-  --color-sidebar-item: #D9D5CC;
+  /*
+    Styfe HQ — aligned with the Moto Desk visual system.
+    Structure is monochrome; colour is reserved for state and data.
+  */
+  --color-paper: #f5f5f7;
+  --color-card: #ffffff;
+  --color-line: #e5e5e7;
+  --color-line-soft: #eeeeef;
+  --color-ink: #1d1d1f;
+  --color-muted: #5f5f65;
+  --color-muted-dark: #86868b;
+  --color-muted-light: #b0b0b5;
+  --color-track: #f0f0f2;
+  --color-well: #f0f0f2;
+  --color-control: #86868b;
+  --color-sidebar-item: #5f5f65;
 
-  --color-green: #1D6B4F;
-  --color-green-deep: #134A37;
-  --color-green-soft: #9CC3B0;
-  --color-green-wash: #E1EFE8;
+  /* State accents — same traffic-light logic as Moto Desk. */
+  --color-green: #197a30;
+  --color-green-deep: #126426;
+  --color-green-soft: #bfe6c9;
+  --color-green-wash: #e6f7ea;
 
-  --color-sand: #C9A77A;
-  --color-sand-soft: #E7DCC8;
+  --color-sand: #8a5a00;
+  --color-sand-soft: #fff3d9;
 
-  --color-blue: #2F5D8A;
+  --color-blue: #0b63c5;
 
-  --color-alert: #8A3E12;
-  --color-alert-wash: #FBE7DA;
+  --color-alert: #c81e14;
+  --color-alert-wash: #ffecea;
 
-  --font-sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --font-sans: "Archivo", system-ui, -apple-system, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --font-serif: "Instrument Serif", Georgia, serif;
 
-  --radius-card: 14px;
+  --radius-card: 12px;
 }
 
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
   }
+
   body {
     background: var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
+
   * {
     border-color: var(--color-line);
   }
+
   ::selection {
-    background: var(--color-green-wash);
+    background: var(--color-track);
+    color: var(--color-ink);
   }
-  /* Touch targets stay >= 44px on coarse pointers */
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
   @media (pointer: coarse) {
     button,
     a[role="button"],
@@ -66,32 +80,36 @@
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
   }
+
   .serif {
     font-family: var(--font-serif);
     font-weight: 400;
   }
+
   .eyebrow {
-    font-size: 13px;
+    font-size: 11px;
+    font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-muted);
   }
+
   .card {
     background: var(--color-card);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-card);
   }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   .no-scrollbar {
     scrollbar-width: none;
   }
-  /* Chevron for <select>. It lives here rather than in a Tailwind arbitrary
-     value because the inline SVG contains spaces, which Tailwind cannot parse
-     inside bg-[url(...)] — the class is dropped silently. */
+
   .select-chevron {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235E5B55' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235F5F65' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>");
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 18px;
@@ -102,6 +120,7 @@
   .print-hidden {
     display: none !important;
   }
+
   body {
     background: #fff;
   }
