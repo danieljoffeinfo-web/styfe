@@ -2,17 +2,30 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
+import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/toast";
 import { deleteClient } from "@/lib/actions/clients";
 
 /**
- * Deleting a client is not undoable, so it asks first and says what will go
- * with it. The action refuses outright if invoices or subscriptions still point
- * at the client — this is the confirmation, not the safety net.
+ * Deleting a client is not undoable, so it asks first and says what goes with
+ * it. The action refuses outright while invoices or subscriptions still point
+ * at the client — this dialog is the confirmation, not the safety net.
+ *
+ * `variant="icon"` is the one that sits on a client card. The card is a link,
+ * so the button stops the click from reaching it and carries its own stacking
+ * context; anything less and deleting would also navigate.
  */
-export function DeleteClientButton({ id, name }: { id: string; name: string }) {
+export function DeleteClientButton({
+  id,
+  name,
+  variant = "button",
+}: {
+  id: string;
+  name: string;
+  variant?: "button" | "icon";
+}) {
   const [open, setOpen] = React.useState(false);
   const [pending, startTransition] = React.useTransition();
   const toast = useToast();
@@ -28,15 +41,37 @@ export function DeleteClientButton({ id, name }: { id: string; name: string }) {
       }
       toast(result.message ?? "Client deleted.");
       setOpen(false);
-      router.push("/clients");
+      // From a card the list just needs to drop a row; from the detail page
+      // there is no page left to stay on.
+      if (variant === "icon") router.refresh();
+      else router.push("/clients");
     });
+  }
+
+  function openDialog(event: React.MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    setOpen(true);
   }
 
   return (
     <>
-      <Button variant="ghost" className="text-muted hover:text-alert" onClick={() => setOpen(true)}>
-        Delete
-      </Button>
+      {variant === "icon" ? (
+        <button
+          type="button"
+          onClick={openDialog}
+          aria-label={`Delete ${name}`}
+          title={`Delete ${name}`}
+          className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-md text-muted-dark opacity-0 transition-opacity hover:bg-well hover:text-alert focus-visible:opacity-100 group-hover:opacity-100"
+        >
+          <Trash2 className="size-4" />
+        </button>
+      ) : (
+        <Button variant="ghost" className="text-muted hover:text-alert" onClick={openDialog}>
+          Delete
+        </Button>
+      )}
+
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent
           title={`Delete ${name}?`}

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MoneyCents } from "@/components/money";
 import { ClientForm } from "@/components/clients/client-form";
+import { DeleteClientButton } from "@/components/clients/delete-client-button";
 import { getClients, getSubscriptions } from "@/lib/queries/clients";
 import { getReceivables } from "@/lib/queries/invoices";
 import { toCents } from "@/lib/money";
@@ -61,12 +62,20 @@ export default async function ClientsPage() {
             const mrrCents = mrrByClient.get(client.id) ?? 0;
             const owedCents = owedByClient.get(client.id) ?? 0;
             return (
-              <Link
+              <article
                 key={client.id}
-                href={`/clients/${client.slug}`}
-                className="group flex min-h-[166px] flex-col rounded-xl border border-line bg-card p-5 transition-colors hover:border-control hover:bg-[#fcfcfd]"
+                className="group relative flex min-h-[166px] flex-col rounded-xl border border-line bg-card p-5 transition-colors hover:border-control hover:bg-[#fcfcfd]"
               >
-                <div className="flex items-start justify-between gap-3">
+                {/* The whole card opens the client; the delete button sits
+                    above it so a click there never navigates. */}
+                <Link
+                  href={`/clients/${client.slug}`}
+                  className="absolute inset-0 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green"
+                >
+                  <span className="sr-only">Open {client.name}</span>
+                </Link>
+
+                <div className="relative flex items-start justify-between gap-3">
                   <div className="flex min-w-0 items-center gap-2">
                     <span
                       aria-hidden
@@ -89,14 +98,15 @@ export default async function ClientsPage() {
                       {client.status}
                     </Badge>
                     <ArrowUpRight className="size-4 text-muted opacity-0 transition-opacity group-hover:opacity-100" />
+                    <DeleteClientButton id={client.id} name={client.name} variant="icon" />
                   </div>
                 </div>
-                <p className="text-[13px] text-muted">
+                <p className="relative text-[13px] text-muted">
                   {[client.contact_name, client.contact_phone]
                     .filter(Boolean)
                     .join(" · ") || "No contact yet"}
                 </p>
-                <div className="mt-auto flex flex-wrap gap-x-4 gap-y-1 pt-2 text-[13px]">
+                <div className="relative mt-auto flex flex-wrap gap-x-4 gap-y-1 pt-2 text-[13px]">
                   <span className="money">
                     {mrrCents > 0 ? (
                       <>
@@ -117,7 +127,7 @@ export default async function ClientsPage() {
                     </span>
                   ) : null}
                 </div>
-              </Link>
+              </article>
             );
           })}
         </div>
