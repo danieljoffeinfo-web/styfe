@@ -15,15 +15,27 @@ export function SettingsForm({ settings }: { settings: ResolvedSettings }) {
   const toast = useToast();
   const [state, formAction] = useActionState<ActionResult | null, FormData>(saveSettings, null);
   const [vat, setVat] = React.useState(settings.vatEnabled);
+  // Settings is one long form with a single save. Tracking whether anything
+  // has been touched is what lets the bar say so, rather than leaving Dan to
+  // guess whether his banking details went anywhere.
+  const [dirty, setDirty] = React.useState(false);
 
   React.useEffect(() => {
     if (!state) return;
-    if (state.ok) toast(state.message ?? "Saved.");
-    else toast(state.error, "error");
+    if (state.ok) {
+      toast(state.message ?? "Saved.");
+      setDirty(false);
+    } else {
+      toast(state.error, "error");
+    }
   }, [state, toast]);
 
   return (
-    <form action={formAction} className="flex flex-col gap-4">
+    <form
+      action={formAction}
+      onChange={() => setDirty(true)}
+      className="flex flex-col gap-4"
+    >
       <Card>
         <CardBody>
           <CardHeader title="VAT" aside="Prices everywhere are stored ex VAT" />
@@ -150,9 +162,14 @@ export function SettingsForm({ settings }: { settings: ResolvedSettings }) {
         </CardBody>
       </Card>
 
-      <SubmitButton variant="primary" className="self-start">
-        Save settings
-      </SubmitButton>
+      {/* Sticky, because the bank details sit three cards above the button and
+          a save you cannot see is a save that did not happen. */}
+      <div className="sticky bottom-0 z-10 -mx-1 flex items-center gap-3 border-t border-line bg-paper/95 px-1 py-3 backdrop-blur">
+        <SubmitButton variant="primary">Save settings</SubmitButton>
+        <span className="text-[13px] text-muted">
+          {dirty ? "Unsaved changes" : "Saves every section on this page"}
+        </span>
+      </div>
     </form>
   );
 }

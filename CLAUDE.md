@@ -142,6 +142,14 @@ month" should mean the month on the calendar.
   given it uses the current one, unless that lands more than three months in
   the past — "8 Jan" typed in December means next January. `npm run check:dates`
   asserts all of that against a fixed Wednesday.
+- **Settings has one save, and it is sticky.** The page is five cards long, so
+  a button at the bottom reads as "it did not save" even when it did. The bar
+  stays on screen and says "Unsaved changes" once anything is touched.
+- **Categories and category rules are off the Settings page.** They only ever
+  described imported bank transactions, which are gone, and 24 rows of slugs
+  with their own per-row Save buttons sat directly beneath the one button that
+  actually saves settings. The tables, queries and actions remain, so the
+  importer still categorises; nothing renders them.
 - **Bank details are structured, not prose.** They used to live inside
   `business_details`, a free-text blob, which could not be laid out as a
   labelled block — and a typo in an account number is the one invoice mistake

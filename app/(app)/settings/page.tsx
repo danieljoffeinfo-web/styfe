@@ -2,8 +2,7 @@ import { PageHeader } from "@/components/shell/page-header";
 import { Card, CardBody, CardHeader } from "@/components/ui/card";
 import { SettingsForm } from "@/components/settings/settings-form";
 import { SegmentEditor } from "@/components/settings/segment-editor";
-import { CategoryEditor, RuleEditor } from "@/components/settings/category-editor";
-import { getCategories, getCategoryRules, getPathSegments, getSettings } from "@/lib/queries/settings";
+import { getPathSegments, getSettings } from "@/lib/queries/settings";
 import { getOfferings } from "@/lib/queries/offerings";
 import { ALLOWED_EMAILS } from "@/lib/env";
 
@@ -11,11 +10,9 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "Settings · Styfe HQ" };
 
 export default async function SettingsPage() {
-  const [settings, segments, categories, rules, offerings] = await Promise.all([
+  const [settings, segments, offerings] = await Promise.all([
     getSettings(),
     getPathSegments(),
-    getCategories(),
-    getCategoryRules(),
     getOfferings(true),
   ]);
 
@@ -29,20 +26,6 @@ export default async function SettingsPage() {
         <CardBody>
           <CardHeader title="Path to the monthly target" aside="Shown on the Overview" />
           <SegmentEditor segments={segments} offerings={offerings} />
-        </CardBody>
-      </Card>
-
-      <Card>
-        <CardBody>
-          <CardHeader title="Categories" aside={`${categories.length} in use`} />
-          <CategoryEditor categories={categories} />
-        </CardBody>
-      </Card>
-
-      <Card>
-        <CardBody>
-          <CardHeader title="Category rules" aside={`${rules.length} rules`} />
-          <RuleEditor rules={rules} categories={categories} />
         </CardBody>
       </Card>
 
